@@ -21,9 +21,9 @@ echo "ENY_VALUE=${ENY_VALUE}"
 pushd $OPENAPI_DATA_DIR
 touch temp.yaml
 sed "s/$ENV_KEY/$ENV_VALUE/g" $TEMPLATE > temp.yaml
-swagger-cli bundle -o ./$OUTFILE -t yaml -r  temp.yaml
-rm temp.yaml
-cat ./$OUTFILE
+# swagger-cli bundle -o ./$OUTFILE -t yaml -r  temp.yaml
+# rm temp.yaml
+cat ./temp.yaml
 popd
 
 # # Redeploying the GCP endpoints with the updated config
