@@ -1,7 +1,7 @@
 # TODO: Addin swagger-cli and glcoud-sdk depency to image
 # https://hub.docker.com/r/google/cloud-sdk
 # https://hub.docker.com/_/node 
-FROM etsiforge/swagger-cli
+FROM etsiforge/swagger-cli:4.0.4
 COPY openapi_update.sh /action/openapi_update.sh
 ENTRYPOINT "echo $OUTFILE"
 
