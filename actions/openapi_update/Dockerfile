@@ -6,7 +6,7 @@ RUN apt install -y nodejs
 RUN apt install -y npm
 RUN npm install -g @apidevtools/swagger-cli
 
-COPY openapi_update.sh /action/openapi_update.sh
+COPY build_openapi_yaml.sh /action/build_openapi_yaml.sh
 COPY gcloud_build_image.sh /tmp/gcloud_build_image.sh
 
-ENTRYPOINT ["/action/openapi_update.sh"]
+ENTRYPOINT ["/action/build_openapi_yaml.sh"]
