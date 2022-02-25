@@ -1,0 +1,31 @@
+name: 'API Update'
+description: 'Updates the openapi file and GCP endpoints deployment'
+inputs:
+  gcp_project:
+    description: 'GCP project to deploy/update the endpoint configuration.'
+    required: true
+  api_subdomain:
+    description: 'The subdomain of the api being updated'
+    required: true
+  environment_key:
+    description: 'Key in the template to replace with the environment value.'
+    default: '<environment>'
+  environment_value:
+    description: 'Value ithat will replace the environment key in the template.'
+    default: 'production'
+  template:
+    description: 'The name of the template yaml file'
+    default: 'template.yaml'
+  outfile:
+    description: 'The name of the outputted Open API file.'
+    default: 'openapi.yaml' 
+runs:
+  using: 'docker'
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.gcp_project }}
+    - ${{ inputs.api_subdomain }}
+    - ${{ inputs.environment_key }}
+    - ${{ inputs.environment_value }}
+    - ${{ inputs.template }}
+    - ${{ inputs.outfile }}
