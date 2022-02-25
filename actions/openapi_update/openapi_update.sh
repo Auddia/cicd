@@ -12,6 +12,8 @@ echo "ENV_KEY=${ENV_KEY}"
 echo "ENY_VALUE=${ENY_VALUE}"
 echo "OUTFILE=${OUTFILE}"
 
+ls
+
 # # OpenAPI File Generation
 # touch temp.yaml
 # sed "s/$ENV_KEY/$ENV_VALUE/g" template.yaml > temp.yaml
