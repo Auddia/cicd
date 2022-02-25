@@ -1,6 +1,9 @@
 name: 'API Update'
 description: 'Updates the openapi file and GCP endpoints deployment'
 inputs:
+  gcp_application_credentials:
+    description: 'The secret value for the GCP Application Credentials'
+    required: true 
   gcp_project:
     description: 'GCP project to deploy/update the endpoint configuration.'
     required: true
@@ -26,6 +29,7 @@ runs:
   using: 'docker'
   image: "Dockerfile"
   env: 
+    GOOGLE_APPLICATION_CREDENTIALS: ${{ inputs.gcp_application_credentials }}
     GCP_PROJECT: ${{ inputs.gcp_project }}
     API_SUBDOMAIN: ${{ inputs.api_subdomain }}
     OPENAPI_DATA_DIR: ${{ inputs.openapi_dir }}
