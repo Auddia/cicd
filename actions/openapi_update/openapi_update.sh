@@ -23,10 +23,8 @@ touch temp.yaml
 sed "s/$ENV_KEY/$ENV_VALUE/g" $TEMPLATE > temp.yaml
 swagger-cli bundle -o ./$OUTFILE -t yaml -r  temp.yaml
 rm temp.yaml
-popd
-
-ls
 cat ./$OUTFILE
+popd
 
 # # Redeploying the GCP endpoints with the updated config
 
