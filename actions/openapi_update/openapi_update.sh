@@ -2,26 +2,30 @@
 
 GCP_PROJECT=$1
 API_SUBDOMAIN=$2
-ENV_KEY=$3
-ENY_VALUE=$4
+OPENAPI_DATA_DIR=$3
+TEMPLATE=$4
 OUTFILE=$5
-TEMPLATE=$6
+ENV_KEY=$6
+ENY_VALUE=$7
 
 echo "GCP_PROJECT=${GCP_PROJECT}"
 echo "API_SUBDOMAIN=${API_SUBDOMAIN}"
+echo "OPENAPI_DATA_DIR=${OPENAPI_DATA_DIR}"
+echo "TEMPLATE=${TEMPLATE}"
+echo "OUTFILE=${OUTFILE}"
 echo "ENV_KEY=${ENV_KEY}"
 echo "ENY_VALUE=${ENY_VALUE}"
-echo "OUTFILE=${OUTFILE}"
-echo "TEMPLATE=${TEMPLATE}"
 
-ls
 
 # OpenAPI File Generation
+pushd $OPENAPI_DATA_DIR
 touch temp.yaml
 sed "s/$ENV_KEY/$ENV_VALUE/g" $TEMPLATE > temp.yaml
 swagger-cli bundle -o ./$OUTFILE -t yaml -r  temp.yaml
 rm temp.yaml
+popd
 
+ls
 cat ./$OUTFILE
 
 # # Redeploying the GCP endpoints with the updated config

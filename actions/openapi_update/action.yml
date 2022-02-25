@@ -7,18 +7,21 @@ inputs:
   api_subdomain:
     description: 'The subdomain of the api being updated'
     required: true
+  openapi_dir:
+    description: The directory location of all the openapi templates and configurations
+    default: "./"
+  template:
+    description: 'The name of the template yaml file'
+    default: 'template.yaml'
+  outfile:
+    description: 'The name of the outputted Open API file.'
+    default: 'openapi.yaml' 
   environment_key:
     description: 'Key in the template to replace with the environment value.'
     default: '<environment>'
   environment_value:
     description: 'Value ithat will replace the environment key in the template.'
     default: 'production'
-  template:
-    description: 'The location of the template yaml file'
-    default: 'template.yaml'
-  outfile:
-    description: 'The location of the outputted Open API file.'
-    default: 'openapi.yaml' 
 runs:
   using: 'docker'
   image: "Dockerfile"
