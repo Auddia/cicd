@@ -1,8 +1,8 @@
 #!/usr/bin/env sh 
 
 echo "DEBUG INFO: "
-echo "\tOPENAPI_YAML=${OPENAPI_YAML}"
+echo "OPENAPI_YAML=${OPENAPI_YAML}"
 
 # cat $OPENAPI_YAML
 
-gcloud_info
+gcloud info
