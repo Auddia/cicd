@@ -8,3 +8,4 @@ runs:
   using: 'composite'
   steps:
     - run: deployment_script.sh ${{ inputs.openapi_yaml }}
+      shell: bash
