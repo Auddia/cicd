@@ -19,7 +19,7 @@ cd $OPENAPI_DATA_DIR
 
 touch temp.yaml
 sed "s/$ENV_KEY/$ENV_VALUE/g" $TEMPLATE > temp.yaml
-swagger-cli bundle -o $CALLERS_DIR/api/$OUTFILE -t yaml -r temp.yaml
+swagger-cli bundle -o $CALLERS_DIR/$OUTFILE -t yaml -r temp.yaml
 
 rm temp.yaml
 
