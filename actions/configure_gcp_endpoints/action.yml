@@ -5,7 +5,6 @@ inputs:
     description: The location of the openapi yaml that defines the endpoint
     default: "./openapi.yaml"
 runs:
-  using: 'docker'
-  image: "Dockerfile"
-  env: 
-    OPENAPI_YAML: ${{ inputs.openapi_yaml }}
+  using: 'composite'
+  steps:
+    - run: deployment_script.sh ${{ inputs.openapi_yaml }}
