@@ -3,7 +3,7 @@
 # https://hub.docker.com/_/node 
 FROM etsiforge/swagger-cli:4.0.4
 COPY build_openapi_yaml.sh /action/build_openapi_yaml.sh
-RUN ["/action/openapi_update.sh"]
+RUN ["/action/build_openapi_yaml.sh"]
 
 
 # FROM apline
