@@ -23,27 +23,29 @@ touch temp.yaml
 sed "s/$ENV_KEY/$ENV_VALUE/g" $TEMPLATE > temp.yaml
 swagger-cli bundle -o /output/$OUTFILE -t yaml -r  temp.yaml
 
-cat ./temp.yaml
-cat /output/$OUTFILE
+# cat ./temp.yaml
+# cat /output/$OUTFILE
 
 rm temp.yaml
 
-# # Redeploying the GCP endpoints with the updated config
+# Redeploying the GCP endpoints with the updated config
 
 # # TODO: Parse the config id out of the output from this command
 # # TODO: Allow action user to pass additional options to this script (Needed?)
-# gcloud endpoints services deploy ./$OUTFILE --project $GCP_PROJECT
+touch deployment_info
+gcloud endpoints services deploy ./$OUTFILE --project $GCP_PROJECT > deployment_info.txt 1>&1
+CONFIG_ID=$(cat deploy_output.txt | awk -F'[][]' '{print $2}' | tr -d '[:space:]')
 
 # # TODO: add this GCP script to this DIR
 # # TODO: get the image name from the output of this command 
 # # TODO: Allow action user to pass additional options to this script (Needed?)
-# /tmp/gcloud_build_image.sh -s $API_SUBDOMAIN -c [CONFIG ID] -p $GCP_PROJECT
+/tmp/gcloud_build_image.sh -s $API_SUBDOMAIN -c $CONFIG_ID -p $GCP_PROJECT
 
 # # TODO: Allow action user to pass additional options to this script (Needed?)
-# gcloud beta run deploy discovery-endpoints-cloudrun-service \
-#   --image="gcr.io/$GCP_PROJECT/endpoints-runtime-serverless:$API_SUBDOMAIN-[CONFIG ID]" \
-#   --allow-unauthenticated \
-#   --platform managed \
-#   --project $GCP_PROJECT \
-#   --region us-central1 \
-#   --min-instances 2
+gcloud beta run deploy discovery-endpoints-cloudrun-service \
+  --image="gcr.io/$GCP_PROJECT/endpoints-runtime-serverless:$API_SUBDOMAIN-$CONFIG_ID" \
+  --allow-unauthenticated \
+  --platform managed \
+  --project $GCP_PROJECT \
+  --region us-central1 \
+  --min-instances 2
