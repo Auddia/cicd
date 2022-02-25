@@ -5,20 +5,24 @@ API_SUBDOMAIN=$2
 ENV_KEY=$3
 ENY_VALUE=$4
 OUTFILE=$5
+TEMPLATE=$6
 
 echo "GCP_PROJECT=${GCP_PROJECT}"
 echo "API_SUBDOMAIN=${API_SUBDOMAIN}"
 echo "ENV_KEY=${ENV_KEY}"
 echo "ENY_VALUE=${ENY_VALUE}"
 echo "OUTFILE=${OUTFILE}"
+echo "TEMPLATE=${TEMPLATE}"
 
 ls
 
-# # OpenAPI File Generation
-# touch temp.yaml
-# sed "s/$ENV_KEY/$ENV_VALUE/g" template.yaml > temp.yaml
-# swagger-cli bundle -o ./$OUTFILE -t yaml -r  temp.yaml
-# rm temp.yaml
+# OpenAPI File Generation
+touch temp.yaml
+sed "s/$ENV_KEY/$ENV_VALUE/g" $TEMPLATE > temp.yaml
+swagger-cli bundle -o ./$OUTFILE -t yaml -r  temp.yaml
+rm temp.yaml
+
+cat ./$OUTFILE
 
 # # Redeploying the GCP endpoints with the updated config
 
@@ -29,7 +33,7 @@ ls
 # # TODO: add this GCP script to this DIR
 # # TODO: get the image name from the output of this command 
 # # TODO: Allow action user to pass additional options to this script (Needed?)
-# ./gcloud_build_image -s $API_SUBDOMAIN -c [CONFIG ID] -p $GCP_PROJECT
+# /tmp/gcloud_build_image.sh -s $API_SUBDOMAIN -c [CONFIG ID] -p $GCP_PROJECT
 
 # # TODO: Allow action user to pass additional options to this script (Needed?)
 # gcloud beta run deploy discovery-endpoints-cloudrun-service \
