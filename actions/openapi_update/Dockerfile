@@ -2,8 +2,8 @@
 # https://hub.docker.com/r/google/cloud-sdk
 # https://hub.docker.com/_/node 
 FROM etsiforge/swagger-cli:4.0.4
-COPY openapi_update.sh /action/openapi_update.sh
-ENTRYPOINT "echo $OUTFILE"
+COPY build_openapi_yaml.sh /action/build_openapi_yaml.sh
+RUN ["/action/openapi_update.sh"]
 
 
 # FROM apline
