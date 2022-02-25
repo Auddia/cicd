@@ -14,25 +14,14 @@ echo "ENV_VALUE=${ENV_VALUE}"
 
 
 # OpenAPI File Generation
+CALLERS_DIR=$(pwd)
 cd $OPENAPI_DATA_DIR
 
 touch temp.yaml
 sed "s/$ENV_KEY/$ENV_VALUE/g" $TEMPLATE > temp.yaml
-swagger-cli bundle -o ./$OUTFILE -t yaml -r  temp.yaml
+swagger-cli bundle -o $CALLERS_DIR/api/$OUTFILE -t yaml -r temp.yaml
 
-ls -al /
-
-ls -al /github
-
-ls -al /gihub/workspace
-
-ls -al /github/workspace/api/data/openapi
-
-ls -al $HOME
-# cat ./temp.yaml
-# cat /output/$OUTFILE
-
-# rm temp.yaml
+rm temp.yaml
 
 # # Redeploying the GCP endpoints with the updated config
 
