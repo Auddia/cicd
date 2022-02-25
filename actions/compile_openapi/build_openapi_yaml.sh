@@ -1,16 +1,11 @@
 #!/usr/bin/env sh
 
-# OPENAPI_DATA_DIR=$1
-# TEMPLATE=$2
-# OUTFILE=$3
-# ENV_KEY=$4
-# ENV_VALUE=$5
-
-echo "OPENAPI_DATA_DIR=${OPENAPI_DATA_DIR}"
-echo "TEMPLATE=${TEMPLATE}"
-echo "OUTFILE=${OUTFILE}"
-echo "ENV_KEY=${ENV_KEY}"
-echo "ENV_VALUE=${ENV_VALUE}"
+echo "DEBUG INFO: "
+echo "\tOPENAPI_DATA_DIR=${OPENAPI_DATA_DIR}"
+echo "\tTEMPLATE=${TEMPLATE}"
+echo "\tOUTFILE=${OUTFILE}"
+echo "\tENV_KEY=${ENV_KEY}"
+echo "\tENV_VALUE=${ENV_VALUE}"
 
 
 # OpenAPI File Generation

@@ -1,0 +1,11 @@
+name: 'GCP Endpoints Configuration/Update/Deployment'
+description: 'Recompiles and the needed components for GCP endpoints and redelopys them'
+inputs:
+  openapi_yaml:
+    description: The location of the openapi yaml that defines the endpoint
+    default: "./"
+runs:
+  using: 'docker'
+  image: "Dockerfile"
+  env: 
+    OPENAPI_YAML: ${{ inputs.openapi_yaml }}
