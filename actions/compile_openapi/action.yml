@@ -1,0 +1,27 @@
+name: 'Compile OpenAPI YAML'
+description: 'Compiles the openapi yaml file using the template in the project'
+inputs:
+  openapi_dir:
+    description: The directory location of all the openapi templates and configurations
+    default: "./"
+  template:
+    description: 'The name of the template yaml file'
+    default: 'template.yaml'
+  outfile:
+    description: 'The name of the outputted Open API file.'
+    default: 'openapi.yaml' 
+  environment_key:
+    description: 'Key in the template to replace with the environment value.'
+    default: '<environment>'
+  environment_value:
+    description: 'Value ithat will replace the environment key in the template.'
+    default: 'production'
+runs:
+  using: 'docker'
+  image: "Dockerfile"
+  env: 
+    OPENAPI_DATA_DIR: ${{ inputs.openapi_dir }}
+    TEMPLATE: ${{ inputs.template }}
+    OUTFILE: ${{ inputs.outfile }}
+    ENV_KEY: ${{ inputs.environment_key }}
+    ENV_VALUE: ${{ inputs.environment_value }}
