@@ -28,7 +28,8 @@ runs:
   args:
     - ${{ inputs.gcp_project }}
     - ${{ inputs.api_subdomain }}
-    - ${{ inputs.environment_key }}
-    - ${{ inputs.environment_value }}
+    - ${{ inputs.openapi_dir }}
     - ${{ inputs.template }}
     - ${{ inputs.outfile }}
+    - ${{ inputs.environment_key }}
+    - ${{ inputs.environment_value }}
