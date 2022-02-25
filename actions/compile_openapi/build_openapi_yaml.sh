@@ -20,9 +20,15 @@ touch temp.yaml
 sed "s/$ENV_KEY/$ENV_VALUE/g" $TEMPLATE > temp.yaml
 swagger-cli bundle -o ./$OUTFILE -t yaml -r  temp.yaml
 
-pwd
-echo $HOME
-ls $HOME
+ls -al /
+
+ls -al /github
+
+ls -al /gihub/workspace
+
+ls -al /github/workspace/api/data/openapi
+
+ls -al $HOME
 # cat ./temp.yaml
 # cat /output/$OUTFILE
 
