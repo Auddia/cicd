@@ -3,7 +3,7 @@ description: 'Recompiles and the needed components for GCP endpoints and redelop
 inputs:
   openapi_yaml:
     description: The location of the openapi yaml that defines the endpoint
-    default: "./"
+    default: "./openapi.yaml"
 runs:
   using: 'docker'
   image: "Dockerfile"
