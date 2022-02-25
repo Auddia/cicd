@@ -3,4 +3,4 @@ FROM ubuntu
 COPY openapi_update.sh ./openapi_update.sh
 COPY gcloud_build_image.sh ./gcloud_build_image.sh
 
-ENTRYPOINT pwd
+ENTRYPOINT ls /
