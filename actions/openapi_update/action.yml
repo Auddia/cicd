@@ -25,11 +25,19 @@ inputs:
 runs:
   using: 'docker'
   image: "Dockerfile"
-  args:
-    - ${{ inputs.gcp_project }}
-    - ${{ inputs.api_subdomain }}
-    - ${{ inputs.openapi_dir }}
-    - ${{ inputs.template }}
-    - ${{ inputs.outfile }}
-    - ${{ inputs.environment_key }}
-    - ${{ inputs.environment_value }}
+  env: 
+    GCP_PROJECT: ${{ inputs.gcp_project }}
+    API_SUBDOMAIN: ${{ inputs.api_subdomain }}
+    OPENAPI_DATA_DIR: ${{ inputs.openapi_dir }}
+    TEMPLATE: ${{ inputs.template }}
+    OUTFILE: ${{ inputs.outfile }}
+    ENV_KEY: ${{ inputs.environment_key }}
+    ENV_VALUE: ${{ inputs.environment_value }}
+  # args:
+  #   - ${{ inputs.gcp_project }}
+  #   - ${{ inputs.api_subdomain }}
+  #   - ${{ inputs.openapi_dir }}
+  #   - ${{ inputs.template }}
+  #   - ${{ inputs.outfile }}
+  #   - ${{ inputs.environment_key }}
+  #   - ${{ inputs.environment_value }}
