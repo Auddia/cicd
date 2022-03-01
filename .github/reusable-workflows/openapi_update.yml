@@ -31,27 +31,28 @@ on:
       gcp_credentials:
         required: true 
 
-openapi_update:
-  runs-on: ubuntu-latest
-#    name: A job to update the discovery api configuration
-  steps:
-    - name: GCloud SDK Setup
-      uses: Auddia/cicd/actions/setup_gcloud@main
-      with:
-        gcp_credentials: '${{ secrets.gcp_credentials }}'
+jobs:
+  openapi_update:
+    name: OpenAPI Update Deployement Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: GCloud SDK Setup
+        uses: Auddia/cicd/actions/setup_gcloud@main
+        with:
+          gcp_credentials: '${{ secrets.gcp_credentials }}'
 
-    - name: Compile OpenAPI YAML File
-      uses: Auddia/cicd/actions/compile_openapi@main
-      with:
-        openapi_dir: ${{ inputs.openapi_dir }}
-        template: ${{ inputs.template }}
-        outfile: ${{ inputs.openapi_yaml }}
-        environment_key: ${{ inputs.environment_key }}
-        environment_value: ${{ inputs.environment_value }}
+      - name: Compile OpenAPI YAML File
+        uses: Auddia/cicd/actions/compile_openapi@main
+        with:
+          openapi_dir: ${{ inputs.openapi_dir }}
+          template: ${{ inputs.template }}
+          outfile: ${{ inputs.openapi_yaml }}
+          environment_key: ${{ inputs.environment_key }}
+          environment_value: ${{ inputs.environment_value }}
 
-    - name: GCP Deployment
-      uses: Auddia/cicd/actions/configure_gcp_endpoints@main
-      with:
-        gcp_project: ${{ inputs.gcp_project }}
-        api_subdomain: ${{ inputs.api_subdomain }}
-        openapi_yaml: ${{ inputs.openapi_yaml }}
+      - name: GCP Deployment
+        uses: Auddia/cicd/actions/configure_gcp_endpoints@main
+        with:
+          gcp_project: ${{ inputs.gcp_project }}
+          api_subdomain: ${{ inputs.api_subdomain }}
+          openapi_yaml: ${{ inputs.openapi_yaml }}
