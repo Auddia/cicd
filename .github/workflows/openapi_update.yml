@@ -5,26 +5,33 @@ on:
     inputs:
       gcp_project:
         description: None
+        type: string
         required: true
       api_subdomain:
         description: None
+        type: string
         required: true
 
       openapi_dir:
         description: The directory location of all the openapi templates and configurations
+        type: string
         default: "./"
       template:
         description: 'The name of the template yaml file'
+        type: string
         default: 'template.yaml'
       openapi_yaml:
         description: The location of the openapi yaml that defines the endpoint
+        type: string
         default: "./openapi.yaml" 
 
       environment_key:
         description: 'Key in the template to replace with the environment value.'
+        type: string
         default: '<environment>'
       environment_value:
         description: 'Value ithat will replace the environment key in the template.'
+        type: string
         default: 'production'
       
     secrets:
