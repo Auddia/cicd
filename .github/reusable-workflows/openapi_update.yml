@@ -1,0 +1,57 @@
+name: Openapi Update
+
+on:
+  workflow_call:
+    inputs:
+      gcp_project:
+        description: None
+        required: true
+      api_subdomain:
+        description: None
+        required: true
+
+      openapi_dir:
+        description: The directory location of all the openapi templates and configurations
+        default: "./"
+      template:
+        description: 'The name of the template yaml file'
+        default: 'template.yaml'
+      openapi_yaml:
+        description: The location of the openapi yaml that defines the endpoint
+        default: "./openapi.yaml" 
+
+      environment_key:
+        description: 'Key in the template to replace with the environment value.'
+        default: '<environment>'
+      environment_value:
+        description: 'Value ithat will replace the environment key in the template.'
+        default: 'production'
+      
+    secrets:
+      gcp_credentials:
+        required: true 
+
+openapi_update:
+  runs-on: ubuntu-latest
+#    name: A job to update the discovery api configuration
+  steps:
+    - name: GCloud SDK Setup
+      uses: Auddia/cicd/actions/setup_gcloud@main
+      with:
+        gcp_credentials: '${{ secrets.gcp_credentials }}'
+
+    - name: Compile OpenAPI YAML File
+      uses: Auddia/cicd/actions/compile_openapi@main
+      with:
+        openapi_dir: ${{ inputs.openapi_dir }}
+        template: ${{ inputs.template }}
+        outfile: ${{ inputs.openapi_yaml }}
+        environment_key: ${{ inputs.environment_key }}
+        environment_value: ${{ inputs.environment_value }}
+
+    - name: GCP Deployment
+      uses: Auddia/cicd/actions/configure_gcp_endpoints@main
+      with:
+        gcp_project: ${{ inputs.gcp_project }}
+        api_subdomain: ${{ inputs.api_subdomain }}
+        openapi_yaml: ${{ inputs.openapi_yaml }}
