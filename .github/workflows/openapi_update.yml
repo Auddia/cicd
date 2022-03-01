@@ -4,38 +4,43 @@ on:
   workflow_call:
     inputs:
       gcp_project:
-        description: None
+        description: 'The GCP project name'
         type: string
         required: true
       api_subdomain:
-        description: None
+        description: 'The subdomain of the api being deployed'
         type: string
         required: true
       default_service_account:
-        description: None
+        description: 'The service account you want to run the gcloud deployment commands'
         type: string
         required: true
 
       openapi_dir:
-        description: The directory location of all the openapi templates and configurations
+        description: 'The directory location of all the openapi templates and configurations'
         type: string
+        required: false
         default: "./"
       template:
         description: 'The name of the template yaml file'
         type: string
+        required: false
         default: 'template.yaml'
       openapi_yaml:
-        description: The location of the openapi yaml that defines the endpoint
+        description: 'The location of the openapi yaml that defines the endpoint'
         type: string
+        required: false
         default: "./openapi.yaml" 
 
       environment_key:
         description: 'Key in the template to replace with the environment value.'
         type: string
+        required: false
         default: '<environment>'
       environment_value:
-        description: 'Value ithat will replace the environment key in the template.'
+        description: 'Value that will replace the environment key in the template.'
         type: string
+        required: false
         default: 'production'
       
     secrets:

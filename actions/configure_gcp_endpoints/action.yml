@@ -2,16 +2,17 @@ name: 'GCP Endpoints Configuration/Update/Deployment'
 description: 'Recompiles and the needed components for GCP endpoints and redelopys them'
 inputs:
   gcp_project:
-    description: None
+    description: The GCP project name
     required: true
   api_subdomain:
-    description: None
+    description: The subdomain of the api being deployed
     required: true
   default_service_account:
-    description: None
+    description: The service account you want to run the gcloud deployment commands
     required: true
   openapi_yaml:
-    description: The location of the openapi yaml that defines the endpoint
+    description: The location of the openapi yaml that defines the api's endpoints
+    required: false
     default: "./openapi.yaml"  
 runs:
   using: 'docker'
