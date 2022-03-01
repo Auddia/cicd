@@ -1,7 +1,7 @@
 # Githut Action
 
 ## Important Info
-* name: `compile_openappi`
+* name: `compile_openapi`
 * yaml reference: `Auddia/cicd/actions/compile_openapi@main@<tag>`
 * action type: Docker Action
 
