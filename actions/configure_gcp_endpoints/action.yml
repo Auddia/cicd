@@ -7,6 +7,9 @@ inputs:
   api_subdomain:
     description: None
     required: true
+  default_service_account:
+    description: None
+    required: true
   openapi_yaml:
     description: The location of the openapi yaml that defines the endpoint
     default: "./openapi.yaml"  
@@ -17,3 +20,4 @@ runs:
     GCP_PROJECT: ${{ inputs.gcp_project }}
     API_SUBDOMAIN: ${{ inputs.api_subdomain }}
     OPENAPI_YAML: ${{ inputs.openapi_yaml }}
+    DEFAULT_GCP_SERVICE_ACCOUNT: ${{ inputs.default_service_account }}

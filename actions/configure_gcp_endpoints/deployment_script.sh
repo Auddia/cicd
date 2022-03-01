@@ -3,6 +3,7 @@
 echo "DEBUG INFO: "
 echo "GCP_PROJECT=${GCP_PROJECT}"
 echo "API_SUBDOMAIN=${API_SUBDOMAIN}"
+echo "DEFAULT_GCP_SERVICE_ACCOUNT=${DEFAULT_GCP_SERVICE_ACCOUNT}"
 echo "OPENAPI_YAML=${OPENAPI_YAML}"
 
 
@@ -24,3 +25,10 @@ gcloud beta run deploy discovery-endpoints-cloudrun-service \
   --project $GCP_PROJECT \
   --region us-central1 \
   --min-instances 2
+
+gcloud run services add-iam-policy-binding discovery-api \
+  --member $DEFAULT_GCP_SERVICE_ACCOUNT \
+  --role "roles/run.invoker" \
+  --platform managed \
+  --project $GCP_PROJECT \
+  --region us-central1

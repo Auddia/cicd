@@ -11,6 +11,10 @@ on:
         description: None
         type: string
         required: true
+      default_service_account:
+        description: None
+        type: string
+        required: true
 
       openapi_dir:
         description: The directory location of all the openapi templates and configurations
@@ -62,4 +66,5 @@ jobs:
         with:
           gcp_project: ${{ inputs.gcp_project }}
           api_subdomain: ${{ inputs.api_subdomain }}
+          default_service_account: ${{ inputs.default_service_account }}
           openapi_yaml: ${{ inputs.openapi_yaml }}
