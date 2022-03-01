@@ -9,11 +9,11 @@ echo "GCP_PROJECT=${GCP_PROJECT}"
 echo "API_SUBDOMAIN=${API_SUBDOMAIN}"
 echo "OPENAPI_YAML=${OPENAPI_YAML}"
 
-ls
+# ls
 
-cat $OPENAPI_YAML
+# cat $OPENAPI_YAML
 
-# gcloud info
+gcloud info
 
 # gcloud endpoints services deploy api/openapi.staging.yaml --project vodacast-staging # This command produces the [CONFIG ID]
 
