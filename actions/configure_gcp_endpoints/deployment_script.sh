@@ -27,7 +27,7 @@ gcloud beta run deploy discovery-endpoints-cloudrun-service \
   --min-instances 2
 
 gcloud run services add-iam-policy-binding discovery-api \
-  --member $DEFAULT_GCP_SERVICE_ACCOUNT \
+  --member "serviceAccount:$DEFAULT_GCP_SERVICE_ACCOUNT" \
   --role "roles/run.invoker" \
   --platform managed \
   --project $GCP_PROJECT \
