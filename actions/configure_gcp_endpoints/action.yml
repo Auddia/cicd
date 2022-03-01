@@ -11,10 +11,6 @@ inputs:
     description: The location of the openapi yaml that defines the endpoint
     default: "./openapi.yaml"  
 runs:
-  # using: 'composite'
-  # steps:
-  #   - run: deployment_script.sh ${{ inputs.gcp_project }} ${{ inputs.api_subdomain }} ${{ inputs.openapi_yaml }}
-  #     shell: bash
   using: 'docker'
   image: "Dockerfile"
   env: 

@@ -1,28 +1,29 @@
 #!/usr/bin/env sh 
 
-# GCP_PROJECT=$1
-# API_SUBDOMAIN=$2
-# OPENAPI_YAML=$3
-
 echo "DEBUG INFO: "
 echo "GCP_PROJECT=${GCP_PROJECT}"
 echo "API_SUBDOMAIN=${API_SUBDOMAIN}"
 echo "OPENAPI_YAML=${OPENAPI_YAML}"
 
-# ls
 
-# cat $OPENAPI_YAML
+# TODO: Parse the config id out of the output from this command
+# TODO: Allow action user to pass additional options to this script (Needed?)
+touch deployment_info.txt
+gcloud endpoints services deploy ./$OPENAPI_YAML --project $GCP_PROJECT > deployment_info.txt 1>&1
+CONFIG_ID=$(cat deployment_info.txt | awk -F'[][]' '{print $2}' | tr -d '[:space:]')
 
-gcloud info
+echo $CONFIG_ID
 
-# gcloud endpoints services deploy api/openapi.staging.yaml --project vodacast-staging # This command produces the [CONFIG ID]
+# # # TODO: add this GCP script to this DIR
+# # # TODO: get the image name from the output of this command 
+# # # TODO: Allow action user to pass additional options to this script (Needed?)
+# /tmp/gcloud_build_image.sh -s $API_SUBDOMAIN -c $CONFIG_ID -p $GCP_PROJECT
 
-# ./scripts/gcloud_build_image -s discovery.vodacast-staging.auddia.services -c [CONFIG ID] -p vodacast-staging
-
+# # # TODO: Allow action user to pass additional options to this script (Needed?)
 # gcloud beta run deploy discovery-endpoints-cloudrun-service \
-#   --image="gcr.io/vodacast-staging/endpoints-runtime-serverless:discovery.vodacast-staging.auddia.services-[CONFIG ID]" \
+#   --image="gcr.io/$GCP_PROJECT/endpoints-runtime-serverless:$API_SUBDOMAIN-$CONFIG_ID" \
 #   --allow-unauthenticated \
 #   --platform managed \
-#   --project vodacast-staging \
+#   --project $GCP_PROJECT \
 #   --region us-central1 \
 #   --min-instances 2
