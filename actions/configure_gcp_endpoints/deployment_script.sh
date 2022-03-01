@@ -9,6 +9,8 @@ echo "GCP_PROJECT=${GCP_PROJECT}"
 echo "API_SUBDOMAIN=${API_SUBDOMAIN}"
 echo "OPENAPI_YAML=${OPENAPI_YAML}"
 
+ls
+
 cat $OPENAPI_YAML
 
 # gcloud info
