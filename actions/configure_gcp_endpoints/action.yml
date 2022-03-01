@@ -1,13 +1,17 @@
 name: 'GCP Endpoints Configuration/Update/Deployment'
 description: 'Recompiles and the needed components for GCP endpoints and redelopys them'
 inputs:
+  gcp_project:
+    description: None
+    required: true
+  api_subdomain:
+    description: None
+    required: true
   openapi_yaml:
     description: The location of the openapi yaml that defines the endpoint
-    default: "./openapi.yaml"
+    default: "./openapi.yaml"  
 runs:
   using: 'composite'
   steps:
-    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
-      shell: bash
-    - run: deployment_script.sh ${{ inputs.openapi_yaml }}
+    - run: deployment_script.sh ${{ inputs.gcp_project }} ${{ inputs.api_subdomain }} ${{ inputs.openapi_yaml }}
       shell: bash
