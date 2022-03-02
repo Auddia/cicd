@@ -73,7 +73,7 @@ jobs:
   discovery_api_update_staging:
     name: Openapi Update Staging Deployment.
     if: github.ref == 'refs/heads/staging'
-    uses: Auddia/cicd/.github/workflows/openapi_update.yml@main
+    uses: Auddia/cicd/.github/workflows/openapi_update.yml@<tag>
     with:
       gcp_project: 'vodacast-staging'
       api_subdomain: 'discovery.vodacast-staging.auddia.services'
@@ -86,7 +86,7 @@ jobs:
   discovery_api_update_production:
     name: Openapi Update Production Deployment
     if: github.ref == 'refs/heads/production'
-    uses: Auddia/cicd/.github/workflows/openapi_update.yml@main
+    uses: Auddia/cicd/.github/workflows/openapi_update.yml@<tag>
     with:
       gcp_project: 'vodacast'
       api_subdomain: 'discovery.vodacast.auddia.services'

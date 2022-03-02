@@ -2,7 +2,7 @@
 
 ## Important Info
 * name: `compile_openapi`
-* yaml reference: `Auddia/cicd/actions/compile_openapi@main@<tag>`
+* yaml reference: `Auddia/cicd/actions/compile_openapi@<tag>`
 * action type: Docker Action
 
 ## Required Setup
