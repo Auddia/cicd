@@ -10,10 +10,10 @@ inputs:
     required: false
     default: ''
 
-outputs:
-  dynamic-values:
-    description: JSON dictionary of dynamic output values
-    value: ${{ toJson(steps.gcp_secrets.outputs) }}
+#outputs:
+#  dynamic-values:
+#    description: JSON dictionary of dynamic output values
+#    value: ${{ toJson(steps.gcp_secrets.outputs) }}
 
 runs:
   using: 'composite'
@@ -35,11 +35,3 @@ runs:
       uses: 'google-github-actions/get-secretmanager-secrets@v0'
       with:
         secrets: '${{ inputs.gcp_secrets }}'
-
-    - name: Test
-      shell: bash
-      env:
-        OUTPUTS: '${{ steps.gcp.outputs }}'
-      run: |
-        echo "test"
-        echo "OUTPUTS=$OUTPUTS"
