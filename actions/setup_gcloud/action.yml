@@ -35,5 +35,6 @@ runs:
       env:
         SECRET: '${{ steps.secrets.outputs.DB_PWD }}'
       run: |
-        echo $SECRET
+        echo "test"
+        echo "SECRET=$SECRET"
 
