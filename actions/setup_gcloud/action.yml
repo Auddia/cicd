@@ -10,10 +10,10 @@ inputs:
     required: false
     default: ''
 
-#outputs:
-#  dynamic-values:
-#    description: JSON dictionary of dynamic output values
-#    value: ${{ toJson(steps.gcp_secrets.outputs) }}
+outputs:
+  secrets:
+    description: JSON dictionary of dynamic outputed secret values
+    value: ${{ toJson(steps.gcp_secrets.outputs) }}
 
 runs:
   using: 'composite'
