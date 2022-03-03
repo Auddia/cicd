@@ -3,7 +3,7 @@
 ## Important Info
 * name: `setup_gcloud`
 * yaml reference: `Auddia/cicd/actions/setup_gcloud@<tag>`
-* action type: Docker Action
+* action type: Composite
 
 ## Description
 This reusable action pulls in the code for the repo and sets up a gcloud-sdk. It makes both the code and sdk available to all actions/steps with in the job where this action is used. 
@@ -25,12 +25,15 @@ The sdk is available in all steps and within docker as long as you use the [`goo
 * References the repo's available secrets and the github group's (i.e. `Auddia`) available secrets
 * If the needed credentials secret doesnt exist and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
 
+##### `gcp_secrets`
+* **Description**: Secrets from GCP that you want available for other steps and actions within a job
+* Here is a [reference](https://github.com/google-github-actions/get-secretmanager-secrets#inputs) for how to structure the secret string for this action
 
 ## Example Usage
 
 ```
 jobs:
-  example_job:
+  example_job_no_secrets:
     name: An example job that uses the gcloud sdk 
     runs-on: ubuntu-latest
     steps:
@@ -41,6 +44,26 @@ jobs:
 
       - name: Example using the gcloud tool
         run: 'gcloud info'
+
+  example_job_with_secrets:
+    name: An example job that uses the gcloud sdk 
+    runs-on: ubuntu-latest
+    steps:
+      - name: GCloud SDK Setup
+        uses: Auddia/cicd/actions/setup_gcloud@<tag>
+        with:
+          gcp_credentials: '${{ secrets.GCP_CREDEENTIALS }}'
+          gcp_secrets: |-
+            token:my-project/docker-registry-token
+
+      - name: Example using the gcloud tool
+        run: 'gcloud info'
+        
+      - name: Reference the secret
+        uses: 'foo/bar@master'
+        env:
+          TOKEN: '${{ steps.gcp_secrets.outputs.token }}'
+        
 ```
 
 ### Additonal Usage
