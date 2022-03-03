@@ -39,8 +39,7 @@ runs:
     - name: Test
       shell: bash
       env:
-        SECRET: '${{ steps.gcp_secrets.outputs }}'
+        OUTPUT: '${{ toJson(steps.gcp_secrets.outputs) }}'
       run: |
-        echo "test"
-        echo "$SECRET"
+        echo $OUTPUT
 
