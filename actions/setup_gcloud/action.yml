@@ -24,7 +24,7 @@ runs:
 
     - name: 'Get Secrets'
       if: '${{ inputs.gcp_secrets }}'
-      id: secrets
+      id: gcp_secrets
       uses: 'google-github-actions/get-secretmanager-secrets@v0'
       with:
         secrets: |-
@@ -33,7 +33,7 @@ runs:
     - name: Test
       shell: bash
       env:
-        SECRET: '${{ steps.secrets.outputs.DB_PWD }}'
+        SECRET: '${{ steps.gcp_secrets.outputs.DB_PWD }}'
       run: |
         echo "test"
         echo "SECRET=$SECRET"
