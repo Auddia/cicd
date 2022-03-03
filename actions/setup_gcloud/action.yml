@@ -23,7 +23,7 @@ runs:
       uses: 'google-github-actions/setup-gcloud@v0'
 
     - name: 'Get Secrets'
-      if: '${{ inputs.gcp_secrets != '' }}'
+      if: '${{ inputs.gcp_secrets }}'
       id: gcp_secrets
       uses: 'google-github-actions/get-secretmanager-secrets@v0'
       with:
