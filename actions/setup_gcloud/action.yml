@@ -36,10 +36,10 @@ runs:
       with:
         secrets: '${{ inputs.gcp_secrets }}'
 
-    - name: Test
-      shell: bash
-      env:
-        OUTPUT: '${{ toJson(steps.gcp_secrets.outputs) }}'
-      run: |
-        echo $OUTPUT
+#    - name: Test
+#      shell: bash
+#      env:
+#        OUTPUT: '${{ toJson(steps.gcp_secrets.outputs) }}'
+#      run: |
+#        echo $OUTPUT
 
