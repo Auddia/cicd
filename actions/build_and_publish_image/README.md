@@ -63,7 +63,7 @@ jobs:
         gcp_credentials: '${{ inputs.gcp_credentials }}'
     
       - name: Build and Publish Docker Image
-        uses: 'Auddia/cicd/actions/builkd_and_publish_image@<tag>'
+        uses: 'Auddia/cicd/actions/build_and_publish_image@<tag>'
         with:
           tag: 'gcr.io/${{ env.GCP_PROJECT }}/discovery-api:${{ github.sha }}'
           dockerfile: ./api/Dockerfile
