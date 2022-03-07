@@ -19,6 +19,7 @@ This action builds and publishes a docker image.
 * **Description**: Image tag
 * `type`: `string`
 * `required`
+* **NOTE**: If your tag contains `gcr.io` `gcloud-sdk` needs to be configured using this [action](../setup_gcloud/README.md). This is shown in the example usage section.
 
 ##### `dockerfile`
 * **Description**: Location of the dockerfile

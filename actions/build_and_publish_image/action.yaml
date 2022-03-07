@@ -24,23 +24,20 @@ inputs:
 runs:
   using: 'composite'
   steps:
-#    - name: 'Build Image'
-#      shell: bash
-#      run: |
-#        docker build \
-#        --tag ${{ inputs.tag }} \
-#        ${{ inputs.build_args }} \
-#        --file ${{ inputs.dockerfile }} \
-#        ${{ inputs.build_context }}
-
-    - name: 'Configure gcp docker registry'
-#      if: "${{ contains(inputs.tag, 'gcr.io') }}"
+    - name: 'Build Image'
       shell: bash
       run: |
-        echo "${{ inputs.tag }}"
-        echo "${{ contains(inputs.tag, 'gcr.io') }}"
-        gcloud auth configure-docker
+        docker build \
+        --tag ${{ inputs.tag }} \
+        ${{ inputs.build_args }} \
+        --file ${{ inputs.dockerfile }} \
+        ${{ inputs.build_context }}
 
-#    - name: 'Publish Image'
-#      shell: bash
-#      run: docker push ${{ inputs.tag }}
+    - name: 'Configure gcp docker registry'
+      if: "${{ contains(inputs.tag, 'gcr.io') }}"
+      shell: bash
+      run: gcloud auth configure-docker
+
+    - name: 'Publish Image'
+      shell: bash
+      run: docker push ${{ inputs.tag }}
