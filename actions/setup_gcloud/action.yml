@@ -6,7 +6,7 @@ inputs:
     description: A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
     required: true
   gcp_secrets:
-    description: None
+    description: DOESNT WORK ATM
     required: false
     default: ''
 
@@ -18,6 +18,9 @@ outputs:
 runs:
   using: 'composite'
   steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
     - name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v0'
       with:
