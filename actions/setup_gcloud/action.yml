@@ -29,6 +29,10 @@ runs:
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v0'
 
+    - name: Test
+      shell: bash
+      run: echo ${{ fromJson(inputs.gcp_secrets) }}
+
     - name: 'Get Secrets'
       if: '${{ inputs.gcp_secrets }}'
       id: gcp_secrets
