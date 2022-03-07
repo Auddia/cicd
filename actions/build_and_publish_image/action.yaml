@@ -30,8 +30,8 @@ runs:
         docker build \
         --tag ${{ inputs.tag }} \
         ${{ inputs.build_args }} \
-        --file ${{ intputs.dockerfile }} \
-        ${{ intputs.build_context }}
+        --file ${{ inputs.dockerfile }} \
+        ${{ inputs.build_context }}
 #
 #    - name: 'Publish Image'
 #      shell: bash
