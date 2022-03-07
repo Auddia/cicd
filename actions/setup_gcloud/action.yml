@@ -31,7 +31,7 @@ runs:
 
     - name: Test
       shell: bash
-      run: echo ${{ inputs.gcp_secrets }}
+      run: echo ${{ fromJson(inputs.gcp_secrets) }}
 
     - name: 'Get Secrets'
       if: '${{ inputs.gcp_secrets }}'
