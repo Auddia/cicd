@@ -67,9 +67,9 @@ jobs:
           build_args: '${{ inputs.build_args }}'
           push_args: '${{ inputs.build_args }}'
 
-#      - name: Test docker image.
-#        shell: bash
-#        run: docker run gcr.io/${{ env.GCP_PROJECT }}/discovery-api:${{ github.sha }} env
+      - name: Test docker image.
+        shell: bash
+        run: docker run gcr.io/${{ env.GCP_PROJECT }}/discovery-api:${{ github.sha }} env
 
 #      - name: Deploy to Cloud Run
 #        shell: bash
