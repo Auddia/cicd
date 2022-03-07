@@ -27,13 +27,13 @@ runs:
     - name: 'Build Image'
       shell: bash
       run: |
-#        echo ${{ inputs.build_args }}
-        docker build \
-        --tag ${{ inputs.tag }} \
-        ${{ inputs.build_args }} \
-        --file ${{ intputs.dockerfile }} \
-        ${{ intputs.build_context }}
-
-    - name: 'Publish Image'
-      shell: bash
-      run: docker push ${{ inputs.tag }}
+        echo ${{ inputs.build_args }}
+#        docker build \
+#        --tag ${{ inputs.tag }} \
+#        ${{ inputs.build_args }} \
+#        --file ${{ intputs.dockerfile }} \
+#        ${{ intputs.build_context }}
+#
+#    - name: 'Publish Image'
+#      shell: bash
+#      run: docker push ${{ inputs.tag }}
