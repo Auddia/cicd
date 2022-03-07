@@ -69,7 +69,9 @@ jobs:
 
       - name: Test docker image.
         shell: bash
-        run: docker run gcr.io/${{ env.GCP_PROJECT }}/discovery-api:${{ github.sha }} env
+        run: |
+          docker pull gcr.io/${{ env.GCP_PROJECT }}/discovery-api:${{ github.sha }}
+          docker run gcr.io/${{ env.GCP_PROJECT }}/discovery-api:${{ github.sha }} env
 
 #      - name: Deploy to Cloud Run
 #        shell: bash
