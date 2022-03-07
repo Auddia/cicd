@@ -1,0 +1,39 @@
+name: 'Build and Publish Image'
+description: 'Builds and publishes a docker image'
+
+inputs:
+  tag:
+    description: Image tag
+    required: true
+  dockerfile:
+    description: Location of the dockerfile
+    required: true
+  build_context:
+    description: Location for docker's build context
+    required: false
+    default: '.'
+  build_args:
+    description: Additional agruments to pass to docker build
+    required: false
+    default: ''
+  push_args:
+    description: Additional arguments to pass to docker push
+    required: false
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Build Image'
+      shell: bash
+      run: |
+#        echo ${{ inputs.build_args }}
+        docker build \
+        --tag ${{ inputs.tag }} \
+        ${{ inputs.build_args }} \
+        --file ${{ intputs.dockerfile }} \
+        ${{ intputs.build_context }}
+
+    - name: 'Publish Image'
+      shell: bash
+      run: docker push ${{ inputs.tag }}
