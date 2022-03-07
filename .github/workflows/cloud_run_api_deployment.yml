@@ -61,7 +61,7 @@ jobs:
       - name: Build and Publish Docker Image
         uses: 'Auddia/cicd/actions/build_and_publish_image@wudstrand/cicd#1'
         with:
-          tag: 'gcr.io/${{ inputs.gcp_projects }}/${{ input.api_name }}:${{ github.sha }}'
+          tag: 'gcr.io/${{ inputs.gcp_projects }}/${{ inputs.api_name }}:${{ github.sha }}'
           dockerfile: '${{ inputs.dockerfile }}'
           build_context: '${{ inputs.build_context }}'
           build_args: '${{ inputs.build_args }}'
