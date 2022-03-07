@@ -34,11 +34,11 @@ runs:
 #        ${{ inputs.build_context }}
 
     - name: 'Configure gcp docker registry'
-#      if: "${{ contains(inputs.tag, 'grc.io') }}"
+#      if: "${{ contains(inputs.tag, 'gcr.io') }}"
       shell: bash
       run: |
         echo "${{ inputs.tag }}"
-        echo "${{ contains(inputs.tag, 'grc.io') }}"
+        echo "${{ contains(inputs.tag, 'gcr.io') }}"
         gcloud auth configure-docker
 
 #    - name: 'Publish Image'
