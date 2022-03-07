@@ -42,7 +42,7 @@ This action builds and publishes a docker image.
 
 ## Example Usage
 
-```
+```yaml
 env:
   GCP_PROJECT: vodacast-staging
   DB: vodacast
@@ -53,11 +53,16 @@ env:
 
 jobs:
   example job:
-    name: Configure GCP Enpoints Example
+    name: Publish image to GCP
     runs-on: ubuntu-latest
     steps:
+      - name: GCloud SDK Setup
+        uses: Auddia/cicd/actions/setup_gcloud@v0
+        with:
+        gcp_credentials: '${{ inputs.gcp_credentials }}'
+    
       - name: Build and Publish Docker Image
-        uses: 'Auddia/cicd/actions/builkd_and_publish_image@wudstrand/cicd#1'
+        uses: 'Auddia/cicd/actions/builkd_and_publish_image@<tag>'
         with:
           tag: 'gcr.io/${{ env.GCP_PROJECT }}/discovery-api:${{ github.sha }}'
           dockerfile: ./api/Dockerfile
