@@ -34,7 +34,7 @@ runs:
         ${{ inputs.build_context }}
 
     - name: 'Configure gcp docker registry'
-      if: "${{ contains(inputs.tag, 'grc.io') }}"
+#      if: "${{ contains(inputs.tag, 'grc.io') }}"
       shell: bash
       run: gcloud auth configure-docker
 
