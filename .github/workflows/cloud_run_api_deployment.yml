@@ -1,0 +1,82 @@
+name: Cloud Run API Deployment
+
+on:
+  workflow_call:
+    inputs:
+      gcp_project:
+        description: The GCP project name
+        type: string
+        required: true
+      gcp_secrets:
+        description: Secrets from GCP that you want available for other steps and actions within a job (Get docs from setup_gcloud action)
+        type: string
+        required: true
+
+      api_name:
+        description: Name of the api
+        type: string
+        required: true
+      dockerfile:
+        description: Location of the dockerfile
+        type: string
+        required: false
+        default: './Dockerfile'
+      build_context:
+        description: Location for docker's build context
+        type: string
+        required: false
+        default: '.'
+      build_args:
+        description: Additional agruments to pass to docker build
+        type: string
+        required: false
+        default: ''
+      push_args:
+        description: Additional arguments to pass to docker push
+        type: string
+        required: false
+        default: ''
+      deploy_args:
+        description: Additional arguments to pass to gcloud beta run deploy
+        type: string
+        required: false
+        default: ''
+
+    secrets:
+      gcp_credentials:
+        required: true
+jobs:
+  api_deployment:
+    name: API Deployement
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup GCloud SDK Staging Environment
+        id: gcp
+        uses: 'Auddia/cicd/actions/setup_gcloud@wudstrand/cicd#1'
+        with:
+          gcp_credentials: '${{ secrets.gcp_credentials }}'
+          gcp_secrets: '${{ inputs.gcp_secrets }}'
+
+      - name: Build and Publish Docker Image
+        uses: 'Auddia/cicd/actions/build_and_publish_image@wudstrand/cicd#1'
+        with:
+          tag: 'gcr.io/${{ inputs.gcp_projects }}/${{ input.api_name }}:${{ github.sha }}'
+          dockerfile: '${{ inputs.dockerfile }}'
+          build_context: '${{ inputs.build_context }}'
+          build_args: '${{ inputs.build_args }}'
+          push_args: '${{ inputs.build_args }}'
+
+#      - name: Test docker image.
+#        shell: bash
+#        run: docker run gcr.io/${{ env.GCP_PROJECT }}/discovery-api:${{ github.sha }} env
+
+#      - name: Deploy to Cloud Run
+#        shell: bash
+#        run: |
+#          gcloud beta run deploy ${{ inputs.api_name }} \
+#          --image gcr.io/${{ inputs.gcp_project }}/${{ input.api_name }}:${{ github.sha }} \
+#          --region us-central1 \
+#          --no-allow-unauthenticated \
+#          --platform managed \
+#          ${{ inputs.deploy_args }}

@@ -25,11 +25,11 @@ The sdk is available in all steps and within docker as long as you use the [`goo
 * References the repo's available secrets and the github group's (i.e. `Auddia`) available secrets
 * If the needed credentials secret doesnt exist and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
 
-[comment]: <> (##### `gcp_secrets`)
+##### `gcp_secrets`
 
-[comment]: <> (* **Description**: Secrets from GCP that you want available for other steps and actions within a job)
+* **Description**: Secrets from GCP that you want available for other steps and actions within a job
 
-[comment]: <> (* Here is a [reference]&#40;https://github.com/google-github-actions/get-secretmanager-secrets#inputs&#41; for how to structure the secret string for this action)
+* Here is a [reference](https://github.com/google-github-actions/get-secretmanager-secrets#inputs) for how to structure the secret string for this action
 
 ## Example Usage
 
@@ -48,41 +48,27 @@ jobs:
         run: 'gcloud info'
 ```
 
-[comment]: <> (```)
+```
+  example_job_with_secrets:
+    name: An example job that uses the gcloud sdk 
+    runs-on: ubuntu-latest
+    steps:
+      - name: GCloud SDK Setup
+        id: gcp
+        uses: Auddia/cicd/actions/setup_gcloud@<tag>
+        with:
+          gcp_credentials: '${{ secrets.GCP_CREDEENTIALS }}'
+          gcp_secrets: |-
+            TOKEN:my-project/docker-registry-token
 
-[comment]: <> (  example_job_with_secrets:)
-
-[comment]: <> (    name: An example job that uses the gcloud sdk )
-
-[comment]: <> (    runs-on: ubuntu-latest)
-
-[comment]: <> (    steps:)
-
-[comment]: <> (      - name: GCloud SDK Setup)
-
-[comment]: <> (        uses: Auddia/cicd/actions/setup_gcloud@<tag>)
-
-[comment]: <> (        with:)
-
-[comment]: <> (          gcp_credentials: '${{ secrets.GCP_CREDEENTIALS }}')
-
-[comment]: <> (          gcp_secrets: |-)
-
-[comment]: <> (            token:my-project/docker-registry-token)
-
-[comment]: <> (      - name: Example using the gcloud tool)
-
-[comment]: <> (        run: 'gcloud info')
+      - name: Example using the gcloud tool
+        run: 'gcloud info'
         
-[comment]: <> (      - name: Reference the secret)
-
-[comment]: <> (        uses: 'foo/bar@master')
-
-[comment]: <> (        env:)
-
-[comment]: <> (          TOKEN: '${{ steps.gcp_secrets.outputs.token }}')
-        
-[comment]: <> (```)
+      - name: Reference the secret
+        uses: 'foo/bar@master'
+        env:
+          TOKEN: '${{ fromJson(steps.gcp.outputs.secrets).TOKEN }}'
+```
 
 ### Additonal Usage
 * [Reuseable Workflow OpenAPI Update](../../.github/workflows/openapi_update.yml)
