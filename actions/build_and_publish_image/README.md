@@ -66,7 +66,7 @@ jobs:
             --build-arg DB_USER \
             --build-arg DB_PWD=${{ secrets.DB_PASSWORD }} \
             --build-arg MIN_CONNECTIONS \
-            --build-arg MAX_CONNECTIONS
+            --build-arg MAX_CONNECTIONS \
 ```
 
 ### Additonal Usage

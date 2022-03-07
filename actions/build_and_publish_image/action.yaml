@@ -32,7 +32,7 @@ runs:
         ${{ inputs.build_args }} \
         --file ${{ inputs.dockerfile }} \
         ${{ inputs.build_context }}
-#
-#    - name: 'Publish Image'
-#      shell: bash
-#      run: docker push ${{ inputs.tag }}
+
+    - name: 'Publish Image'
+      shell: bash
+      run: docker push ${{ inputs.tag }}
