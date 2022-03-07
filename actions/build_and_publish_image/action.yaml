@@ -37,6 +37,7 @@ runs:
 #      if: "${{ contains(inputs.tag, 'grc.io') }}"
       shell: bash
       run: |
+        echo "${{ inputs.tag }}"
         echo "${{ contains(inputs.tag, 'grc.io') }}"
         gcloud auth configure-docker
 
