@@ -22,10 +22,10 @@ runs:
 
         echo $config | while read line; do
           arg=(${line//:/ })
-          build_args="${build_arg}  --build-arg ${arg[0]}=${arg[1]}/n";
+          build_args="${build_args}  --build-arg ${arg[0]}=${arg[1]}/n";
         done
 
-        echo $build_arg
+        echo $build_args
 
 
 
