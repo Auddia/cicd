@@ -35,7 +35,7 @@ runs:
       run: |
         if [ -n "${{ inputs.build_config }}" ]
         then
-          echo "${{ inputs.build_config }}" >> temp.txt
+          echo "${{ inputs.build_config }}" | grep -v '^[[:space:]]*$'  >> temp.txt
           arg_list=$(awk -F: '{print "--build-args "$1"="$2}' temp.txt)
           cleaned_args=${arg_list//= /=}
           echo "set-output name=additional_build_args::$cleaned_args"
