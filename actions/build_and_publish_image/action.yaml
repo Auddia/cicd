@@ -49,18 +49,16 @@ runs:
           value=$(echo $cleaned_args | tr '\n' ' ')
         fi
 
-        echo $value
-
         secret_args='${{ inputs.gcp_secrets }}'
 
-        echo "$secret_args" | grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\""
+        echo "$secret_args" | grep -o "DB_PWD"
 
-        echo "$secret_args" | grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\"" | tr -d "[\":]" > sec_input.txt
-        echo "File"
-        cat sec_input.txt
-
-        additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
-        echo $additional_args
+#        echo "$secret_args" | grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\"" | tr -d "[\":]" > sec_input.txt
+#        echo "File"
+#        cat sec_input.txt
+#
+#        additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
+#        echo $additional_args
 
 #        echo "additional_build_args=${value} ${additional_args}" >> $GITHUB_ENV
 
