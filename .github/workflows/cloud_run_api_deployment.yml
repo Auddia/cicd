@@ -74,7 +74,7 @@ jobs:
           push_args: '${{ inputs.build_args }}'
           gcp_secrets: '${{ steps.gcp.outputs.secrets }}'
 
-      - name: Test docker image.
+      - name: Test docker image
         shell: bash
         run: |
           docker pull gcr.io/${{ env.GCP_PROJECT }}/${{ inputs.api_name }}:${{ github.sha }}
