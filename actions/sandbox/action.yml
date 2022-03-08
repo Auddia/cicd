@@ -20,7 +20,11 @@ runs:
     - name: 'Print Input'
       shell: bash
       run: |
-        echo ${{ fromJson(inputs.secrets) }} | jq "."
+        echo ${{ inputs.secrets }} > temp.txt
+        keys=$(sed -E 's/.*"([A-Z_]+).*":.*|.*/\1/' temp.txt | grep -v '^[[:space:]]*$')
+
+        sed -E 's/(.*"([A-Z_]+).*":.*/\2/' temp.txt
+
 #        echo ${{ fromJson(inputs.secrets)['T'] }}
 
 #
