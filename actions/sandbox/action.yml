@@ -21,6 +21,7 @@ runs:
       shell: bash
       run: |
         jq --help
+        echo ${{ inputs.secrets }}
 
 #        echo "${{ inputs.config }}" >> temp.txt
 #        arg_list=$(awk -F: '{print "--build-args "$1"="$2}' temp.txt)
