@@ -20,7 +20,7 @@ runs:
     - name: 'Print Input'
       shell: bash
       run: |
-        echo "${{ inputs.secrets }} >> temp.txt"
+        echo "${{ inputs.secrets }} > temp.txt"
         cat temp.txt
 
 #        echo "${{ inputs.config }}" >> temp.txt
