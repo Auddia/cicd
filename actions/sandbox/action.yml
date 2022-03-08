@@ -20,9 +20,9 @@ runs:
     - name: 'Print Input'
       shell: bash
       run: |
-        echo "${{ inputs.secrets }} > temp.txt"
-        ls
-        cat temp.txt
+        echo "${{ inputs.secrets }} > ./temp.txt"
+        ls ./
+        cat ./temp.txt
 
 #        echo "${{ inputs.config }}" >> temp.txt
 #        arg_list=$(awk -F: '{print "--build-args "$1"="$2}' temp.txt)
