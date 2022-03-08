@@ -17,10 +17,10 @@ runs:
     - name: 'Print Input'
       shell: bash
       run: |
-        while read line
+        for line in ${{ inputs.config }}
         do
-          echo "Line: $line"
-        done << ${{ inputs.config }}
+          echo "Line: $line";
+        done
 
 
 
