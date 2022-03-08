@@ -9,10 +9,10 @@ inputs:
     description: None
     required: true
 
-outputs:
-  args:
-    description: None
-    value: ${{ toJson(steps.gcp_secrets.outputs) }}
+#outputs:
+#  args:
+#    description: None
+#    value: ${{ toJson(steps.gcp_secrets.outputs) }}
 
 runs:
   using: 'composite'
@@ -21,8 +21,7 @@ runs:
       shell: bash
       run: |
         echo '${{ inputs.secrets }}' > temp.txt
-        ls -la ./
-        cat ./temp.txt
+        sed 's/[\*]*//' temp.txt
 #        arg_list=$(awk -F: '{print "--build-args "$1"="$2}' temp.txt)
 #        echo $arg_list
 
