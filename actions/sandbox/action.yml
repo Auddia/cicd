@@ -20,7 +20,8 @@ runs:
     - name: 'Print Input'
       shell: bash
       run: |
-        echo ${{ fromJson(inputs.secrets)['T'] }}
+        echo ${{ fromJson(inputs.secrets).keys }}
+#        echo ${{ fromJson(inputs.secrets)['T'] }}
 
 #
 #        sed 's/[\*]*//' temp.txt > temp_cleaned.txt
