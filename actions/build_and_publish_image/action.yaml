@@ -52,7 +52,8 @@ runs:
         echo $value
 
         secret_args='${{ inputs.gcp_secrets }}'
-        echo $secrets_args | grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\"" | tr -d "[\":]" > input.txt
+        echo '${{ inputs.gcp_secrets }}'
+#        echo $secrets_args | grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\"" | tr -d "[\":]" > input.txt
 #        secrets=$(awk '{print "--build-arg "$1"="$2}' input.txt)
 
 #        echo "additional_build_args=${value} ${secrets}" >> $GITHUB_ENV
