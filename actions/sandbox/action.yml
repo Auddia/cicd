@@ -16,7 +16,11 @@ runs:
   steps:
     - name: 'Print Input'
       shell: bash
-      run: echo ${{ inputs.config }}
+      run: |
+        while read line
+        do
+          echo "Line: $line"
+        done << ${{ inputs.config }}
 
 
 
