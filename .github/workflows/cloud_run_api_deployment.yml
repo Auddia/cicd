@@ -21,6 +21,11 @@ on:
         type: string
         required: false
         default: './Dockerfile'
+      build_config:
+        description: A list of environment variables to pass as build args to the build step
+        type: string
+        required: false
+        default: ''
       build_context:
         description: Location for docker's build context
         type: string
@@ -63,6 +68,7 @@ jobs:
         with:
           tag: 'gcr.io/${{ inputs.gcp_project }}/${{ inputs.api_name }}:${{ github.sha }}'
           dockerfile: '${{ inputs.dockerfile }}'
+          build_config: '${{ inputs.build_config }}'
           build_context: '${{ inputs.build_context }}'
           build_args: '${{ inputs.build_args }}'
           push_args: '${{ inputs.build_args }}'

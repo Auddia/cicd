@@ -9,6 +9,10 @@ inputs:
     description: Location of the dockerfile
     required: false
     default: './Dockerfile'
+  build_config:
+    description: A list of environment variables to pass as build args to the build step
+    required: false
+    default: ""
   build_context:
     description: Location for docker's build context
     required: false
@@ -25,20 +29,36 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: 'Build Image'
+    - name: Translate Build Config to Build Commands
+      id: build_config
+      shell: bash
+      run: |
+        if [ -n "${{ inputs.build_config }}" ]
+        then
+          echo "${{ inputs.build_config }}" >> temp.txt
+          arg_list=$(awk -F: '{print "--build-args "$1"="$2}' temp.txt)
+          cleaned_args=${arg_list//= /=}
+          echo "set-output name=additional_build_args::$cleaned_args"
+        else
+          echo "set-output name=additional_build_args::\"
+        fi
+
+
+    - name: Build Image
       shell: bash
       run: |
         docker build \
         --tag ${{ inputs.tag }} \
+        ${{ steps.build_config.outputs.additional_build_args }}
         ${{ inputs.build_args }} \
         --file ${{ inputs.dockerfile }} \
         ${{ inputs.build_context }}
 
-    - name: 'Configure gcp docker registry'
+    - name: Configure GCP Docker Registry
       if: "${{ contains(inputs.tag, 'gcr.io') }}"
       shell: bash
       run: gcloud auth configure-docker
 
-    - name: 'Publish Image'
+    - name: Publish Image
       shell: bash
       run: docker push ${{ inputs.tag }}
