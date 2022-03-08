@@ -21,7 +21,11 @@ runs:
       shell: bash
       run: |
         echo '${{ inputs.secrets }}' > temp.txt
+        cat temp.txt
+
         sed 's/[\*]*//' temp.txt > temp_cleaned.txt
+        cat temp_cleaned.txt
+
         sed 's/,$//' temp_cleaned.txt > temp_cleaned_2.txt
         cat temp_cleaned_2.txt
 
