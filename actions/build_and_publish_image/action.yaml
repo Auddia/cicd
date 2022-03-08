@@ -34,7 +34,7 @@ runs:
       shell: bash
       run: |
         build_config="${{ inputs.build_config }}"
-        if [ -n $build_config ]
+        if [ -n $build_config ];
         then
           echo $build_config | grep -v '^[[:space:]]*$'  >> temp.txt
           arg_list=$(awk -F: '{print "--build-args "$1"="$2}' temp.txt)
@@ -43,7 +43,6 @@ runs:
         else
           echo "set-output name=additional_build_args::\"
         fi
-
 
     - name: Build Image
       shell: bash
