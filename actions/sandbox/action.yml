@@ -21,7 +21,7 @@ runs:
         build_args=""
 
         echo $config | while read line; do
-          arg=(${line//:/ })
+          arg=(${line//:/})
           build_args="${build_args}  --build-arg ${arg[0]}=${arg[1]}/n";
         done
 
