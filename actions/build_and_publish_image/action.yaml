@@ -38,7 +38,7 @@ runs:
       shell: bash
       run: |
         build_config="${{ inputs.build_config }}"
-        if [ -z $build_config ];
+        if [ -z "$build_config" ];
         then
           value=""
         else
@@ -49,7 +49,7 @@ runs:
           value=$(echo $cleaned_args | tr '\n' ' ')
         fi
 
-        echo '${{ inputs.secrets }}' > temp.txt
+        echo '${{ inputs.gcp_secrets }}' > temp.txt
         grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\"" temp.txt | tr -d "[\":]" > input.txt
         secrets=$(awk '{print "--build-arg "$1"="$2}' input.txt)
 
