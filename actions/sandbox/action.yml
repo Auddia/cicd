@@ -20,7 +20,8 @@ runs:
     - name: 'Print Input'
       shell: bash
       run: |
-        echo "${{ inputs.secrets }}"
+        echo "${{ inputs.secrets }} >> temp"
+        cat temp
         echo "${{ fromJson(inputs.secrets) }}" | jq "."
 #        echo "${{ inputs.secrets }}" | jq "."
 
