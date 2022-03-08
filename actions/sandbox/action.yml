@@ -21,7 +21,10 @@ runs:
       shell: bash
       run: |
         echo '${{ inputs.secrets }}' > temp.txt
-        sed 's/[\*]*//' temp.txt
+        sed 's/[\*]*//' temp.txt > temp.txt
+        sed 's/,$//' temp.txt > temp.txt
+        cat temp.txt
+
 #        arg_list=$(awk -F: '{print "--build-args "$1"="$2}' temp.txt)
 #        echo $arg_list
 
