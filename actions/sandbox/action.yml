@@ -26,8 +26,9 @@ runs:
 
         for i in $keys
         do
-          echo "::set-env name=KEY::$i"
+          echo "KEY=$i" >> $GITHUB_ENV
         done
+        echo $GITHUB_ENV
 
 #        echo $keys | tr ' ' '\n' | awk '{print "--build-arg " $1 "=" }'
 #        ${{ fromJson(inputs.secrets).T }}
