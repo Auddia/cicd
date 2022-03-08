@@ -72,6 +72,7 @@ jobs:
           build_context: '${{ inputs.build_context }}'
           build_args: '${{ inputs.build_args }}'
           push_args: '${{ inputs.build_args }}'
+          gcp_secrets: '${{ steps.gcp.outputs.secrets }}'
 
       - name: Test docker image.
         shell: bash

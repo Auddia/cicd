@@ -25,6 +25,10 @@ inputs:
     description: Additional arguments to pass to docker push
     required: false
     default: ''
+  gcp_secrets:
+    description: None
+    required: false
+    default: ''
 
 runs:
   using: 'composite'
