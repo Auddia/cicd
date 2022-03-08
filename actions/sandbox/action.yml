@@ -21,6 +21,7 @@ runs:
       shell: bash
       run: |
         echo "${{ inputs.secrets }} > temp.txt"
+        ls
         cat temp.txt
 
 #        echo "${{ inputs.config }}" >> temp.txt
