@@ -41,7 +41,7 @@ runs:
           cleaned_args=${arg_list//= /=}
           echo "set-output name=additional_build_args::$(echo $cleaned_args | tr '\n' ' ')"
         else
-          echo "set-output name=additional_build_args::\"
+          echo "set-output name=additional_build_args::\\"
         fi
 
     - name: Build Image
