@@ -22,7 +22,7 @@ runs:
       run: |
         echo '${{ inputs.secrets }}' > temp.txt
         keys=$(sed -E 's/.*"([A-Z_]+).*":.*|.*/\1/' temp.txt | grep -v '^[[:space:]]*$')
-        echo $keys | tr ' ' '\n' | awk '{print "--build-arg " $1 "=" ${{ fromJson(inputs.secrets)[T] }}}'
+        echo $keys | tr ' ' '\n' | awk '{print "--build-arg " $1 "=" ${{ fromJson(inputs.secrets).T }}}'
 
 #        echo ${{ fromJson(inputs.secrets)['T'] }}
 
