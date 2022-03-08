@@ -28,6 +28,7 @@ runs:
         do
           echo "KEY=$i"
           echo "KEY=$i" >> $GITHUB_ENV
+          echo ${{ env.KEY }}
         done
         cat $GITHUB_ENV
 
