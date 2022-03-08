@@ -17,12 +17,16 @@ runs:
     - name: 'Print Input'
       shell: bash
       run: |
-        export config="${{ inputs.config }}"
+        config="${{ inputs.config }}"
+        build_args=""
 
-        for line in $config
-        do
-          echo "Line: $line";
+        echo $config | while read line; do
+          arg=(${line//:/ })
+          build_args="${build_arg}  --build-arg ${arg[0]}=${arg[1]}/n";
         done
+
+        echo $build_arg
+
 
 
 
