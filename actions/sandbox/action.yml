@@ -26,7 +26,8 @@ runs:
 
         for i in $keys
         do
-          echo ${{ fromJson(inputs.secrets)['$i'] }}
+          echo "Key: $i"
+          echo ${{ fromJson(inputs.secrets)[$i] }}
         done
 
 #        echo $keys | tr ' ' '\n' | awk '{print "--build-arg " $1 "=" }'
