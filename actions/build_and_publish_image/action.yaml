@@ -33,7 +33,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Translate Build Config to Build Commands
+    - name: Translate Build Config and Secrets to Build Commands
       id: build_config
       shell: bash
       run: |
@@ -53,7 +53,7 @@ runs:
         grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\"" temp.txt | tr -d "[\":]" > input.txt
         secrets=$(awk '{print "--build-arg "$1"="$2}' input.txt)
 
-        echo "${value} ${secrets}" >> $GITHUB_ENV
+        echo "additional_build_args=${value} ${secrets}" >> $GITHUB_ENV
 
     - name: Build Image
       shell: bash
