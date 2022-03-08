@@ -17,7 +17,7 @@ runs:
     - name: 'Print Input'
       shell: bash
       run: |
-        echo ${{ inputs.config }} >> temp.txt
+        echo "${{ inputs.config }}" >> temp.txt
         arg_list=$(awk -F: '{print "--build-args "$1"="$2}' temp.txt)
         cleaned_args=${arg_list//= /=}
         echo $cleaned_args
