@@ -12,7 +12,7 @@ inputs:
   build_config:
     description: A list of environment variables to pass as build args to the build step
     required: false
-    default: '\'
+    default: ''
   build_context:
     description: Location for docker's build context
     required: false
