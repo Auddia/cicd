@@ -20,11 +20,11 @@ inputs:
   build_args:
     description: Additional agruments to pass to docker build
     required: false
-    default: '\'
+    default: ''
   push_args:
     description: Additional arguments to pass to docker push
     required: false
-    default: '\'
+    default: ''
 
 runs:
   using: 'composite'
@@ -36,7 +36,7 @@ runs:
         build_config="${{ inputs.build_config }}"
         if [ -z $build_config ];
         then
-          echo "::set-output name=additional_build_args::\\"
+          echo "::set-output name=additional_build_args::"
         else
           echo $build_config > temp.txt
           grep -o "\(\w*\):\s*[0-9.a-zA-z\-\,]*" temp.txt > input.txt
@@ -51,7 +51,7 @@ runs:
       run: |
         docker build \
         --tag ${{ inputs.tag }} \
-        ${{ env.additional_build_args }}
+        ${{ env.additional_build_args }} \
         ${{ inputs.build_args }} \
         --file ${{ inputs.dockerfile }} \
         ${{ inputs.build_context }}
@@ -63,4 +63,4 @@ runs:
 
     - name: Publish Image
       shell: bash
-      run: docker push ${{ inputs.tag }}
+      run: docker push ${{ inputs.tag }} ${{ inputs.push_args }}
