@@ -45,21 +45,25 @@ runs:
           echo $value
         fi
 
-    - name: Build Image
-      shell: bash
-      run: |
-        docker build \
-        --tag ${{ inputs.tag }} \
-        ${{ env.additional_build_args }}
-        ${{ inputs.build_args }} \
-        --file ${{ inputs.dockerfile }} \
-        ${{ inputs.build_context }}
-
-    - name: Configure GCP Docker Registry
-      if: "${{ contains(inputs.tag, 'gcr.io') }}"
-      shell: bash
-      run: gcloud auth configure-docker
-
     - name: Publish Image
       shell: bash
-      run: docker push ${{ inputs.tag }}
+      run: echo "${{ env.additional_build_args }}"
+
+#    - name: Build Image
+#      shell: bash
+#      run: |
+#        docker build \
+#        --tag ${{ inputs.tag }} \
+#        ${{ env.additional_build_args }}
+#        ${{ inputs.build_args }} \
+#        --file ${{ inputs.dockerfile }} \
+#        ${{ inputs.build_context }}
+#
+#    - name: Configure GCP Docker Registry
+#      if: "${{ contains(inputs.tag, 'gcr.io') }}"
+#      shell: bash
+#      run: gcloud auth configure-docker
+#
+#    - name: Publish Image
+#      shell: bash
+#      run: docker push ${{ inputs.tag }}
