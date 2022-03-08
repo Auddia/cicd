@@ -17,7 +17,9 @@ runs:
     - name: 'Print Input'
       shell: bash
       run: |
-        for line in ${{ inputs.config }}
+        export config=${{ inputs.config }}
+
+        for line in $config
         do
           echo "Line: $line";
         done
