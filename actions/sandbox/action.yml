@@ -1,0 +1,22 @@
+name: 'Setup GCloud'
+description: 'Setups runner environment for a project to use GCLoud-SDK for deployment purposes'
+
+inputs:
+  config:
+    description: A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
+    required: true
+
+outputs:
+  secrets:
+    description: JSON dictionary of dynamic outputed secret values
+    value: ${{ toJson(steps.gcp_secrets.outputs) }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Print Input'
+      shell: bash
+      run: echo ${{ inputs.config }}
+
+
+
