@@ -8,7 +8,9 @@
 ## Required Setup
 To use this action in your repository you need to do the following steps to configure the GCP environment properly.
 
-1. Create Cloud Run Service by deploying ESPv2 container:
+1. Make sure to run the [setup_gcloud action](../setup_gcloud/README.md) before using this action in a job.
+
+2. Create Cloud Run Service by deploying ESPv2 container:
 ```bash
 $ gcloud run deploy <API_NAME>-endpoints-cloudrun-service \
   --image="gcr.io/endpoints-release/endpoints-runtime-serverless:2" \
@@ -18,9 +20,10 @@ $ gcloud run deploy <API_NAME>-endpoints-cloudrun-service \
   --region us-central1
 ```
 
-2. Map the custom subdomain to the cloud run service by going to the GCP cloud console. First click on to `Cloud Run` and then click `Manage Custom Domains` in the top banner and add the mapping of api service to the desired domain name.
+3. Map the custom subdomain to the cloud run service by going to the GCP cloud console. First click on to `Cloud Run` and then click `Manage Custom Domains` in the top banner and add the mapping of api service to the desired domain name.
    1. **NOTE:** Make sure the domain is verified in `Cloud DNS`
-3. Run the `configure_gcp_endpoints` action.
+
+4. Run the `configure_gcp_endpoints` action.
 
 ## Description
 This is a custom action used for deploying updated api definitions to gcp endpoints.

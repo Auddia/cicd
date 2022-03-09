@@ -8,7 +8,8 @@
 ## Required Setup
 To use this action in your repository you need to do the following to setup the needed templating structure.
 
-1. Have a dockerfile defining the applications deployment environment
+1. Have a dockerfile defining the applications deployment environment.
+2. If you are publishing to GCP's container registry make sure to run the [setup_gcloud action](../setup_gcloud/README.md) before using this action in a job.
 
 ## Description
 This action builds and publishes a docker image.
@@ -60,7 +61,7 @@ push_args: |
 * **Description**: Secrets from GCP that you want available in the docker container
 * `type`: `string`
 * `required`: `true`
-* Uses the `outputs.secrets` from the [setup_gcloud](../../actions/setup_gcloud/README.md) action
+* Uses the `outputs.secrets` from the [setup_gcloud](../setup_gcloud/README.md) action
 
 ## Example Usage
 
