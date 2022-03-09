@@ -59,13 +59,13 @@ jobs:
     steps:
       - name: Setup GCloud SDK Staging Environment
         id: gcp
-        uses: 'Auddia/cicd/actions/setup_gcloud@v01'
+        uses: 'Auddia/cicd/actions/setup_gcloud@main'
         with:
           gcp_credentials: '${{ secrets.gcp_credentials }}'
           gcp_secrets: '${{ inputs.gcp_secrets }}'
 
       - name: Build and Publish Docker Image
-        uses: 'Auddia/cicd/actions/build_and_publish_image@v01'
+        uses: 'Auddia/cicd/actions/build_and_publish_image@main'
         with:
           tag: 'gcr.io/${{ inputs.gcp_project }}/${{ inputs.api_name }}:${{ github.sha }}'
           dockerfile: '${{ inputs.dockerfile }}'
