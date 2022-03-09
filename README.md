@@ -27,7 +27,7 @@ Actions define a group of common steps that reoccur across many jobs and workflo
 * [Github Action Definition](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#actions)
 
 ### Custom Actions
-* [Build and publish action docs](./actions/build_and_publish_image/README.md)
+* [Build and publish docker image action docs](./actions/build_and_publish_image/README.md)
 * [Compile Openapi action docs](./actions/compile_openapi/README.md)
 * [Configure GCP endpoints action docs](./actions/configure_gcp_endpoints/README.md)
 * [Setup gcloud action docs](./actions/setup_gcloud/README.md)
