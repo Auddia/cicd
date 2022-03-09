@@ -52,7 +52,7 @@ runs:
         ls
 
         secret_args='${{ inputs.gcp_secrets }}'
-        echo "$secret_args" | grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\"" | tr -d "[\":]" > input.txt
+        echo "Test" > input.txt
         cat input.txt
 #
 #        secret_args='${{ inputs.gcp_secrets }}'
