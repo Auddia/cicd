@@ -84,9 +84,9 @@ jobs:
         shell: bash
         run: |
           gcloud beta run deploy ${{ inputs.api_name }} \
-          --quiet \
           --image gcr.io/${{ inputs.gcp_project }}/${{ inputs.api_name }}:${{ github.sha }} \
           --region us-central1 \
+          --quiet \
           --no-allow-unauthenticated \
           --platform managed \
           ${{ inputs.deploy_args }}
