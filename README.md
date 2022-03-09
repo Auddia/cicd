@@ -11,7 +11,10 @@ Workflows define a job or a group of jobs that can be run in parallel or in some
 [reuseable workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows) are stored in the `.github/workflows` directory.
 
 * [Github Workflow Definition](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#workflows)
-* [Custom workflow documentation](./docs/WORKFLOWS.md)
+
+### Custom Workflows
+* [Openapi Update Workflow](./workflows/openapi_update.md)
+* [Cloud Run API Deployment](./workflows/cloud_run_api_deployment.md)
 
 
 ## Actions
