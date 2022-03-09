@@ -5,6 +5,15 @@ inputs:
   gcp_credentials:
     description: A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
     required: true
+  gcp_secrets:
+    description: Secrets from GCP that you want available for other steps and actions within a job
+    required: false
+    default: ''
+
+outputs:
+  secrets:
+    description: JSON dictionary of dynamic outputed secret values
+    value: ${{ toJson(steps.gcp_secrets.outputs) }}
 
 runs:
   using: 'composite'
@@ -19,3 +28,15 @@ runs:
 
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v0'
+      with:
+        install_components: 'beta'
+
+    - name: 'Get Secrets'
+      if: '${{ inputs.gcp_secrets }}'
+      id: gcp_secrets
+      uses: 'google-github-actions/get-secretmanager-secrets@v0'
+      with:
+        secrets: '${{ inputs.gcp_secrets }}'
+
+
+

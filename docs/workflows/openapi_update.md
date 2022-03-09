@@ -1,12 +1,7 @@
-# Reusable Workflows
-This contains information on all the defined workflows that are aim to be reused.
+# Openapi Update Workflow
+This workflow generates an openapi configuration and deploys/redeploys GCP endpoints. Make sure to review the actions below to configure your project properly. 
 
-## Table of Contents
-* [Openapi Update Workflow](#openapi-update-workflow)
-
-## Openapi Update Workflow
-This workflow generates an openapi configuration and deploys/redeploys GCP endpoints.
-
+* GCloud SDK setup action: [setup_gcloud](../../actions/setup_gcloud/README.md)
 * Openapi config generation action: [compile_openapi action](../actions/compile_openapi/README.md)
 * GCP Endpoints deployement action: [configure_gcp_endpoints action](../actions/configure_gcp_endpoints/README.md).
 

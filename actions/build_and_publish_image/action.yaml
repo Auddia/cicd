@@ -1,0 +1,74 @@
+name: 'Build and Publish Image'
+description: 'Builds and publishes a docker image'
+
+inputs:
+  tag:
+    description: Image tag
+    required: true
+  dockerfile:
+    description: Location of the dockerfile
+    required: false
+    default: './Dockerfile'
+  build_config:
+    description: A list of environment variables to pass as build args to the build step
+    required: false
+    default: ''
+  build_context:
+    description: Location for docker's build context
+    required: false
+    default: '.'
+  build_args:
+    description: Additional agruments to pass to docker build
+    required: false
+    default: ''
+  push_args:
+    description: Additional arguments to pass to docker push
+    required: false
+    default: ''
+  gcp_secrets:
+    description: Secrets from GCP that you want available in the docker container
+    required: false
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Translate Build Config and Secrets to Build Commands
+      id: build_config
+      shell: bash
+      run: |
+        build_config="${{ inputs.build_config }}"
+        if [ -z "$build_config" ];
+        then
+          value=""
+        else
+          config="$build_config"
+          echo "$config" | grep ":" > input.txt
+          arg_list=$(awk -F: '{print "--build-arg "$1"="$2}' input.txt)
+          cleaned_args=${arg_list//= /=}
+          value=$(echo "$cleaned_args" | tr '\n' ' ')
+        fi
+
+        secret_args='${{ inputs.gcp_secrets }}'
+        echo "$secret_args" | grep ":" | tr -d "[\":]" > input.txt
+        additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
+        echo "additional_build_args=${value} ${additional_args}" >> "$GITHUB_ENV"
+
+    - name: Build Image
+      shell: bash
+      run: |
+        docker build \
+        --tag ${{ inputs.tag }} \
+        ${{ env.additional_build_args }} \
+        ${{ inputs.build_args }} \
+        --file ${{ inputs.dockerfile }} \
+        ${{ inputs.build_context }}
+
+    - name: Configure GCP Docker Registry
+      if: "${{ contains(inputs.tag, 'gcr.io') }}"
+      shell: bash
+      run: gcloud auth configure-docker
+
+    - name: Publish Image
+      shell: bash
+      run: docker push ${{ inputs.tag }} ${{ inputs.push_args }}
