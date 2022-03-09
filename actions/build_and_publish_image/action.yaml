@@ -42,20 +42,23 @@ runs:
         then
           value=""
         else
-          echo $build_config > temp.txt
-          grep -o "\(\w*\):\s*[0-9.a-zA-z\-\,]*" temp.txt > input.txt
+          config="$build_config"
+          echo "$config" | grep -o "\(\w*\):\s*[0-9.a-zA-z\-\,]*" > input.txt
           arg_list=$(awk -F: '{print "--build-arg "$1"="$2}' input.txt)
           cleaned_args=${arg_list//= /=}
           value=$(echo $cleaned_args | tr '\n' ' ')
         fi
 
-        echo '${{ inputs.gcp_secrets }}' > g.txt
+        echo "$value"
+        ls
 
-        grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\"" g.txt
-
+        secret_args='${{ inputs.gcp_secrets }}'
+        echo "$secret_args" | grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\"" | tr -d "[\":]" > input.txt
+#
 #        secret_args='${{ inputs.gcp_secrets }}'
-#        #
-#        #        echo "$secret_args" | grep "\s*\"\w*\"\s*:\s*\"[*]*\w*\""
+#        echo "$secret_args" | grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\"" | tr -d "[\":]" > input.txt
+#        additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
+#        echo "additional_build_args=${value} ${additional_args}" >> $GITHUB_ENV
 
     - name: Build Image
       shell: bash
