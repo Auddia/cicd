@@ -50,14 +50,9 @@ runs:
         fi
 
         secret_args='${{ inputs.gcp_secrets }}'
-        echo "$secret_args" | grep ":"
         echo "$secret_args" | grep ":" | tr -d "[\":]" > input.txt
-        cat input.txt
-#
-#        secret_args='${{ inputs.gcp_secrets }}'
-#        echo "$secret_args" | grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\"" | tr -d "[\":]" > input.txt
-#        additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
-#        echo "additional_build_args=${value} ${additional_args}" >> $GITHUB_ENV
+        additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
+        echo "additional_build_args=${value} ${additional_args}" >> $GITHUB_ENV
 
     - name: Build Image
       shell: bash
