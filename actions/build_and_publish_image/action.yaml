@@ -51,7 +51,7 @@ runs:
 
         secret_args='${{ inputs.gcp_secrets }}'
 
-        echo "$secret_args" | grep -o "DB_PWD"
+        echo "$secret_args" | grep -o "\s*\"\w*\"\s*:\s*\"[*]*\w*\""
 
     - name: Build Image
       shell: bash
