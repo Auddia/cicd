@@ -127,7 +127,7 @@ jobs:
             DB_PWD: ${{ fromJson(steps.gcp.outputs.secrets).DB_PWD }}
 
   example_image_with_all_secrets:
-    name: Discovery API Staging Deployement
+    name: Publish Image with all the request secrets
     runs-on: ubuntu-latest
     steps:
       - name: Setup GCloud SDK Staging Environment
