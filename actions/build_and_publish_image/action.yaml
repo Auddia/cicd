@@ -52,7 +52,7 @@ runs:
         ls
 
         secret_args='${{ inputs.gcp_secrets }}'
-        echo "Test" > input.txt
+        echo "$secret_args" | grep -o "DB_PWD"
         cat input.txt
 #
 #        secret_args='${{ inputs.gcp_secrets }}'
