@@ -110,7 +110,7 @@ jobs:
   discovery_api_staging:
     name: (Staging) Discovery API Deployment
     if: github.ref == 'refs/heads/staging'
-    uses: Auddia/cicd/.github/workflows/cloud_run_api_deployment.yml@wudstrand/cicd#1
+    uses: Auddia/cicd/.github/workflows/cloud_run_api_deployment.yml@<tag>
     with:
       gcp_project: 'vodacast-staging'
       api_name: discovery-api
@@ -133,7 +133,7 @@ jobs:
   discovery_api_production:
     name: (Production) Discovery API Deployment
     if: github.ref == 'refs/heads/production'
-    uses: Auddia/cicd/.github/workflows/cloud_run_api_deployment.yml@wudstrand/cicd#1
+    uses: Auddia/cicd/.github/workflows/cloud_run_api_deployment.yml@<tag>
     with:
       gcp_project: 'vodacast'
       api_name: discovery-api
