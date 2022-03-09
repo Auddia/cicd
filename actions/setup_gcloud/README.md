@@ -40,7 +40,7 @@ The sdk is available in all steps and within docker as long as you use the [`goo
 fromJson(steps.gcp.outputs.secrets).TOKEN
 fromJson(steps.gcp.outputs.secrets)['TOKEN']
 ```
-* [Example of a Dynamic Reference](../../actions/build_and_publish_image/action.yaml)
+* [Example of a Dynamic Reference](../build_and_publish_image/action.yaml)
 ```yaml
 # Where secret_args is assumed to be the output of this action.  
 echo "$secret_args" | grep ":" | tr -d "[\":]" > input.txt
@@ -88,6 +88,7 @@ jobs:
 ### Additonal Usage
 * [Reuseable Workflow OpenAPI Update](../../.github/workflows/openapi_update.yml)
 * [Reuseable Workflow Cloud Run API Deployment](../../.github/workflows/cloud_run_api_deployment.yml)
+* [Dynamic Usage of Secrets Usage](../build_and_publish_image/action.yaml)
 * [OpenAPI Update Deployment](https://github.com/Auddia/vodacast-functions/blob/staging/.github/workflows/deployments.yml#L7)
     * Note this is call to the reusable workflow from [above](../../.github/workflows/openapi_update.yml), but it is still an example of how to configure the `setup_gcloud` action.
 * [API Deployment](FILL IN)
