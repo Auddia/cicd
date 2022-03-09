@@ -1,5 +1,5 @@
 # Cloud Run API Deployment Workflow
-This workflow build and publishes a docker image to GCP's docker registry and then deploys that container as an application under GCP's cloud run.
+This workflow build and publishes a docker image to GCP's docker registry and then deploys that container as an application under GCP's cloud run. Make sure to review the actions below to configure your project properly. 
 
 * GCloud SDK setup action: [setup_gcloud](../../actions/setup_gcloud/README.md)
 * Build and publish Docker image action: [build_and_publish_image](../../actions/build_and_publish_image/README.md)
