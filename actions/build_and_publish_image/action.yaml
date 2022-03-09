@@ -43,7 +43,7 @@ runs:
           value=""
         else
           config="$build_config"
-          echo "$config" | grep -o "\(\w*\):\s*[0-9.a-zA-z\-\,]*" > input.txt
+          echo "$config" | grep ":" > input.txt
           arg_list=$(awk -F: '{print "--build-arg "$1"="$2}' input.txt)
           cleaned_args=${arg_list//= /=}
           value=$(echo $cleaned_args | tr '\n' ' ')
@@ -51,6 +51,7 @@ runs:
 
         secret_args='${{ inputs.gcp_secrets }}'
         echo "$secret_args" | grep ":"
+        echo "$secret_args" | grep ":" | tr -d "[\":]" > input.txt
         cat input.txt
 #
 #        secret_args='${{ inputs.gcp_secrets }}'
