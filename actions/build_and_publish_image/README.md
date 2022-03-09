@@ -85,10 +85,10 @@ jobs:
     name: Publish image to GCP
     runs-on: ubuntu-latest
     steps:
-      - name: GCloud SDK Setup
+      - name: Setup GCloud SDK Environment
         uses: Auddia/cicd/actions/setup_gcloud@v0
         with:
-        gcp_credentials: '${{ inputs.gcp_credentials }}'
+          gcp_credentials: '${{ inputs.gcp_credentials }}'
     
       - name: Build and Publish Docker Image
         uses: 'Auddia/cicd/actions/build_and_publish_image@<tag>'
@@ -105,7 +105,7 @@ jobs:
     name: Publish image to GCP with only a part of the secrets retrieved
     runs-on: ubuntu-latest
     steps:
-      - name: Setup GCloud SDK Staging Environment
+      - name: Setup GCloud SDK Environment
         id: gcp
         uses: 'Auddia/cicd/actions/setup_gcloud@<tag>'
         with:
@@ -130,7 +130,7 @@ jobs:
     name: Publish Image with all the request secrets
     runs-on: ubuntu-latest
     steps:
-      - name: Setup GCloud SDK Staging Environment
+      - name: Setup GCloud SDK Environment
         id: gcp
         uses: 'Auddia/cicd/actions/setup_gcloud@<tag>'
         with:
