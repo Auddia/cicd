@@ -3,8 +3,11 @@ This repository stores a collections of common github actions and workflows for 
 
 ## Table Of Contents
 * [Github Actions Documentation](https://docs.github.com/en/actions)
-* [Workflows](#workflows)
-* [Actions](#actions)
+
+
+[comment]: <> (* [Workflows]&#40;#workflows&#41;)
+
+[comment]: <> (* [Actions]&#40;#actions&#41;)
 
 ## Workflows
 Workflows define a job or a group of jobs that can be run in parallel or in some defined order. All the 
