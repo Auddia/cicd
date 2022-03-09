@@ -91,7 +91,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup GCloud SDK Environment
-        uses: Auddia/cicd/actions/setup_gcloud@v0
+        uses: Auddia/cicd/actions/setup_gcloud@<tag>
         with:
           gcp_credentials: '${{ inputs.gcp_credentials }}'
     
