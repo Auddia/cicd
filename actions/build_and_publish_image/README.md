@@ -29,31 +29,59 @@ This action builds and publishes a docker image.
 ##### `build_context`
 * **Description**: Location for docker's build context
 * `type`: `string`
+* `required`: `false`
 * `default`: `.`
 
 ##### `build_args`
 * **Description**: Additional agruments to pass to docker build
 * `type`: `string`
-* `default`: ``
+* `required`: `false`
+* `default`: `''`
+* Syntax
+```yaml
+build_args: |
+    --disable-content-trust \
+    --pull \
+```
 
 ##### `push_args`
 * **Description**: Additional arguments to pass to docker push
 * `type`: `string`
-* `default`: ``
+* `required`: `false`
+* `default`: `''`
+* Syntax
+```yaml
+push_args: |
+    --disable-content-trust \
+    --quiet \
+```
+
+##### `gcp_secrets`
+* **Description**: Secrets from GCP that you want available in the docker container
+* `type`: `string`
+* `required`: `true`
+* Uses the `outputs.secrets` from the [setup_gcloud](../../actions/setup_gcloud/README.md) action
 
 ## Example Usage
 
 ```yaml
-env:
-  GCP_PROJECT: vodacast-staging
-  DB: vodacast
-  DB_USER: postgres
-  CONNECTION_STR: 10.30.192.3
-  MIN_CONNECTIONS: 10
-  MAX_CONNECTIONS: 15
-
 jobs:
-  example job:
+  example_image:
+    name: Publish image to Docker
+    runs-on: ubuntu-latest
+    steps:  
+      - name: Build and Publish Docker Image
+        uses: 'Auddia/cicd/actions/build_and_publish_image@<tag>'
+        with:
+          tag: '<tag>'
+          dockerfile: ./api/Dockerfile
+          build_args: |
+            CONNECTION_STR: 10.63.224.44
+            DB_USER: discovery_api_server
+            MIN_CONNECTIONS: 10
+            MAX_CONNECTIONS: 15
+  
+  example_image_no_secrets:
     name: Publish image to GCP
     runs-on: ubuntu-latest
     steps:
@@ -65,16 +93,67 @@ jobs:
       - name: Build and Publish Docker Image
         uses: 'Auddia/cicd/actions/build_and_publish_image@<tag>'
         with:
-          tag: 'gcr.io/${{ env.GCP_PROJECT }}/discovery-api:${{ github.sha }}'
+          tag: 'gcr.io/${{ gcp_project }}/discovery-api:${{ github.sha }}'
           dockerfile: ./api/Dockerfile
           build_args: |
-            --build-arg CONNECTION_STR \
-            --build-arg DB_USER \
-            --build-arg DB_PWD=${{ secrets.DB_PASSWORD }} \
-            --build-arg MIN_CONNECTIONS \
-            --build-arg MAX_CONNECTIONS \
+            CONNECTION_STR: 10.63.224.44
+            DB_USER: discovery_api_server
+            MIN_CONNECTIONS: 10
+            MAX_CONNECTIONS: 15
+
+  example_image_with_restricted_secrets:
+    name: Publish image to GCP with only a part of the secrets retrieved
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup GCloud SDK Staging Environment
+        id: gcp
+        uses: 'Auddia/cicd/actions/setup_gcloud@<tag>'
+        with:
+          gcp_credentials: '${{ secrets.VODACAST_STAGING_GCP_CREDENTIALS }}'
+          gcp_secrets: |
+            DB_PWD: projects/vodacast-staging/secrets/vodacast-postgres-password
+            OTHER: projects/vodacast-staging/secrets/other
+
+      - name: Build and Publish Docker Image
+        uses: 'Auddia/cicd/actions/build_and_publish_image@<tag>'
+        with:
+          tag: 'gcr.io/${{ gcp_project }}/discovery-api:${{ github.sha }}'
+          dockerfile: ./api/Dockerfile
+          build_config: |
+            CONNECTION_STR: 10.30.192.3
+            DB_USER: postgres
+            MIN_CONNECTIONS: 10
+            MAX_CONNECTIONS: 15
+            DB_PWD: ${{ fromJson(steps.gcp.outputs.secrets).DB_PWD }}
+
+  example_image_with_all_secrets:
+    name: Discovery API Staging Deployement
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup GCloud SDK Staging Environment
+        id: gcp
+        uses: 'Auddia/cicd/actions/setup_gcloud@<tag>'
+        with:
+          gcp_credentials: '${{ secrets.VODACAST_STAGING_GCP_CREDENTIALS }}'
+          gcp_secrets: |
+            DB_PWD: projects/vodacast-staging/secrets/vodacast-postgres-password
+            OTHER: projects/vodacast-staging/secrets/other
+            
+      # All secrets from the gcp step will be available in the build image as --build-args
+      - name: Build and Publish Docker Image
+        uses: 'Auddia/cicd/actions/build_and_publish_image@<tag>'
+        with:
+          tag: 'gcr.io/${{ gcp_project }}/discovery-api:${{ github.sha }}'
+          dockerfile: ./api/Dockerfile
+          gcp_secrets: ${{ steps.gcp.outputs.secrets }}
+          build_config: |
+            CONNECTION_STR: 10.30.192.3
+            DB_USER: postgres
+            MIN_CONNECTIONS: 10
+            MAX_CONNECTIONS: 15
 ```
 
 ### Additonal Usage
-TODO: FIll in
-* [Vodacast Staging Discovery API Deployment]()
+* [Cloud Run API Deployment](../../.github/workflows/cloud_run_api_deployment.yml)
+* [API Deployment](FILL IN)
+  * Note this is call to the reusable workflow from [above](../../.github/workflows/cloud_run_api_deployment.yml), but it is still an example of how to configure the `setup_gcloud` action. 

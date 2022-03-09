@@ -6,7 +6,8 @@
 * action type: Composite
 
 ## Description
-This reusable action pulls in the code for the repo and sets up a gcloud-sdk. It makes both the code and sdk available to all actions/steps with in the job where this action is used. 
+This reusable action pulls in the code for the repo, sets up a gcloud-sdk, and retrieves GCP secrets. 
+It makes both the code, sdk, and secrets available to all actions/steps with in the job where this action is used. 
 
 #### sdk made available in the following step/action types
 * [Composite Actions](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action) 
@@ -26,10 +27,26 @@ The sdk is available in all steps and within docker as long as you use the [`goo
 * If the needed credentials secret doesnt exist and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
 
 ##### `gcp_secrets`
-
 * **Description**: Secrets from GCP that you want available for other steps and actions within a job
-
 * Here is a [reference](https://github.com/google-github-actions/get-secretmanager-secrets#inputs) for how to structure the secret string for this action
+
+
+### Output
+
+##### `secrets`
+* **Description**: The secrets from gcp that were requested via the `gcp_secrets` argument.
+* Explicit reference
+```yaml
+fromJson(steps.gcp.outputs.secrets).TOKEN
+fromJson(steps.gcp.outputs.secrets)['TOKEN']
+```
+* [Example of a Dynamic Reference](../../actions/build_and_publish_image/action.yaml)
+```yaml
+# Where secret_args is assumed to be the output of this action.  
+echo "$secret_args" | grep ":" | tr -d "[\":]" > input.txt
+additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
+echo "additional_build_args=${value} ${additional_args}" >> $GITHUB_ENV
+```
 
 ## Example Usage
 
@@ -46,9 +63,7 @@ jobs:
 
       - name: Example using the gcloud tool
         run: 'gcloud info'
-```
 
-```
   example_job_with_secrets:
     name: An example job that uses the gcloud sdk 
     runs-on: ubuntu-latest
@@ -72,5 +87,8 @@ jobs:
 
 ### Additonal Usage
 * [Reuseable Workflow OpenAPI Update](../../.github/workflows/openapi_update.yml)
+* [Reuseable Workflow Cloud Run API Deployment](../../.github/workflows/cloud_run_api_deployment.yml)
 * [OpenAPI Update Deployment](https://github.com/Auddia/vodacast-functions/blob/staging/.github/workflows/deployments.yml#L7)
     * Note this is call to the reusable workflow from [above](../../.github/workflows/openapi_update.yml), but it is still an example of how to configure the `setup_gcloud` action.
+* [API Deployment](FILL IN)
+    * Note this is call to the reusable workflow from [above](../../.github/workflows/cloud_run_api_deployment.yml), but it is still an example of how to configure the `setup_gcloud` action.

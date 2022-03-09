@@ -8,7 +8,7 @@ on:
         type: string
         required: true
       gcp_secrets:
-        description: Secrets from GCP that you want available for other steps and actions within a job (Get docs from setup_gcloud action)
+        description: Secrets from GCP that you want available in the docker container
         type: string
         required: true
 
@@ -49,6 +49,7 @@ on:
 
     secrets:
       gcp_credentials:
+        description: A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
         required: true
 jobs:
   api_deployment:
@@ -74,19 +75,12 @@ jobs:
           push_args: '${{ inputs.build_args }}'
           gcp_secrets: '${{ steps.gcp.outputs.secrets }}'
 
-      - name: Test docker image
-        shell: bash
-        run: |
-          docker pull gcr.io/${{ env.GCP_PROJECT }}/${{ inputs.api_name }}:${{ github.sha }}
-          docker run gcr.io/${{ env.GCP_PROJECT }}/${{ inputs.api_name }}:${{ github.sha }} env
-
       - name: Deploy to Cloud Run
         shell: bash
         run: |
           gcloud beta run deploy ${{ inputs.api_name }} \
           --image gcr.io/${{ inputs.gcp_project }}/${{ inputs.api_name }}:${{ github.sha }} \
           --region us-central1 \
-          --quiet \
           --no-allow-unauthenticated \
           --platform managed \
           ${{ inputs.deploy_args }}
