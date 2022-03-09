@@ -14,6 +14,10 @@ To use this action in your repository you need to do the following to setup the 
 ## Description
 This action builds and publishes a docker image.
 
+Can publish to:
+* GCP's Container Registry
+* Default Docker Registry (Not Tested)
+
 ### Input Arguments
 
 ##### `tag`
