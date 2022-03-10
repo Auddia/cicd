@@ -26,15 +26,7 @@ jobs:
 
       - name: test script call
         shell: bash
-        run: |
-          echo "one: "
-          ls -la
-
-          echo "two: "
-          ls -la ../
-
-          echo: "three: "
-          ls -la ../../
+        run: ./scripts/hello_world.sh
 
   gcloud_with_secrets:
     name: GCloud Setup w/ Secrets
