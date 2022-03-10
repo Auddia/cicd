@@ -47,24 +47,8 @@ jobs:
       - name: Test If Secrets Are Avaiable
         shell: bash
         run: |
-#          secrets=${{ toJson(steps.gcp.outputs.secrets) }}
-#          if [ $secrets = "{}" ];
-#          then
-#            exit -1
-#          fi
-#
-#          test_one=${{ fromJson(steps.gcp.outputs.secrets).TEST_ONE }}
-#          test_two=${{ fromJson(steps.gcp.outputs.secrets)['TEST_TWO'] }}
-#
-#          if [ -z "$test_one" ];
-#          then
-#            exit -1
-#          fi
-#
-#          if [ -z "$test_two" ];
-#          then
-#            exit -1
-#          fi
+          source ./scripts/test_function.sh
+          execute_for_each_space echo 1 2 3
 
       - name: Test Restricted Access to Secrets
         shell: bash
