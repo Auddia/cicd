@@ -28,9 +28,9 @@ runs:
       run: |
         keys="${{ inputs.keys }}"
         echo $keys
-        echo "output=${value}" >> "$GITHUB_ENV"
+        echo "keys=${value}" >> "$GITHUB_ENV"
 
     - name: See Command
       shell: bash
       run: |
-        echo ${{ env.output }}
+        echo ${{ env.keys }}
