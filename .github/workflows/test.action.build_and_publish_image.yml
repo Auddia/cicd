@@ -65,7 +65,7 @@ jobs:
         shell: bash
         run: |
           source ./scripts/test_functions.sh
-          image_output=$(docker run gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }}
+          image_output=$(docker run gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }})
 
           expected="TEST_ONE: ONE
             TEST_TWO: TWO
