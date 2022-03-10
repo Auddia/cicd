@@ -59,7 +59,7 @@ jobs:
           gcp_secrets: '${{ steps.gcp.outputs.secrets }}'
           build_config: |
             TEST_TWO: TWO
-            TEST_THREE: THREE
+            TEST_THREE: PI
 
       - name: Validate Image
         shell: bash
