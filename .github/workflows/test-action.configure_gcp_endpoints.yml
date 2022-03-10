@@ -1,3 +1,5 @@
+name: '[Action Test] configure_gcp_endpoints'
+
 on:
   workflow_dispatch:
     inputs:

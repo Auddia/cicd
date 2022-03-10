@@ -1,3 +1,5 @@
+name: '[Action Test] build_and_publish_image'
+
 on:
   workflow_dispatch:
     inputs:

@@ -1,3 +1,5 @@
+name: '[Action Test] compile_openapi'
+
 on:
   workflow_dispatch:
     inputs:
