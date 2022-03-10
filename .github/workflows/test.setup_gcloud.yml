@@ -24,7 +24,7 @@ jobs:
         run: gcloud info
 
   gcloud_with_secrets:
-    name: Test GCloud Setup w/ Secrets
+    name: GCloud Setup w/ Secrets
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -43,6 +43,6 @@ jobs:
 
       - name: Output Secrets
         shell: bash
-#        if: "${{ steps.gcp.outputs.secrets == '' }}"
+#        if: "${{ steps.gcp.outputs.secrets == {} }}"
         run: |
           echo "Secrets: ${{ steps.gcp.outputs.secrets }}"
