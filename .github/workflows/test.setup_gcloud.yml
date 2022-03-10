@@ -54,7 +54,7 @@ jobs:
           fi
 
           test_one=${{ fromJson(steps.gcp.outputs.secrets).TEST_ONE }}
-          test_two=${{ fromJson(steps.gcp.outputs.secrets)['TEST_TWO'] }}
+          test_two=${{ fromJson(steps.gcp.outputs.secrets)['TOKEN'] }}
 
           if [ -z "$test_one" ];
           then
