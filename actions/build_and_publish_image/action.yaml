@@ -44,7 +44,8 @@ runs:
         value=$(echo "$cleaned_args" | tr '\n' ' ')
 
         secret_args='${{ inputs.gcp_secrets }}'
-        echo "$secret_args" | grep ":" | tr -d "[\":]" > secret_input.txt
+        echo "$secret_args"
+
 
     - name: Build Image
       shell: bash
