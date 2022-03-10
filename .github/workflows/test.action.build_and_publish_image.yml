@@ -19,8 +19,14 @@ jobs:
       - name: Build and Publish Image
         uses: ./action/build_and_publish_image
         with:
-          tag: "test_image"
+          tag: "auddia_test_image"
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_config: |
             TEST_ONE: ONE
             TEST_TWO: TWO
+
+      - name: Pull Image
+        shell: bash
+        run: |
+          docker pull auddia_test_image
+          docker run auddia_test_image
