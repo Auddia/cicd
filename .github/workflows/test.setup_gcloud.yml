@@ -12,6 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+#          repository: Auddia/cicd
           ref: ${{ github.ref }}
 
       - name: GCloud SDK Setup
@@ -22,6 +23,10 @@ jobs:
       - name: Test SDK
         shell: bash
         run: gcloud info
+
+      - name: test script call
+        shell: bash
+        run: ../../scripts/hello_world.sh
 
   gcloud_with_secrets:
     name: GCloud Setup w/ Secrets
@@ -54,7 +59,7 @@ jobs:
           fi
 
           test_one=${{ fromJson(steps.gcp.outputs.secrets).TEST_ONE }}
-          test_two=${{ fromJson(steps.gcp.outputs.secrets)['TOKEN'] }}
+          test_two=${{ fromJson(steps.gcp.outputs.secrets)['TEST_TWO'] }}
 
           if [ -z "$test_one" ];
           then
