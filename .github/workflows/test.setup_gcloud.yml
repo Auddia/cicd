@@ -36,20 +36,33 @@ jobs:
         uses: ./actions/setup_gcloud
         with:
           gcp_credentials: ${{ github.event.inputs.gcp_secret }}
+          gcp_secrets: |
+            TEST_ONE: projects/vodacast-staging/secrets/vodacast-postgres-password
+            TEST_TWO: projects/vodacast-staging/secrets/vodacast-postgres-password
 
       - name: Test SDK
         shell: bash
         run: gcloud info
 
-      - name: Output Secrets
+      - name: Test If Secrets Are Avaiable
         shell: bash
         run: |
           secrets=${{ toJson(steps.gcp.outputs.secrets) }}
-          echo "Secrets: $secrets"
-
           if [ $secrets = "{}" ];
           then
-            echo "True"
-          else
-            echo "False"
+            exit -1
           fi
+
+      - name: Test Restricted Access to Secrets
+        shell: bash
+        run: |
+          secrets=${{ toJson(steps.gcp.outputs.secrets) }}
+          if [ $secrets = "{}" ];
+          then
+            exit -1
+          fi
+
+          value=steps.gcp.outputs.secrets.TEST_ONE
+          value_two=steps.gcp.outputs.secrets['TOKEN']
+
+          echo "${value} ${value_two}"
