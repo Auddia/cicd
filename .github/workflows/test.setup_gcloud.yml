@@ -6,8 +6,8 @@ on:
         required: true
 
 jobs:
-  test_setup_gcloud_no_secrets:
-    name: Test gcloud sdk setup
+  gcloud_no_secrets:
+    name: GCloud SDK Setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,19 +23,19 @@ jobs:
         shell: bash
         run: gcloud info
 
-  test_setup_gcloud_secrets:
-    name: Test gcloud setup with secrets
+  gcloud_with_secrets:
+    name: Test GCloud Setup w/ Secrets
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
 
-      - name: GCloud SDK Setup
-        id: gcp
-        uses: ./actions/setup_gcloud
-        with:
-          gcp_credentials: ${{ github.event.inputs.gcp_secret }}
+#      - name: GCloud SDK Setup
+#        id: gcp
+#        uses: ./actions/setup_gcloud
+#        with:
+#          gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 
       - name: Test SDK
         shell: bash
