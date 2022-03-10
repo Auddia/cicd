@@ -13,3 +13,10 @@ fail_if_empty_string() {
     exit 1
   fi
 }
+
+fail_if_unequal_string() {
+  if [ "$1" = "$2" ];
+  then
+    exit 1
+  fi
+}

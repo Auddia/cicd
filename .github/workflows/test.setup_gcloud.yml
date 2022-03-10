@@ -47,15 +47,13 @@ jobs:
       - name: Test If Secrets Are Avaiable
         shell: bash
         run: |
+          source ./scripts/test_functions.sh
+
           secrets=${{ toJson(steps.gcp.outputs.secrets) }}
-          if [ $secrets = "{}" ];
-          then
-            exit -1
-          fi
+          fail_if_unequal_string $secrets "{}"
 
           test_one=${{ fromJson(steps.gcp.outputs.secrets).TEST_ONE }}
           test_two=${{ fromJson(steps.gcp.outputs.secrets)['TEST_TWO'] }}
 
-          source ./scripts/test_functions.sh
           fail_if_empty_string "$test_one"
           fail_if_empty_string "$test_two"
