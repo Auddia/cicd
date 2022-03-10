@@ -1,7 +1,6 @@
 name: '[Action Test] setup_gcloud'
 
 on:
-  push:
   workflow_dispatch:
     inputs:
       gcp_secret:

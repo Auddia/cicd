@@ -1,6 +1,7 @@
 name: '[Action Test] compile_openapi'
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       gcp_secret:
