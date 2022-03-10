@@ -16,7 +16,11 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - name: Print
-        shell: bash
-        run: |
-          ls -la
+      - name: Build and Publish Image
+        uses: ./action/build_and_publish_image
+        with:
+          tag: "test_image"
+          dockerfile: ./resources/test_docker_env/Dockerfile
+          build_config: |
+            TEST_ONE: ONE
+            TEST_TWO: TWO
