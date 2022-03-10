@@ -46,7 +46,7 @@ runs:
         secret_args='${{ inputs.gcp_secrets }}'
         if [ -n "$secret_args" ];
         then
-          echo "$secret_args" | grep ":" | tr -d "[\":]" > secret_input.txt
+          echo "$secret_args" | grep ":" | tr -d "[\":]" > input.txt
           additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
           echo "additional_build_args=${value} ${additional_args}" >> "$GITHUB_ENV"
         else
