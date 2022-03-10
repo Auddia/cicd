@@ -1,4 +1,4 @@
-name: '[Action Test] setup_gcloud '
+name: '[Action Test] setup_gcloud'
 
 on:
   workflow_dispatch:
