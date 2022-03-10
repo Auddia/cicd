@@ -27,39 +27,39 @@ jobs:
         shell: bash
         run: gcloud info
 
-  gcloud_with_secrets:
-    name: GCloud Setup w/ Secrets
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          repository: Auddia/cicd
-          path: cicd
-          ref: ${{ github.ref }}
-
-      - name: GCloud SDK Setup
-        id: gcp
-        uses: .cicd/actions/setup_gcloud
-        with:
-          gcp_credentials: ${{ github.event.inputs.gcp_secret }}
-          gcp_secrets: |
-            TEST_ONE: projects/vodacast-staging/secrets/vodacast-postgres-password
-            TEST_TWO: projects/vodacast-staging/secrets/vodacast-postgres-password
-
-      - name: Test SDK
-        shell: bash
-        run: gcloud info
-
-      - name: Test Secrets Avaiablity
-        shell: bash
-        run: |
-          source ./cicd/scripts/test_functions.sh
-
-          secrets=${{ toJson(steps.gcp.outputs.secrets) }}
-          fail_if_strings_unequal $secrets "{}"
-
-          test_one=${{ fromJson(steps.gcp.outputs.secrets).TEST_ONE }}
-          test_two=${{ fromJson(steps.gcp.outputs.secrets)['TEST_TWO'] }}
-
-          fail_if_empty_string "$test_one"
-          fail_if_empty_string "$test_two"
+#  gcloud_with_secrets:
+#    name: GCloud Setup w/ Secrets
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#        with:
+#          repository: Auddia/cicd
+#          path: cicd
+#          ref: ${{ github.ref }}
+#
+#      - name: GCloud SDK Setup
+#        id: gcp
+#        uses: .cicd/actions/setup_gcloud
+#        with:
+#          gcp_credentials: ${{ github.event.inputs.gcp_secret }}
+#          gcp_secrets: |
+#            TEST_ONE: projects/vodacast-staging/secrets/vodacast-postgres-password
+#            TEST_TWO: projects/vodacast-staging/secrets/vodacast-postgres-password
+#
+#      - name: Test SDK
+#        shell: bash
+#        run: gcloud info
+#
+#      - name: Test Secrets Avaiablity
+#        shell: bash
+#        run: |
+#          source ./cicd/scripts/test_functions.sh
+#
+#          secrets=${{ toJson(steps.gcp.outputs.secrets) }}
+#          fail_if_strings_unequal $secrets "{}"
+#
+#          test_one=${{ fromJson(steps.gcp.outputs.secrets).TEST_ONE }}
+#          test_two=${{ fromJson(steps.gcp.outputs.secrets)['TEST_TWO'] }}
+#
+#          fail_if_empty_string "$test_one"
+#          fail_if_empty_string "$test_two"
