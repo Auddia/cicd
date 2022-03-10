@@ -53,6 +53,18 @@ jobs:
             exit -1
           fi
 
+          test_one=${{ fromJson(steps.gcp.outputs.secrets).TEST_ONE }}
+          test_two=${{ fromJson(steps.gcp.outputs.secrets)['TEST_TWO'] }}
+
+          if [ -z $test_one ];
+          then
+            exit -1
+          fi
+
+          if [ -z $test_two ];
+            exit -1
+          fi
+
       - name: Test Restricted Access to Secrets
         shell: bash
         run: |
