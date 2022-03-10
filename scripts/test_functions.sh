@@ -14,7 +14,7 @@ fail_if_empty_string() {
   fi
 }
 
-fail_if_unequal_string() {
+fail_if_strings_unequal() {
   if [ "$1" = "$2" ];
   then
     exit 1
