@@ -30,6 +30,5 @@ jobs:
         shell: bash
         run: |
           ls
-
           image_output=$(docker run auddia_test_image)
           echo "$image_output"
