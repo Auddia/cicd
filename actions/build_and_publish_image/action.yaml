@@ -44,7 +44,14 @@ runs:
         value=$(echo "$cleaned_args" | tr '\n' ' ')
 
         secret_args='${{ inputs.gcp_secrets }}'
-        echo "$secret_args" | grep ":"
+        if [ -n "$secret_args" ];
+        then
+          echo "$secret_args" | grep ":" | tr -d "[\":]" > secret_input.txt
+          additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
+          echo "additional_build_args=${value} ${additional_args}" >> "$GITHUB_ENV"
+        else
+          echo "additional_build_args=${value}" >> "$GITHUB_ENV"
+        fi
 
 
     - name: Build Image
