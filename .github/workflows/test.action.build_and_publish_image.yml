@@ -25,3 +25,12 @@ jobs:
           build_config: |
             TEST_ONE: ONE
             TEST_TWO: TWO
+
+      - name: Validate Image
+        shell: bash
+        run: |
+          source ./scripts/test_functions.sh
+
+          image_output=$(docker run auddia_test_image)
+
+          echo $image_output
