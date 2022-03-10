@@ -65,4 +65,9 @@ jobs:
         run: |
           source ./scripts/test_functions.sh
           image_output=$(docker run auddia_test_image)
-          echo "$image_output"
+
+          expected="TEST_ONE: ***
+            TEST_TWO: TWO
+            TEST_THREE: PI"
+
+          fail_if_strings_unequal "$image_output" "$expected"
