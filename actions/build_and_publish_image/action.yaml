@@ -53,11 +53,9 @@ runs:
         --file ${{ inputs.dockerfile }} \
         ${{ inputs.build_context }}
 
-    - name: Configure GCP Docker Registry
+    - name: Publish GCP Docker Registry
       if: "${{ contains(inputs.tag, 'gcr.io') }}"
       shell: bash
-      run: gcloud auth configure-docker
-
-    - name: Publish Image
-      shell: bash
-      run: docker push ${{ inputs.tag }} ${{ inputs.push_args }}
+      run: |
+        gcloud auth configure-docker
+        docker push ${{ inputs.tag }} ${{ inputs.push_args }}
