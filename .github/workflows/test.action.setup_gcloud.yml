@@ -9,7 +9,7 @@ on:
 
 jobs:
   gcloud_no_secrets:
-    name: None
+    name: GCloud Setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
