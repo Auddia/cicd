@@ -20,6 +20,3 @@ fail_if_strings_unequal() {
     exit 1
   fi
 }
-
-
-echo "$secret_args" | grep ":" | tr -d "[\":]" > input.txt
