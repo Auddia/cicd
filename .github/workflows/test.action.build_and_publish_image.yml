@@ -31,7 +31,12 @@ jobs:
         run: |
           source ./scripts/test_functions.sh
           image_output=$(docker run auddia_test_image)
-          echo "$image_output"
+
+          expected="TEST_ONE: ONE
+            TEST_TWO: TWO
+            TEST_THREE: "
+
+          fail_if_strings_unequal "$image_output" "$expected"
 
   generic_with_secrets_image:
     name: Generic Image w/ Secrets
