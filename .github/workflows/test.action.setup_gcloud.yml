@@ -1,7 +1,6 @@
 name: '[Action Test] setup_gcloud '
 
 on:
-  push:
   workflow_dispatch:
     inputs:
       gcp_secret:
@@ -9,7 +8,7 @@ on:
         required: true
 
 jobs:
-  place_holder:
+  gcloud_no_secrets:
     name: None
     runs-on: ubuntu-latest
     steps:
@@ -32,8 +31,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          path: cicd
-          repository: Auddia/cicd
           ref: ${{ github.ref }}
 
       - name: Print
