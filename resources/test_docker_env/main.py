@@ -1,21 +1,19 @@
 from dataclasses import dataclass
-from typing import Optional, Any
 import os
 
 
 @dataclass
 class Item:
     name: str
-    env_val: Optional[Any] = None
 
     def __str__(self):
         return f"{self.name}: {os.getenv(self.name, None)}"
 
 
 items = [
-    Item("T_ONE"),
-    Item("T_TWO"),
-    Item("T_THREE")
+    Item("TEST_ONE"),
+    Item("TEST_TWO"),
+    Item("TEST_THREE")
 ]
 
 
