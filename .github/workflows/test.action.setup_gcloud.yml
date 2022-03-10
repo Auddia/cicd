@@ -1,4 +1,4 @@
-name: '[Action Test] setup_gcloud'
+name: '[Action Test] setup_gcloud '
 
 on:
   workflow_dispatch:
@@ -18,9 +18,14 @@ jobs:
           path: cicd
           ref: ${{ github.ref }}
 
+      - name: GCloud SDK Setup
+        uses: ./cicd/actions/setup_gcloud
+        with:
+          gcp_credentials: ${{ github.event.inputs.gcp_secret }}
+
       - name: Test SDK
         shell: bash
-        run: ls -la
+        run: gcloud info
 
 #  gcloud_with_secrets:
 #    name: GCloud Setup w/ Secrets
