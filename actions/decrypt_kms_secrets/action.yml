@@ -27,10 +27,12 @@ runs:
       shell: bash
       run: |
         keys="${{ inputs.keys }}"
-        echo $keys
-        echo "keys=${value}" >> "$GITHUB_ENV"
+        echo "$config" | grep ":" > input.txt
+        arg_list=$(awk -F: '{print "--key="$1 " --ciphertext-file="$2 " --plaintext-file=./keys/"$1".key" }' input.txt)
+        echo "$arg_list"
+        echo "arg_list=${arg_list}" >> "$GITHUB_ENV"
 
     - name: See Command
       shell: bash
       run: |
-        echo ${{ env.keys }}
+        echo ${{ env.arg_list }}
