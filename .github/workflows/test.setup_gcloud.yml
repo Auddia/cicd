@@ -1,0 +1,64 @@
+on:
+  workflow_dispatch:
+    gcp_secret:
+      description: 'GCP Secret'
+      required: true
+
+jobs:
+  test_setup_gcloud_no_secrets:
+    name: Test Job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: GCloud SDK Setup
+        uses: ./actions/setup_gcloud
+        with:
+          gcp_credentials: ${{ github.event.inputs.logLevel }}
+
+      - name: Test SDK
+        shell: bash
+        run: gcloud info
+
+  test_setup_gcloud_secrets:
+    name: Test Job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+#      - name: GCloud SDK Setup
+#        id: gcp
+#        uses: ./actions/setup_gcloud
+#        with:
+#          gcp_credentials: '${{ secrets.TEST_CREDENTIALS_VODACAST_STAGING }}'
+#          secrets: |
+#            VALUE_ONE: projects/vodacast-staging/secrets/discovery_db-discovery_server-password
+#            VALUE_TWO: projects/vodacast-staging/secrets/discovery_db-discovery_server-password
+#
+#      - name: Test SDK
+#        shell: bash
+#        run: gcloud info
+#
+#      - name: Output Secrets
+#        shell: bash
+#        run: |
+#          secrets='${{ steps.gcp.outputs.secrets }}'
+#          if [ -z "$secrets" ];
+#          then
+#            exit -1
+#          else
+#            echo "Secrets are available"
+#            echo "Secrets: ${secrets}"
+#          fi
+
+      - name: Test branch
+        shell: bash
+        run: git branch
+
+      - name: Test failure
+        shell: bash
+        run: exit -1

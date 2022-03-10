@@ -1,0 +1,34 @@
+name: Decrypt KMS Secret
+description: Using the gcloud command this action decrypts all the kms secrets requested
+inputs:
+  key_ring:
+    description: The KMS keyring that that the secrets are being taken from
+    required: true
+  keys:
+    description: 'The keys being requested in the format (key: cipher_text_location)'
+    required: true
+  output_dir:
+    description: 'The location to store the decrypted keys'
+    required: false
+    default: '.'
+
+#--ciphertext-file=./config/cfr_runner.key.enc",
+#"--plaintext-file=./config/cfr_runner.key",
+#"--location=us-central1",
+#"--keyring=cfr",
+#"--key=cfr_runner_key
+#
+
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Process KMS Input
+      shell: bash
+      run: |
+        build_config="${{ inputs.build_config }}"
+        config="$build_config"
+        echo "$config" | grep ":" > input.txt
+        arg_list=$(awk -F: '{print "--build-arg "$1"="$2}' input.txt)
+        cleaned_args=${arg_list//= /=}
+        value=$(echo "$cleaned_args" | tr '\n' ' ')

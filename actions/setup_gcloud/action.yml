@@ -10,6 +10,7 @@ inputs:
     required: false
     default: ''
 
+
 outputs:
   secrets:
     description: JSON dictionary of dynamic outputed secret values
