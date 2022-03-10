@@ -1,6 +1,7 @@
 name: '[Action Test] configure_gcp_endpoints'
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       gcp_secret:
