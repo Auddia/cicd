@@ -17,7 +17,7 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: Build and Publish Image
-        uses: ./action/build_and_publish_image
+        uses: ./actions/build_and_publish_image
         with:
           tag: "auddia_test_image"
           dockerfile: ./resources/test_docker_env/Dockerfile
