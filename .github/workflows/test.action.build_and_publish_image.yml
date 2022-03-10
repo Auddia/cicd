@@ -19,7 +19,7 @@ jobs:
       - name: Build and Publish Image
         uses: ./actions/build_and_publish_image
         with:
-          tag: "auddia_test_image"
+          tag: "auddia_test_image:${{ github.sha }}"
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_context: ./resources/test_docker_env
           build_config: |
@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           source ./scripts/test_functions.sh
-          image_output=$(docker run auddia_test_image)
+          image_output=$(docker run auddia_test_image:${{ github.sha }})
 
           expected="TEST_ONE: ONE
             TEST_TWO: TWO
@@ -38,7 +38,42 @@ jobs:
 
           fail_if_strings_unequal "$image_output" "$expected"
 
-  generic_with_secrets_image:
+  gcp_image:
+    name: GCP Image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: GCloud SDK Setup
+        uses: ./actions/setup_gcloud
+        with:
+          gcp_credentials: ${{ github.event.inputs.gcp_secret }}
+
+      - name: Build and Publish Image
+        uses: ./actions/build_and_publish_image
+        with:
+          tag: "gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }}"
+          dockerfile: ./resources/test_docker_env/Dockerfile
+          build_context: ./resources/test_docker_env
+          build_config: |
+            TEST_ONE: ONE
+            TEST_TWO: TWO
+
+      - name: Validate Image
+        shell: bash
+        run: |
+          source ./scripts/test_functions.sh
+          image_output=$(docker run gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }}
+
+          expected="TEST_ONE: ONE
+            TEST_TWO: TWO
+            TEST_THREE: "
+
+          fail_if_strings_unequal "$image_output" "$expected"
+
+  generic_image_with_secrets:
     name: Generic Image w/ Secrets
     runs-on: ubuntu-latest
     steps:
@@ -57,7 +92,7 @@ jobs:
       - name: Build and Publish Image
         uses: ./actions/build_and_publish_image
         with:
-          tag: "auddia_test_image"
+          tag: "auddia_test_image:${{ github.sha }}"
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_context: ./resources/test_docker_env
           gcp_secrets: '${{ steps.gcp.outputs.secrets }}'
@@ -69,7 +104,46 @@ jobs:
         shell: bash
         run: |
           source ./scripts/test_functions.sh
-          image_output=$(docker run auddia_test_image)
+          image_output=$(docker run auddia_test_image:${{ github.sha }})
+
+          expected="TEST_ONE: ***
+            TEST_TWO: TWO
+            TEST_THREE: PI"
+
+          fail_if_strings_unequal "$image_output" "$expected"
+
+  gcp_image_with_secrets:
+    name: GCP Image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: GCloud SDK Setup
+        id: gcp
+        uses: ./actions/setup_gcloud
+        with:
+          gcp_credentials: ${{ github.event.inputs.gcp_secret }}
+          gcp_secrets: |
+            TEST_ONE: projects/vodacast-staging/secrets/vodacast-postgres-password
+
+      - name: Build and Publish Image
+        uses: ./actions/build_and_publish_image
+        with:
+          tag: "gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }}"
+          dockerfile: ./resources/test_docker_env/Dockerfile
+          build_context: ./resources/test_docker_env
+          gcp_secrets: '${{ steps.gcp.outputs.secrets }}'
+          build_config: |
+            TEST_TWO: TWO
+            TEST_THREE: PI
+
+      - name: Validate Image
+        shell: bash
+        run: |
+          source ./scripts/test_functions.sh
+          image_output=$(docker run gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }})
 
           expected="TEST_ONE: ***
             TEST_TWO: TWO
