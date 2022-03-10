@@ -14,8 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          path: cicd
-          repository: Auddia/cicd
           ref: ${{ github.ref }}
 
       - name: Print
