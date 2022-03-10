@@ -38,6 +38,3 @@ runs:
       uses: 'google-github-actions/get-secretmanager-secrets@v0'
       with:
         secrets: '${{ inputs.gcp_secrets }}'
-
-
-

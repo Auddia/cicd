@@ -35,7 +35,7 @@ jobs:
         id: gcp
         uses: ./actions/setup_gcloud
         with:
-          gcp_credentials: '${{ secrets.TEST_CREDENTIALS_VODACAST_STAGING }}'
+          gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 
       - name: Test SDK
         shell: bash
@@ -45,5 +45,4 @@ jobs:
         shell: bash
         if: '${{ steps.gcp.outputs.secrets }}' == ''
         run: |
-          secrets='${{ steps.gcp.outputs.secrets }}'
-          echo "Secrets: ${secrets}"
+          echo "Secrets: ${{ steps.gcp.outputs.secrets }}"
