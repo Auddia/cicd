@@ -62,8 +62,8 @@ jobs:
             exit -1
           fi
 
-          value=fromJson(steps.gcp.outputs.secrets).TEST_ONE
-          value_two=fromJson(steps.gcp.outputs.secrets)['TOKEN']
+          value=${{ fromJson(steps.gcp.outputs.secrets).TEST_ONE }}
+          value_two=${{ fromJson(steps.gcp.outputs.secrets)['TOKEN'] }}
 
           echo "${value}"
           echo "${value_two}"
