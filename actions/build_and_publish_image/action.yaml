@@ -37,17 +37,11 @@ runs:
       id: build_config
       shell: bash
       run: |
-        build_config="${{ inputs.build_config }}"
-        if [ -z "$build_config" ];
-        then
-          value=""
-        else
-          config="$build_config"
-          echo "$config" | grep ":" > input.txt
-          arg_list=$(awk -F: '{print "--build-arg "$1"="$2}' input.txt)
-          cleaned_args=${arg_list//= /=}
-          value=$(echo "$cleaned_args" | tr '\n' ' ')
-        fi
+        config="${{ inputs.build_config }}"
+        echo "$config" | grep ":" > input.txt
+        arg_list=$(awk -F: '{print "--build-arg "$1"="$2}' input.txt)
+        cleaned_args=${arg_list//= /=}
+        value=$(echo "$cleaned_args" | tr '\n' ' ')
 
         secret_args='${{ inputs.gcp_secrets }}'
         echo "$secret_args" | grep ":" | tr -d "[\":]" > input.txt
