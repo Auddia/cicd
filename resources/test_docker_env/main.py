@@ -6,17 +6,16 @@ import os
 @dataclass
 class Item:
     name: str
-    value: Any
     env_val: Optional[Any] = None
 
     def __str__(self):
-        return f"{self.name}: [(val: env) -> ({self.value}: {self.env_val})] "
+        return f"{self.name}: {os.getenv('T_ONE', None)}"
 
 
 items = [
-    Item("T_ONE", 1, os.getenv("T_ONE", None)),
-    Item("T_TWO", 2, os.getenv("T_TWO", None)),
-    Item("T_THREE", 3.14, os.getenv("T_THREE", None))
+    Item("T_ONE"),
+    Item("T_TWO"),
+    Item("T_THREE")
 ]
 
 
