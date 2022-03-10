@@ -15,11 +15,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: Auddia/cicd
-          path: helper
+          path: cicd
           ref: ${{ github.ref }}
 
       - name: GCloud SDK Setup
-        uses: ./helper/actions/setup_gcloud
+        uses: ./actions/setup_gcloud
         with:
           gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 
