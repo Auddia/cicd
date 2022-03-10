@@ -29,6 +29,5 @@ jobs:
       - name: Validate Image
         shell: bash
         run: |
-          source ./scripts/test_functions.sh
           image_output=$(docker run auddia_test_image)
           echo "$image_output"
