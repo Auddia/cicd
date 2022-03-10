@@ -14,8 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          repository: Auddia/cicd
-          path: cicd
           ref: ${{ github.ref }}
 
       - name: GCloud SDK Setup
