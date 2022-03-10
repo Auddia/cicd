@@ -31,7 +31,12 @@ runs:
         arg_list=$(awk -F: '{print "--key="$1 " --ciphertext-file="$2 " --plaintext-file=./keys/"$1".key" }' input.txt)
         echo "$arg_list" > /tmp/kms_decrypt_input
 
-    - name: See Command
+    - name: Decrypt Keys
       shell: bash
       run: |
-        cat /tmp/kms_decrypt_input
+        cat /tmp/kms_decrypt_input | xargs -I % kms decrypt --location=us-central1 --keyring=${{ inputs.key_ring }}
+
+    - name: See Keys
+      shell: bash
+      run: |
+        ls ./keys
