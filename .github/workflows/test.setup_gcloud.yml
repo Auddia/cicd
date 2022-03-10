@@ -36,9 +36,6 @@ jobs:
         uses: ./actions/setup_gcloud
         with:
           gcp_credentials: '${{ secrets.TEST_CREDENTIALS_VODACAST_STAGING }}'
-#          secrets: |
-#            VALUE_ONE: projects/vodacast-staging/secrets/discovery_db-discovery_server-password
-#            VALUE_TWO: projects/vodacast-staging/secrets/discovery_db-discovery_server-password
 
       - name: Test SDK
         shell: bash
