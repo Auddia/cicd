@@ -10,7 +10,7 @@ class Item:
     env_val: Optional[Any] = None
 
     def __str__(self):
-        return f"{self.name}: [(val: env) -> ({self.value}: {self.env_val}] "
+        return f"{self.name}: [(val: env) -> ({self.value}: {self.env_val})] "
 
 
 items = [
