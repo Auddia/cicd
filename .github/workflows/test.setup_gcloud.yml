@@ -47,6 +47,7 @@ jobs:
       - name: Test If Secrets Are Avaiable
         shell: bash
         run: |
+          ls -la
           source ./scripts/test_function.sh
           execute_for_each_space echo 1 2 3
 
