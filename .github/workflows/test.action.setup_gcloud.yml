@@ -35,6 +35,11 @@ jobs:
           repository: Auddia/cicd
           ref: ${{ github.ref }}
 
+      - name: Test Secrets Avaiablity
+        shell: bash
+        run: |
+          ls -la
+
       - name: GCloud SDK Setup
         id: gcp
         uses: ./cicd/actions/setup_gcloud
