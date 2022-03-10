@@ -27,7 +27,10 @@ runs:
       shell: bash
       run: |
         keys="${{ inputs.keys }}"
-        echo "keys" | grep ":" > input.txt
-        arg_list=$(awk -F: '{print "--build-arg "$1"="$2}' input.txt)
-        cleaned_args=${arg_list//= /=}
-        value=$(echo "$cleaned_args" | tr '\n' ' ')
+        echo $keys
+        echo "output=${value}" >> "$GITHUB_ENV"
+
+    - name: See Command
+      shell: bash
+      run: |
+        echo ${{ env.output }}
