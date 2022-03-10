@@ -57,20 +57,5 @@ jobs:
           test_two=${{ fromJson(steps.gcp.outputs.secrets)['TEST_TWO'] }}
 
           source ./scripts/test_functions.sh
-          execute_for_each_space fail_if_empty_string "$test_one" "$test_two"
-
-
-      - name: Test Restricted Access to Secrets
-        shell: bash
-        run: |
-          secrets='${{ toJson(steps.gcp.outputs.secrets) }}'
-          if [ $secrets = "{}" ];
-          then
-            exit -1
-          fi
-
-          value=${{ fromJson(steps.gcp.outputs.secrets).TEST_ONE }}
-          value_two=${{ fromJson(steps.gcp.outputs.secrets)['TOKEN'] }}
-
-          echo "${value}"
-          echo "${value_two}"
+          fail_if_empty_string "$test_one"
+          fail_if_empty_string "$test_two"
