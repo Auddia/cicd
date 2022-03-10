@@ -57,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup GCloud SDK Staging Environment
+      - name: Setup GCloud SDK
         id: gcp
         uses: 'Auddia/cicd/actions/setup_gcloud@main'
         with:
