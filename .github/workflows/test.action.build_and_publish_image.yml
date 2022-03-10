@@ -21,9 +21,6 @@ jobs:
         with:
           tag: "auddia_test_image"
           dockerfile: ./resources/test_docker_env/Dockerfile
-          build_config: |
-            TEST_ONE: ONE
-            TEST_TWO: TWO
 
       - name: Pull Image
         shell: bash
