@@ -1,4 +1,5 @@
 on:
+  push:
   workflow_dispatch:
     inputs:
       gcp_secret:
@@ -15,3 +16,8 @@ jobs:
           path: cicd
           repository: Auddia/cicd
           ref: ${{ github.ref }}
+
+      - name: Print
+        shell: bash
+        run: |
+          ls -la

@@ -35,7 +35,7 @@ jobs:
           repository: Auddia/cicd
           ref: ${{ github.ref }}
 
-      - name: Test Secrets Avaiablity
+      - name: Print
         shell: bash
         run: |
           ls -la
