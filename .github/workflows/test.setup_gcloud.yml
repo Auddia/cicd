@@ -16,7 +16,7 @@ jobs:
       - name: GCloud SDK Setup
         uses: ./actions/setup_gcloud
         with:
-          gcp_credentials: ${{ github.event.inputs.logLevel }}
+          gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 
       - name: Test SDK
         shell: bash
