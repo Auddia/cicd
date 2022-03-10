@@ -14,9 +14,9 @@ class Item:
 
 
 items = [
-    Item("Test One", 1, os.getenv("T_ONE", None)),
-    Item("Test Two", 2, os.getenv("T_TWO", None)),
-    Item("Test Three", 3.14, os.getenv("T_THREE", None))
+    Item("T_ONE", 1, os.getenv("T_ONE", None)),
+    Item("T_TWO", 2, os.getenv("T_TWO", None)),
+    Item("T_THREE", 3.14, os.getenv("T_THREE", None))
 ]
 
 

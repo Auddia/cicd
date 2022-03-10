@@ -33,3 +33,38 @@ jobs:
           source ./scripts/test_functions.sh
           image_output=$(docker run auddia_test_image)
           echo "$image_output"
+
+  generic_with_secrets_image:
+    name: Generic Image w/ Secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: GCloud SDK Setup
+        id: gcp
+        uses: ./actions/setup_gcloud
+        with:
+          gcp_credentials: ${{ github.event.inputs.gcp_secret }}
+          gcp_secrets: |
+            TEST_ONE: projects/vodacast-staging/secrets/vodacast-postgres-password
+
+      - name: Build and Publish Image
+        uses: ./actions/build_and_publish_image
+        with:
+          tag: "auddia_test_image"
+          dockerfile: ./resources/test_docker_env/Dockerfile
+          build_context: ./resources/test_docker_env
+          gcp_secrets: '${{ steps.gcp.outputs.secrets }}'
+          build_config: |
+            TEST_TWO: TWO
+            TEST_THREE: THREE
+
+      - name: Validate Image
+        shell: bash
+        run: |
+          ls ./scripts
+          source ./scripts/test_functions.sh
+          image_output=$(docker run auddia_test_image)
+          echo "$image_output"
