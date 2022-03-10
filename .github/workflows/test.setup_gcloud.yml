@@ -56,7 +56,7 @@ jobs:
       - name: Test Restricted Access to Secrets
         shell: bash
         run: |
-          secrets=${{ toJson(steps.gcp.outputs.secrets) }}
+          secrets='${{ toJson(steps.gcp.outputs.secrets) }}'
           if [ $secrets = "{}" ];
           then
             exit -1
