@@ -31,11 +31,11 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-#      - name: GCloud SDK Setup
-#        id: gcp
-#        uses: ./actions/setup_gcloud
-#        with:
-#          gcp_credentials: ${{ github.event.inputs.gcp_secret }}
+      - name: GCloud SDK Setup
+        id: gcp
+        uses: ./actions/setup_gcloud
+        with:
+          gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 
       - name: Test SDK
         shell: bash
@@ -43,6 +43,6 @@ jobs:
 
       - name: Output Secrets
         shell: bash
-        if: '${{ steps.gcp.outputs.secrets }}' == ''
+#        if: "${{ steps.gcp.outputs.secrets == '' }}"
         run: |
           echo "Secrets: ${{ steps.gcp.outputs.secrets }}"
