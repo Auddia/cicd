@@ -9,7 +9,7 @@ class Item:
     env_val: Optional[Any] = None
 
     def __str__(self):
-        return f"{self.name}: {os.getenv('T_ONE', None)}"
+        return f"{self.name}: {os.getenv(self.name, None)}"
 
 
 items = [
