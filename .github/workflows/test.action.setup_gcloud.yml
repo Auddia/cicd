@@ -14,10 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          repository: Auddia/cicd
+          path: cicd
           ref: ${{ github.ref }}
 
       - name: GCloud SDK Setup
-        uses: ./actions/setup_gcloud
+        uses: ./cicd/actions/setup_gcloud
         with:
           gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 
@@ -31,16 +33,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          repository: Auddia/cicd
+          path: cicd
           ref: ${{ github.ref }}
-
-      - name: Print
-        shell: bash
-        run: |
-          ls -la
 
       - name: GCloud SDK Setup
         id: gcp
-        uses: ./actions/setup_gcloud
+        uses: .cicd/actions/setup_gcloud
         with:
           gcp_credentials: ${{ github.event.inputs.gcp_secret }}
           gcp_secrets: |
@@ -54,7 +53,7 @@ jobs:
       - name: Test Secrets Avaiablity
         shell: bash
         run: |
-          source ./scripts/test_functions.sh
+          source ./cicd/scripts/test_functions.sh
 
           secrets=${{ toJson(steps.gcp.outputs.secrets) }}
           fail_if_strings_unequal $secrets "{}"
