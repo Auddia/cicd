@@ -43,6 +43,6 @@ jobs:
 
       - name: Output Secrets
         shell: bash
-#        if: "${{ steps.gcp.outputs.secrets == {} }}"
+        if: '${{ toJson(steps.gcp.outputs.secrets) == "{}" }}'
         run: |
           echo "Secrets: ${{ toJson(steps.gcp.outputs.secrets) }}"
