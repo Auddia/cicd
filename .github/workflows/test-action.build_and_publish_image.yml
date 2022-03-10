@@ -1,7 +1,6 @@
 name: '[Action Test] build_and_publish_image'
 
 on:
-  push:
   workflow_dispatch:
     inputs:
       gcp_secret:
