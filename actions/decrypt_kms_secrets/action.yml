@@ -37,8 +37,3 @@ runs:
       run: |
         cat /tmp/kms_decrypt_input
         cat /tmp/kms_decrypt_input | xargs -I % gcloud kms decrypt % --location=us-central1 --keyring=${{ inputs.key_ring }}
-
-
-gcloud kms decrypt --ciphertext-file=./config/test_key.key.enc --plaintext-file=./keys/test_key.key --key=test_key --location=us-central1 --keyring=test?...y
-
-gcloud iam service-accounts keys create ./config/photo_album_runner.key --iam-account photo-album-runner@$PROJECT_ID.iam.gserviceaccount.com
