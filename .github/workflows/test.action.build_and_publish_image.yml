@@ -127,6 +127,7 @@ jobs:
           gcp_credentials: ${{ github.event.inputs.gcp_secret }}
           gcp_secrets: |
             TEST_ONE: projects/vodacast-staging/secrets/vodacast-postgres-password
+            TEST_THREE: projects/vodacast-staging/secrets/vodacast-postgres-password
 
       - name: Build and Publish Image
         uses: ./actions/build_and_publish_image
@@ -137,7 +138,7 @@ jobs:
           gcp_secrets: '${{ steps.gcp.outputs.secrets }}'
           build_config: |
             TEST_TWO: TWO
-            TEST_THREE: PI
+            TEST_FOUR: PI
 
       - name: Validate Image
         shell: bash
@@ -147,6 +148,7 @@ jobs:
 
           expected="TEST_ONE: ***
             TEST_TWO: TWO
-            TEST_THREE: PI"
+            TEST_THREE: ***
+            TEST_FOUR: PI"
 
           fail_if_strings_unequal "$image_output" "$expected"
