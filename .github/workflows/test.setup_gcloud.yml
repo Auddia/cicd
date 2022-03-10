@@ -62,6 +62,7 @@ jobs:
           fi
 
           if [ -z $test_two ];
+          then
             exit -1
           fi
 
