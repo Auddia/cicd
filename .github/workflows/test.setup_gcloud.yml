@@ -1,8 +1,9 @@
 on:
   workflow_dispatch:
-    gcp_secret:
-      description: 'GCP Secret'
-      required: true
+    inputs:
+      gcp_secret:
+        description: 'GCP Secret'
+        required: true
 
 jobs:
   test_setup_gcloud_no_secrets:
