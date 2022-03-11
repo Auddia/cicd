@@ -8,15 +8,22 @@ on:
         required: true
 
 jobs:
-  place_holder:
-    name: None
+  env_one:
+    name: Environment One
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
 
-      - name: Print
+      - name: Compile OpenAPI File
+        uses: ./actions/compile_openapi
+        with:
+          openapi_dir: ./resources/test_openapi_template
+          environment_value: env_one
+
+      - name: Validate OpenAPI Created
         shell: bash
         run: |
           ls -la
+          cat openapi.yaml

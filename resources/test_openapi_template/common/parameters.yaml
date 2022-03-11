@@ -1,0 +1,7 @@
+parameters:
+  testParam:
+    name: test_param
+    in: query
+    required: false
+    type: integer
+    description: 'test param'
