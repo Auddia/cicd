@@ -26,4 +26,8 @@ jobs:
         shell: bash
         run: |
           ls -la
-          cat openapi.yaml
+          source ./scripts/test_functions.sh
+          generated_file=$(cat openapi.yaml)
+          title_line=$(echo "$generated_file" | grep "title"")
+          expected="title: ENV ONE"
+          fail_if_strings_unequal "$output" "$expected"
