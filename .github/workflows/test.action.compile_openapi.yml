@@ -2,10 +2,6 @@ name: '[Action Test] compile_openapi'
 
 on:
   workflow_dispatch:
-    inputs:
-      gcp_secret:
-        description: 'GCP Secret'
-        required: true
 
 jobs:
   env_one:
