@@ -86,7 +86,7 @@ jobs:
           gcp_secrets: '${{ inputs.gcp_secrets }}'
 
       - name: Decrypt Data
-        if: '${{ inputs.gcp_secrets }}'
+        if: '${{ inputs.decrypt_info }}'
         uses: 'Auddia/cicd/actions/decrypt_kms_secrets@wudstrand/cicd#3'
         with:
           key_ring: '${{ inputs.key_ring }}'
