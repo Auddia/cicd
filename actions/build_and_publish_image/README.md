@@ -5,18 +5,19 @@
 * yaml reference: `Auddia/cicd/actions/build_and_publish_image@<tag>`
 * action type: Composite Action
 
-## Required Setup
-To use this action in your repository you need to do the following to setup the needed templating structure.
-
-1. Have a dockerfile defining the applications deployment environment.
-2. If you are publishing to GCP's container registry make sure to run the [setup_gcloud action](../setup_gcloud/README.md) before using this action in a job.
-
 ## Description
 This action builds and publishes a docker image.
 
 Can publish to:
 * GCP's Container Registry
-* Default Docker Registry (Not Tested)
+
+### Tags
+This action is available on tags `v01` and above
+
+## Required Setup
+To use this action in your repository you need to do the following to setup.
+1. Have a dockerfile defining the applications deployment environment.
+2. If you are publishing to GCP's container registry make sure to run the [setup_gcloud action](../setup_gcloud/README.md) before using this action in a job.
 
 ### Input Arguments
 
@@ -159,6 +160,5 @@ jobs:
 ```
 
 ### Additonal Usage
+* [Tests](../../.github/workflows/test.action.build_and_publish_image.yml)
 * [Cloud Run API Deployment](../../.github/workflows/cloud_run_api_deployment.yml)
-* [API Deployment](FILL IN)
-  * Note this is call to the reusable workflow from [above](../../.github/workflows/cloud_run_api_deployment.yml), but it is still an example of how to configure the `setup_gcloud` action. 

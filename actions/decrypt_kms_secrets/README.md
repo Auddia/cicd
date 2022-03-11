@@ -11,10 +11,12 @@ is saved and it is made available to all subsequent actions and steps.
 
 NOTE: This action assumes that you have setup the gcloud sdk with this [action](../setup_gcloud/README.md) 
 
+### Tags
+This action is available on tags `v02` and above
+
 #### the decrypted data made available in the following step/action types
 * [Composite Actions](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action) 
   * The code maybe in a wierd (i.e. non-default directory but it is there)
-* [Docker Actions](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action)
 * Other action types not tested
 
 ### Input Arguments
@@ -23,7 +25,6 @@ NOTE: This action assumes that you have setup the gcloud sdk with this [action](
 * **Description**: The GCP KMS keyring that the keys are retrieved from
 * `type`: `string`
 * `required`
-
 
 ##### `decrypt_info`
 * **Description**: A list of decryption requests in the format (`ciphertext : key : plaintext`)
@@ -49,7 +50,7 @@ decrypt_info: |
 
 
 ### Output
-The `plaintext` generated in this step will be available in the `output_dir` specified, and they will have the `plaintext` name from the `decrypt_info` input.
+The all generated `plaintext` in this step is made available to all subsequent steps and action within the same job. The `plaintest` is located in the `output_dir` specified, and they will have the same name as the `plaintext` from the `decrypt_info` input.
 
 ## Example Usage
 
@@ -87,5 +88,5 @@ jobs:
           fail_if_strings_unequal "$output" "$expected"
 ```
 
-### Additonal Usage
-* 
+### Additional Usage
+* [Tests](../../.github/workflows/test.action.decrypt_kms_secrets.yml)
