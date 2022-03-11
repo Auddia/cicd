@@ -26,7 +26,7 @@ runs:
         keys="${{ inputs.decrypt_info }}"
         echo "$keys" | grep ":" | tr -d '[ ]' > input.txt
 
-        mkdir ${{ inputs.output_dir }}
+        mkdir -p ${{ inputs.output_dir }}
         arg_list=$(awk -F: '{
             print "--ciphertext-file " input_dir"/"$1" --plaintext-file " output_dir"/"$3 " --key "$2;
         }' input_dir=${{ inputs.input_dir }} output_dir=${{ inputs.output_dir }} input.txt)
