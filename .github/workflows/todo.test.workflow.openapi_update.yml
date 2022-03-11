@@ -1,4 +1,4 @@
-name: '[Workflow Test] open_api_update'
+name: '[TODO] [Workflow Test] open_api_update'
 
 on:
   workflow_dispatch:

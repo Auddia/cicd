@@ -12,6 +12,7 @@ Make sure to refer to the docs for the specific release, tag or branch to have t
   * [`v0`](https://github.com/Auddia/cicd/releases/tag/v0)
   * [`v01`](https://github.com/Auddia/cicd/releases/tag/v01)
   * [`COMING SOON v02`](https://github.com/Auddia/cicd/releases/tag/v02)
+* [Action Items]()
 
 ## Workflows
 Workflows define a job or a group of jobs that can be run in parallel or in some defined order. All the 
@@ -43,4 +44,52 @@ For more information on each release view the official release docs. For even mo
   * [`v01`](https://github.com/Auddia/cicd/releases/tag/v01)
   * [`COMING SOON v02`](https://github.com/Auddia/cicd/releases/tag/v02)
 
+
+# Action Items
+* How to test commands that deploy to GCP?
+  * Need some sort of mocking mechanism or a container that we can deploy in the runner while it is testing
+  * Test's where this is involved are marked as TODO.
+    * [todo.test.action.configure_gcp_endpoints](./.github/workflows/todo.test.action.configure_gcp_endpoints.yml)
+    * [todo.test.workflow.open_api_update](./.github/workflows/todo.test.workflow.open_api_update.yml)
+    * [todo.test.workflow.cloud_run_api_deployment](./.github/workflows/todo.test.workflow.cloud_run_api_deployment.yml)
+* Roll out tag `v02`
+  * Work with Luis and Dan to get the `wudstrand/cicd#3` branch working
+  * Once working test all actions via their new tests
+  * Merge into main
+  * Create release branch
+  * Change the tags to v01
+  * Create a release via Github GUI
+  * Test new release
+  * Migrate early adopters to the `v02` tag
+    * `vodacast-hub`
+    * `cfr`
+    * etc.
+
+DOC String for the `v02` release
+```markdown
+## New
+* [decrypt_kms_secrets action docs](./actions/decrypt_kms_secrets/README.md)
+* test.action.build_and_publish_image.yml
+* test.action.compile_open_api.yml
+* test.action.decrypt_kms_secrets.yml
+* test.action.setup_gcloud.yml
+* todo.test.action.configure_gcp_endpoints.yml
+* todo.test.workflow.cloud_run_api_deployment.yml
+* todo.test.workflow.openapi_update.yml
+
+## Updated
+* [cloud_run_api_deployment_workflow](./docs/workflows/cloud_run_api_deployment.md)
+  * Added in optional parameter to allow for kms decrpytion in the build process if needed
+
+## Available Actions
+* [compile_openapi action docs](./actions/compile_openapi/README.md)
+* [configure_gcp_endpoints action docs](./actions/configure_gcp_endpoints/README.md)
+* [setup_gcloud action docs](./actions/setup_gcloud/README.md)
+* [build_and_publish_image action docs](./actions/build_and_publish_image/README.md)
+* [decrypt_kms_secrets action docs](./actions/decrypt_kms_secrets/README.md)
+
+## Available Workflows
+* [openapi_update Workflow](./docs/workflows/openapi_update.md)
+* [cloud_run_api_deployment_workflow](./docs/workflows/cloud_run_api_deployment.md)
+```
 

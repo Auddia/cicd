@@ -1,4 +1,4 @@
-name: '[Workflow Test] cloud_run_api_deployment'
+name: '[TODO] [Action Test] configure_gcp_endpoints'
 
 on:
   workflow_dispatch:
