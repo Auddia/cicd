@@ -31,3 +31,27 @@ jobs:
           title_line=$(echo "$generated_file" | grep "title"")
           expected="title: ENV ONE"
           fail_if_strings_unequal "$output" "$expected"
+
+  env_two:
+    name: Environment Two
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Compile OpenAPI File
+        uses: ./actions/compile_openapi
+        with:
+          openapi_dir: ./resources/test_openapi_template
+          environment_value: env_two
+
+      - name: Validate OpenAPI Created
+        shell: bash
+        run: |
+          ls -la
+          source ./scripts/test_functions.sh
+          generated_file=$(cat openapi.yaml)
+          title_line=$(echo "$generated_file" | grep "title"")
+          expected="title: ENV TWO"
+          fail_if_strings_unequal "$output" "$expected"
