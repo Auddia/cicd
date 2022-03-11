@@ -28,10 +28,8 @@ runs:
 
         mkdir ./keys
         arg_list=$(awk -F: '{
-          print \
-            "--ciphertext-file ${{ inputs.input_dir }}/"$2 \
-            " --plaintext-file ${{ inputs.output_dir }}/"$1"" " --key "$1 \
-        }' input.txt)
+           print "--ciphertext-file input_dir/"$2 " --plaintext-file output_dir/"$1 " --key "$1 \
+         }' input_dir=${{ inputs.input_dir }} output_dir=${{ inputs.output_dir }} input.txt)
         echo "$arg_list" > /tmp/kms_decrypt_input
 
     - name: Decrypt Keys
