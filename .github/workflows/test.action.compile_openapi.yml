@@ -51,4 +51,5 @@ jobs:
         run: |
           ls -la
           source ./scripts/test_functions.sh
-          cat openapi.yaml
+          generated_file=$(cat openapi.yaml)
+          echo "$generated_file" | grep "title""
