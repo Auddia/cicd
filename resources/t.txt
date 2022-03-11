@@ -1,0 +1,1 @@
+--ciphertext-file  ./resources/test_key.key.enc --plaintext-file ./resources/test_key.key --key test_key
