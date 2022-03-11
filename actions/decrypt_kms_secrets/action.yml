@@ -2,13 +2,13 @@ name: Decrypt KMS Secret
 description: Using the gcloud command this action decrypts all the kms secrets requested
 inputs:
   key_ring:
-    description: The KMS keyring that that the secrets are being taken from
+    description: 'The GCP KMS keyring that the keys are retrieved from'
     required: true
-  keys:
-    description: 'The keys being requested in the format (ciphertext : key : plaintext)'
+  decrypt_info:
+    description: 'A list of decryption requests in the format (ciphertext : key : plaintext)'
     required: true
   input_dir:
-    description: 'The location to store the encrypted data'
+    description: 'The location where the encrypted data is stored'
     required: false
     default: '.'
   output_dir:
@@ -23,7 +23,7 @@ runs:
     - name: Process KMS Input
       shell: bash
       run: |
-        keys="${{ inputs.keys }}"
+        keys="${{ inputs.decrypt_info }}"
         echo "$keys" | grep ":" | tr -d '[ ]' > input.txt
 
         mkdir ${{ inputs.output_dir }}
