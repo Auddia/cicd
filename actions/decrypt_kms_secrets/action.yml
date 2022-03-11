@@ -21,6 +21,8 @@ runs:
       run: |
         keys="${{ inputs.keys }}"
         echo "$keys" > input.txt
+
+        mkdir ./keys
         arg_list=$(awk -F: '{print "--ciphertext-file "$2 " --plaintext-file ./keys/"$1"" " --key "$1}' input.txt)
         echo "$arg_list" > /tmp/kms_decrypt_input
 
