@@ -23,11 +23,9 @@ jobs:
         run: |
           ls -la
           source ./scripts/test_functions.sh
-          generated_file=$(cat ./openapi.yaml)
-          title_line=$(echo "$generated_file" | grep "title"")
+          title_line=$(grep "title" ./openapi.yaml)
           expected="title: ENV ONE"
           fail_if_strings_unequal "$output" "$expected"
-
   env_two:
     name: Environment Two
     runs-on: ubuntu-latest
@@ -47,5 +45,6 @@ jobs:
         run: |
           ls -la
           source ./scripts/test_functions.sh
-          generated_file=$(cat openapi.yaml)
-          echo "$generated_file" | grep "title""
+          title_line=$(grep "title" ./openapi.yaml)
+          expected="title: ENV TWO"
+          fail_if_strings_unequal "$output" "$expected"
