@@ -3,7 +3,11 @@ This workflow generates an openapi configuration and deploys/redeploys GCP endpo
 
 * GCloud SDK setup action: [setup_gcloud](../../actions/setup_gcloud/README.md)
 * Openapi config generation action: [compile_openapi action](../../actions/compile_openapi/README.md)
-* GCP Endpoints deployement action: [configure_gcp_endpoints action](../../actions/configure_gcp_endpoints/README.md).
+* GCP Endpoints deployement action: [configure_gcp_endpoints action](../../actions/configure_gcp_endpoints/README.md)
+
+### Tags
+This action is available on tags `v0` and above.
+
 
 ### Input Arguments
 

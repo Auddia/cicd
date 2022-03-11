@@ -5,6 +5,9 @@ This workflow build and publishes a docker image to GCP's docker registry and th
 * (Optional Step) Decrypt KMS secrets action [decrypt_kms_secrets](../../actions/decrypt_kms_secrets/README.md)
 * Build and publish Docker image action: [build_and_publish_image](../../actions/build_and_publish_image/README.md)
 
+### Tags
+This action is available on tags `v01` and above.
+
 ### Input Arguments
 
 ##### `gcp_project`
