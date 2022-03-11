@@ -5,10 +5,14 @@ inputs:
     description: The KMS keyring that that the secrets are being taken from
     required: true
   keys:
-    description: 'The keys being requested in the format (key: cipher_text_location)'
+    description: 'The keys being requested in the format (key: cipher_text)'
     required: true
+  input_dir:
+    description: 'The location to store the encrypted data'
+    required: false
+    default: '.'
   output_dir:
-    description: 'The location to store the decrypted keys'
+    description: 'The location to store the decrypted data'
     required: false
     default: '.'
 
@@ -23,7 +27,11 @@ runs:
         echo "$keys" | grep ":" > input.txt
 
         mkdir ./keys
-        arg_list=$(awk -F: '{print "--ciphertext-file "$2 " --plaintext-file ./keys/"$1"" " --key "$1}' input.txt)
+        arg_list=$(awk -F: '{
+          print \
+            "--ciphertext-file ${{ inputs.input_dir }}/"$2 \
+            " --plaintext-file ${{ inputs.output_dir }}/"$1"" " --key "$1 \
+        }' input.txt)
         echo "$arg_list" > /tmp/kms_decrypt_input
 
     - name: Decrypt Keys
