@@ -11,7 +11,7 @@ Make sure to refer to the docs for the specific release, tag or branch to have t
 * [Release Info](#releases)
   * [`v0`](https://github.com/Auddia/cicd/releases/tag/v0)
   * [`v01`](https://github.com/Auddia/cicd/releases/tag/v01)
-  * [`v02`](https://github.com/Auddia/cicd/releases/tag/v02)
+  * [`COMING SOON v02`](https://github.com/Auddia/cicd/releases/tag/v02)
 
 ## Workflows
 Workflows define a job or a group of jobs that can be run in parallel or in some defined order. All the 
