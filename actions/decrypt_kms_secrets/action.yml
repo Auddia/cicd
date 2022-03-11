@@ -34,5 +34,4 @@ runs:
     - name: Decrypt Keys
       shell: bash
       run: |
-        cat /tmp/kms_decrypt_input
         cat /tmp/kms_decrypt_input | xargs -I % gcloud kms decrypt % --location=us-central1 --keyring=${{ inputs.key_ring }}
