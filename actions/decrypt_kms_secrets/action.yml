@@ -28,3 +28,22 @@ runs:
       shell: bash
       run: |
         cat /tmp/kms_decrypt_input | xargs -I % gcloud kms decrypt % --location=us-central1 --keyring=${{ inputs.key_ring }}
+
+
+        config="TEST_ONE: ONE
+        TEST_TWO: TWO
+        "
+        echo "$config" > input.txt
+        arg_list=$(awk -F: '{print "--build-arg "$1"="$2}' input.txt)
+        cleaned_args=${arg_list//= /=}
+        value=$(echo "$cleaned_args" | tr '\n' ' ')
+
+        secret_args=''
+        if [ -n "$secret_args" ];
+        then
+          echo "$secret_args" | tr -d "[\":]" > input.txt
+          additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
+          echo "additional_build_args=${value} ${additional_args}" >> "$GITHUB_ENV"
+        else
+          echo "additional_build_args=${value}" >> "$GITHUB_ENV"
+        fi
