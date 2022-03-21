@@ -14,7 +14,7 @@ This action is available on tags `v0` and above
 
 #### sdk made available in the following step/action types
 * [Composite Actions](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action) 
-  * The code maybe in a wierd (i.e. non-default directory but it is there)
+  * The code maybe in a weird (i.e. non-default directory but it is there)
 * [Docker Actions](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action)
     * Tested image: [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/)
     * The code maybe in a wierd (i.e. non-default directory but it is there)

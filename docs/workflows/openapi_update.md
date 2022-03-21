@@ -3,7 +3,7 @@ This workflow generates an openapi configuration and deploys/redeploys GCP endpo
 
 * GCloud SDK setup action: [setup_gcloud](../../actions/setup_gcloud/README.md)
 * Openapi config generation action: [compile_openapi action](../../actions/compile_openapi/README.md)
-* GCP Endpoints deployement action: [configure_gcp_endpoints action](../../actions/configure_gcp_endpoints/README.md)
+* GCP Endpoints deployment action: [configure_gcp_endpoints action](../../actions/configure_gcp_endpoints/README.md)
 
 ### Tags
 This action is available on tags `v0` and above.
@@ -65,9 +65,9 @@ This action is available on tags `v0` and above.
 ### Secrets
 
 ##### `gcp_credentials`
-* **Description**: The json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
-* References the repo's available secrets and the github group's (i.e. `Auddia`) available secrets
-* If the needed credentials secret doesnt exist and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
+* **Description**: The json api key from Google for the desired service account that will be issuing the commands from the `gcloud` cli.
+* References the repo's available secrets and the GitHub group's (i.e. `Auddia`) available secrets
+* If the needed credentials secret doesn't exist, and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
 
 
 ### Example Usage
@@ -111,4 +111,4 @@ jobs:
 ```
 
 ### Additional Usage
-* [Tests]()
+* [Tests](FILL IN)

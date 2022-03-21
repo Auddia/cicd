@@ -57,7 +57,7 @@ on:
 
 jobs:
   openapi_update:
-    name: 'OpenAPI Update Deployement Job'
+    name: 'OpenAPI Update Deployment Job'
     runs-on: ubuntu-latest
     steps:
       - name: 'GCloud SDK Setup'

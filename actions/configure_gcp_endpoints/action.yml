@@ -1,5 +1,5 @@
 name: 'GCP Endpoints Configuration/Update/Deployment'
-description: 'Recompiles and the needed components for GCP endpoints and redelopys them'
+description: 'Recompiles and the needed components for GCP endpoints and redeploys them'
 
 inputs:
   gcp_project:

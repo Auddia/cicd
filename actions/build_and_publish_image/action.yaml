@@ -18,7 +18,7 @@ inputs:
     required: false
     default: '.'
   build_args:
-    description: 'Additional agruments to pass to docker build'
+    description: 'Additional arguments to pass to docker build'
     required: false
     default: ''
   push_args:

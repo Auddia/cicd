@@ -19,7 +19,7 @@ inputs:
     required: false
     default: '<environment>'
   environment_value:
-    description: 'Value ithat will replace the environment key in the template.'
+    description: 'Value that will replace the environment key in the template.'
     required: false
     default: 'production'
 

@@ -26,6 +26,7 @@ jobs:
           title_line=$(grep "title" ./openapi.yaml)
           expected="title: ENV ONE"
           fail_if_strings_unequal "$output" "$expected"
+
   env_two:
     name: 'Environment Two'
     runs-on: ubuntu-latest

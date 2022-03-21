@@ -132,7 +132,7 @@ jobs:
       - name: 'Build and Publish Image'
         uses: ./actions/build_and_publish_image
         with:
-          tag: "gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }}"
+          tag: gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }}
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_context: ./resources/test_docker_env
           gcp_secrets: '${{ steps.gcp.outputs.secrets }}'
