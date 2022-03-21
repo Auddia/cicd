@@ -21,6 +21,16 @@ This action is available on tags `v0` and above.
 * `type`: `string`
 * `required`: `true`
 
+##### `api_name`
+* **Description**: Name of the api
+* `type`: `string`
+* `required`: `true`
+
+##### `endpoints_service_name`
+* **Description**: Name of the GCP endpoints service name 
+* `type`: `string`
+* `required`: `true`
+
 ##### `default_service_account`
 * **Description**: The service account you want to run the gcloud deployment commands
 * `type`: `string`
@@ -76,6 +86,8 @@ jobs:
     with:
       gcp_project: 'vodacast-staging'
       api_subdomain: 'discovery.vodacast-staging.auddia.services'
+      api_name: 'discovery-api'
+      endpoints_service_name: 'discovery-endpoints-cloudrun-service'
       default_service_account: "842445588503-compute@developer.gserviceaccount.com"
       openapi_dir: './api/data/openapi'
       environment_value: 'staging'
@@ -89,6 +101,8 @@ jobs:
     with:
       gcp_project: 'vodacast'
       api_subdomain: 'discovery.vodacast.auddia.services'
+      api_name: 'discovery-api'
+      endpoints_service_name: 'discovery-endpoints-cloudrun-service'
       default_service_account: '186761483508-compute@developer.gserviceaccount.com'
       openapi_dir: './api/data/openapi'
       environment_value: 'production'

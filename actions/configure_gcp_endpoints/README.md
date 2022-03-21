@@ -54,6 +54,16 @@ $ gcloud run deploy <API_NAME>-endpoints-cloudrun-service \
 * `type`: `string`
 * `required`: `true`
 
+##### `api_name`
+* **Description**: Name of the api
+* `type`: `string`
+* `required`: `true`
+
+##### `endpoints_service_name`
+* **Description**: Name of the GCP endpoints service name 
+* `type`: `string`
+* `required`: `true`
+
 ##### `default_service_account`
 * **Description**: The service account you want to run the gcloud deployment commands
 * `type`: `string`
@@ -82,6 +92,8 @@ jobs:
         with:
           gcp_project: ${{ inputs.gcp_project }}
           api_subdomain: ${{ inputs.api_subdomain }}
+          api_name: ${{ inputs.api_name }}
+          endpoints_service_name: ${{ inputs.endpoints_service_name }}
           default_service_account: ${{ inputs.default_service_account }}
           openapi_yaml: ${{ inputs.openapi_yaml }}
 ```
