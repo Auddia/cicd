@@ -80,14 +80,14 @@ jobs:
     steps:
       - name: Setup GCloud SDK
         id: gcp
-        uses: 'Auddia/cicd/actions/setup_gcloud@wudstrand/cicd#3'
+        uses: 'Auddia/cicd/actions/setup_gcloud@main'
         with:
           gcp_credentials: '${{ secrets.gcp_credentials }}'
           gcp_secrets: '${{ inputs.gcp_secrets }}'
 
       - name: Decrypt Data
         if: '${{ inputs.decrypt_info }}'
-        uses: 'Auddia/cicd/actions/decrypt_kms_secrets@wudstrand/cicd#3'
+        uses: 'Auddia/cicd/actions/decrypt_kms_secrets@main'
         with:
           key_ring: '${{ inputs.key_ring }}'
           decrypt_info: '${{ inputs.decrypt_info }}'
@@ -95,7 +95,7 @@ jobs:
           output_dir: '${{ inputs.output_dir }}'
 
       - name: Build and Publish Docker Image
-        uses: 'Auddia/cicd/actions/build_and_publish_image@wudstrand/cicd#3'
+        uses: 'Auddia/cicd/actions/build_and_publish_image@main'
         with:
           tag: 'gcr.io/${{ inputs.gcp_project }}/${{ inputs.api_name }}:${{ github.sha }}'
           dockerfile: '${{ inputs.dockerfile }}'
