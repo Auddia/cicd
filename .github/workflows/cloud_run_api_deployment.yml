@@ -1,4 +1,4 @@
-name: Cloud Run API Deployment
+name: [Template] Cloud Run API Deployment
 
 on:
   workflow_call:
