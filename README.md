@@ -53,9 +53,7 @@ For more information on each release view the official release docs. For even mo
     * [todo.test.workflow.open_api_update](./.github/workflows/todo.test.workflow.open_api_update.yml)
     * [todo.test.workflow.cloud_run_api_deployment](./.github/workflows/todo.test.workflow.cloud_run_api_deployment.yml)
 * Error Propagation
-  * [Openapi Update Workflow](./docs/workflows/openapi_update.md) and [Compile Openapi action docs](./actions/compile_openapi/README.md) have issues showing a failure when the `openapi.yml` bundling fails
-    * Address in [`build_openapi_yaml.sh`](./actions/compile_openapi/build_openapi_yaml.sh) script. I believe this is an issue with the `swagger-cli` not throwing an error or the error failing to be propagated out of the container
-  * This maybe an issue with all docker actions
+  * Needs to be tested
 * Roll out tag `v02`
   * Work with Luis and Dan to get the `wudstrand/cicd#3` branch working
   * Once working test all actions via their new tests
