@@ -16,6 +16,12 @@ touch temp.yaml
 sed "s/$ENV_KEY/$ENV_VALUE/g" "$TEMPLATE" > temp.yaml
 swagger-cli bundle -o "$CALLERS_DIR"/"$OUTFILE" -t yaml -r temp.yaml
 
+if [ -s "$CALLERS_DIR"/"$OUTFILE" ];
+then
+  echo "Failed to generate openapi file"
+  exit 1
+fi
+
 echo "Generated the $CALLERS_DIR/$OUTFILE"
 cat "$CALLERS_DIR"/"$OUTFILE"
 

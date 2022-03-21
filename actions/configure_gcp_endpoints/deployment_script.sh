@@ -17,6 +17,11 @@ CONFIG_ID=$(awk -F'[][]' '{print $2}' deployment_info.txt | tr -d '[:space:]')
 
 echo "CONFIG_ID=$CONFIG_ID"
 
+if [ -z "$CONFIG_ID" ];
+then
+  exit 1
+fi
+
 # TODO: Allow action user to pass additional options to this script (Needed?)
 /tmp/gcp_build_image.sh -s "$API_SUBDOMAIN" -c "$CONFIG_ID" -p "$GCP_PROJECT"
 
