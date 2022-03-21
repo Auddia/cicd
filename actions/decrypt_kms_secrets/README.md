@@ -54,7 +54,7 @@ The all generated `plaintext` in this step is made available to all subsequent s
 
 ## Example Usage
 
-```
+```yaml
 jobs:
   decrypt_key:
     name: Decrypt Key

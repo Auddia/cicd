@@ -94,7 +94,7 @@ paths:
 
 ## Example Usage
 
-```
+```yaml
 jobs:
   example job:
     name: Configure GCP Enpoints Example

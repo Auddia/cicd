@@ -76,7 +76,7 @@ $ gcloud run deploy <API_NAME>-endpoints-cloudrun-service \
 
 ## Example Usage
 
-```
+```yaml
 jobs:
   example_job:
     name: Configure GCP Enpoints Example

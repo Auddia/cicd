@@ -61,7 +61,7 @@ echo "additional_build_args=${value} ${additional_args}" >> $GITHUB_ENV
 
 ## Example Usage
 
-```
+```yaml
 jobs:
   example_job_no_secrets:
     name: An example job that uses the gcloud sdk 
