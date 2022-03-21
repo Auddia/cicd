@@ -16,7 +16,7 @@ jobs:
         uses: ./actions/compile_openapi
         with:
           openapi_dir: ./resources/test_openapi_template
-          environment_value: env_one1
+          environment_value: env_one
 
       - name: Validate OpenAPI Created
         shell: bash
