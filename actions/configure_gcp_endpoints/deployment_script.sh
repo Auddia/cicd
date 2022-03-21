@@ -12,6 +12,7 @@ echo "OPENAPI_YAML=${OPENAPI_YAML}"
 # TODO: Allow action user to pass additional options to this script (Needed?)
 touch deployment_info.txt
 gcloud endpoints services deploy ./"$OPENAPI_YAML" --project "$GCP_PROJECT" > deployment_info.txt 2>&1
+cat deployment_info.txt
 CONFIG_ID=$(awk -F'[][]' '{print $2}' deployment_info.txt | tr -d '[:space:]')
 
 echo "CONFIG_ID=$CONFIG_ID"
