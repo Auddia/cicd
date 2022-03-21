@@ -21,7 +21,7 @@ Workflows define a job or a group of jobs that can be run in parallel or in some
 * [Github Workflow Definition](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#workflows)
 
 ### Custom Workflows
-* [Openapi Update Workflow](./docs/workflows/openapi_update.md)
+* [Openapi Update](./docs/workflows/openapi_update.md)
 * [Cloud Run API Deployment](./docs/workflows/cloud_run_api_deployment.md)
 
 
