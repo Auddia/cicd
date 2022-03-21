@@ -40,9 +40,9 @@ Actions define a group of common steps that reoccur across many jobs and workflo
 
 ## Releases
 For more information on each release view the official release docs. For even more information refer to the docs in the `source_code.zip` or the github `tag` for the specific release.
-  * [`v0`](https://github.com/Auddia/cicd/releases/tag/v0)
-  * [`v01`](https://github.com/Auddia/cicd/releases/tag/v01)
-  * [`COMING SOON v02`](https://github.com/Auddia/cicd/releases/tag/v02)
+  * [`v0`](./docs/releases/v0.md)
+  * [`v01`](./docs/releases/v01.md)
+  * [`COMING SOON v02`](./docs/releases/v02.md)
 
 
 # Action Items
