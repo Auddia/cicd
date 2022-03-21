@@ -137,13 +137,13 @@ on:
 
 jobs:
   discovery_api_staging:
-    name: (Staging) Discovery API Deployment
+    name: '(Staging) Discovery API Deployment'
     if: github.ref == 'refs/heads/staging'
     uses: Auddia/cicd/.github/workflows/cloud_run_api_deployment.yml@<tag>
     with:
-      gcp_project: 'vodacast-staging'
+      gcp_project: vodacast-staging
       api_name: discovery-api
-      dockerfile: './api/Dockerfile'
+      dockerfile: ./api/Dockerfile
       gcp_secrets: |
         DB_PWD: projects/vodacast-staging/secrets/vodacast-postgres-password
       build_config: |
@@ -160,13 +160,13 @@ jobs:
       gcp_credentials: ${{ secrets.VODACAST_STAGING_GCP_CREDENTIALS }}
 
   discovery_api_production:
-    name: (Production) Discovery API Deployment
+    name: '(Production) Discovery API Deployment'
     if: github.ref == 'refs/heads/production'
     uses: Auddia/cicd/.github/workflows/cloud_run_api_deployment.yml@<tag>
     with:
-      gcp_project: 'vodacast'
+      gcp_project: vodacast
       api_name: discovery-api
-      dockerfile: './api/Dockerfile'
+      dockerfile: ./api/Dockerfile
       gcp_secrets: |
         DB_PWD: projects/vodacast/secrets/discovery_db-discovery_api_server-password
       build_args: |

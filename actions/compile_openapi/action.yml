@@ -1,5 +1,6 @@
 name: 'Compile OpenAPI YAML'
 description: 'Compiles the openapi yaml file using the template in the project'
+
 inputs:
   openapi_dir:
     description: 'The directory location of all the openapi templates and configurations'
@@ -21,6 +22,7 @@ inputs:
     description: 'Value ithat will replace the environment key in the template.'
     required: false
     default: 'production'
+
 runs:
   using: 'docker'
   image: "Dockerfile"

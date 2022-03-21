@@ -3,37 +3,37 @@ description: 'Builds and publishes a docker image'
 
 inputs:
   tag:
-    description: Image tag
+    description: 'Image tag'
     required: true
   dockerfile:
-    description: Location of the dockerfile
+    description: 'Location of the dockerfile'
     required: false
     default: './Dockerfile'
   build_config:
-    description: A list of environment variables to pass as build args to the build step
+    description: 'A list of environment variables to pass as build args to the build step'
     required: false
     default: ''
   build_context:
-    description: Location for docker's build context
+    description: 'Location for docker's build context'
     required: false
     default: '.'
   build_args:
-    description: Additional agruments to pass to docker build
+    description: 'Additional agruments to pass to docker build'
     required: false
     default: ''
   push_args:
-    description: Additional arguments to pass to docker push
+    description: 'Additional arguments to pass to docker push'
     required: false
     default: ''
   gcp_secrets:
-    description: Secrets from GCP that you want available in the docker container
+    description: 'Secrets from GCP that you want available in the docker container'
     required: false
     default: ''
 
 runs:
   using: 'composite'
   steps:
-    - name: Translate Build Config and Secrets to Build Commands
+    - name: 'Translate Build Config and Secrets to Build Commands'
       id: build_config
       shell: bash
       run: |
@@ -59,7 +59,7 @@ runs:
         fi
 
 
-    - name: Build Image
+    - name: 'Build Image'
       shell: bash
       run: |
         docker build \
@@ -69,8 +69,8 @@ runs:
         --file ${{ inputs.dockerfile }} \
         ${{ inputs.build_context }}
 
-    - name: Publish GCP Docker Registry
-      if: "${{ contains(inputs.tag, 'gcr.io') }}"
+    - name: 'Publish GCP Docker Registry'
+      if: ${{ contains(inputs.tag, 'gcr.io') }}
       shell: bash
       run: |
         gcloud auth configure-docker

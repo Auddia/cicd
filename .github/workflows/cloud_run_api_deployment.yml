@@ -4,11 +4,11 @@ on:
   workflow_call:
     inputs:
       gcp_project:
-        description: The GCP project name
+        description: 'The GCP project name'
         type: string
         required: true
       gcp_secrets:
-        description: Secrets from GCP that you want available in the docker container
+        description: 'Secrets from GCP that you want available in the docker container'
         type: string
         required: true
 
@@ -34,78 +34,78 @@ on:
         default: '.'
 
       api_name:
-        description: Name of the api
+        description: 'Name of the api'
         type: string
         required: true
       dockerfile:
-        description: Location of the dockerfile
+        description: 'Location of the dockerfile'
         type: string
         required: false
         default: './Dockerfile'
       build_config:
-        description: A list of environment variables to pass as build args to the build step
+        description: 'A list of environment variables to pass as build args to the build step'
         type: string
         required: false
         default: ''
       build_context:
-        description: Location for docker's build context
+        description: 'Location for docker's build context'
         type: string
         required: false
         default: '.'
       build_args:
-        description: Additional agruments to pass to docker build
+        description: 'Additional agruments to pass to docker build'
         type: string
         required: false
         default: ''
       push_args:
-        description: Additional arguments to pass to docker push
+        description: 'Additional arguments to pass to docker push'
         type: string
         required: false
         default: ''
       deploy_args:
-        description: Additional arguments to pass to gcloud beta run deploy
+        description: 'Additional arguments to pass to gcloud beta run deploy'
         type: string
         required: false
         default: ''
 
     secrets:
       gcp_credentials:
-        description: A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
+        description: 'A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.'
         required: true
 jobs:
   api_deployment:
-    name: API Deployement
+    name: 'API Deployement'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup GCloud SDK
+      - name: 'Setup GCloud SDK'
         id: gcp
-        uses: 'Auddia/cicd/actions/setup_gcloud@main'
+        uses: Auddia/cicd/actions/setup_gcloud@main
         with:
-          gcp_credentials: '${{ secrets.gcp_credentials }}'
-          gcp_secrets: '${{ inputs.gcp_secrets }}'
+          gcp_credentials: ${{ secrets.gcp_credentials }}
+          gcp_secrets: ${{ inputs.gcp_secrets }}
 
-      - name: Decrypt Data
-        if: '${{ inputs.decrypt_info }}'
-        uses: 'Auddia/cicd/actions/decrypt_kms_secrets@main'
+      - name: 'Decrypt Data'
+        if: ${{ inputs.decrypt_info }}
+        uses: Auddia/cicd/actions/decrypt_kms_secrets@main
         with:
-          key_ring: '${{ inputs.key_ring }}'
-          decrypt_info: '${{ inputs.decrypt_info }}'
-          input_dir: '${{ inputs.input_dir }}'
-          output_dir: '${{ inputs.output_dir }}'
+          key_ring: ${{ inputs.key_ring }}
+          decrypt_info: ${{ inputs.decrypt_info }}
+          input_dir: ${{ inputs.input_dir }}
+          output_dir: ${{ inputs.output_dir }}
 
-      - name: Build and Publish Docker Image
-        uses: 'Auddia/cicd/actions/build_and_publish_image@main'
+      - name: 'Build and Publish Docker Image'
+        uses: Auddia/cicd/actions/build_and_publish_image@main
         with:
-          tag: 'gcr.io/${{ inputs.gcp_project }}/${{ inputs.api_name }}:${{ github.sha }}'
-          dockerfile: '${{ inputs.dockerfile }}'
-          build_config: '${{ inputs.build_config }}'
-          build_context: '${{ inputs.build_context }}'
-          build_args: '${{ inputs.build_args }}'
-          push_args: '${{ inputs.build_args }}'
-          gcp_secrets: '${{ steps.gcp.outputs.secrets }}'
+          tag: gcr.io/${{ inputs.gcp_project }}/${{ inputs.api_name }}:${{ github.sha }}
+          dockerfile: ${{ inputs.dockerfile }}
+          build_config: ${{ inputs.build_config }}
+          build_context: ${{ inputs.build_context }}
+          build_args: ${{ inputs.build_args }}
+          push_args: ${{ inputs.build_args }}
+          gcp_secrets: ${{ steps.gcp.outputs.secrets }}
 
-      - name: Deploy to Cloud Run
+      - name: 'Deploy to Cloud Run'
         shell: bash
         run: |
           gcloud beta run deploy ${{ inputs.api_name }} \

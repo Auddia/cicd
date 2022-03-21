@@ -64,36 +64,36 @@ echo "additional_build_args=${value} ${additional_args}" >> $GITHUB_ENV
 ```yaml
 jobs:
   example_job_no_secrets:
-    name: An example job that uses the gcloud sdk 
+    name: 'An example job that uses the gcloud sdk'
     runs-on: ubuntu-latest
     steps:
-      - name: GCloud SDK Setup
+      - name: 'GCloud SDK Setup'
         uses: Auddia/cicd/actions/setup_gcloud@<tag>
         with:
-          gcp_credentials: '${{ secrets.GCP_CREDEENTIALS }}'
+          gcp_credentials: ${{ secrets.GCP_CREDEENTIALS }}
 
-      - name: Example using the gcloud tool
-        run: 'gcloud info'
+      - name: 'Example using the gcloud tool'
+        run: gcloud info
 
   example_job_with_secrets:
-    name: An example job that uses the gcloud sdk 
+    name: 'An example job that uses the gcloud sdk'
     runs-on: ubuntu-latest
     steps:
-      - name: GCloud SDK Setup
+      - name: 'GCloud SDK Setup'
         id: gcp
         uses: Auddia/cicd/actions/setup_gcloud@<tag>
         with:
-          gcp_credentials: '${{ secrets.GCP_CREDEENTIALS }}'
+          gcp_credentials: ${{ secrets.GCP_CREDEENTIALS }}
           gcp_secrets: |-
             TOKEN:my-project/docker-registry-token
 
-      - name: Example using the gcloud tool
-        run: 'gcloud info'
+      - name: 'Example using the gcloud tool'
+        run: gcloud info
         
-      - name: Reference the secret
-        uses: 'foo/bar@master'
+      - name: 'Reference the secret'
+        uses: foo/bar@master
         env:
-          TOKEN: '${{ fromJson(steps.gcp.outputs.secrets).TOKEN }}'
+          TOKEN: ${{ fromJson(steps.gcp.outputs.secrets).TOKEN }}
 ```
 
 ### Additonal Usage

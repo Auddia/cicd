@@ -9,24 +9,24 @@ on:
 
 jobs:
   generic_image:
-    name: Generic Image
+    name: 'Generic Image'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
 
-      - name: Build and Publish Image
+      - name: 'Build and Publish Image'
         uses: ./actions/build_and_publish_image
         with:
-          tag: "auddia_test_image:${{ github.sha }}"
+          tag: auddia_test_image:${{ github.sha }}
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_context: ./resources/test_docker_env
           build_config: |
             TEST_ONE: ONE
             TEST_TWO: TWO
 
-      - name: Validate Image
+      - name: 'Validate Image'
         shell: bash
         run: |
           source ./scripts/test_functions.sh
@@ -39,29 +39,29 @@ jobs:
           fail_if_strings_unequal "$image_output" "$expected"
 
   gcp_image:
-    name: GCP Image
+    name: 'GCP Image'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
 
-      - name: GCloud SDK Setup
+      - name: 'GCloud SDK Setup'
         uses: ./actions/setup_gcloud
         with:
           gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 
-      - name: Build and Publish Image
+      - name: 'Build and Publish Image'
         uses: ./actions/build_and_publish_image
         with:
-          tag: "gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }}"
+          tag: gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }}
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_context: ./resources/test_docker_env
           build_config: |
             TEST_ONE: ONE
             TEST_TWO: TWO
 
-      - name: Validate Image
+      - name: 'Validate Image'
         shell: bash
         run: |
           source ./scripts/test_functions.sh
@@ -74,14 +74,14 @@ jobs:
           fail_if_strings_unequal "$image_output" "$expected"
 
   generic_image_with_secrets:
-    name: Generic Image w/ Secrets
+    name: 'Generic Image w/ Secrets'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
 
-      - name: GCloud SDK Setup
+      - name: 'GCloud SDK Setup'
         id: gcp
         uses: ./actions/setup_gcloud
         with:
@@ -89,18 +89,18 @@ jobs:
           gcp_secrets: |
             TEST_ONE: projects/vodacast-staging/secrets/vodacast-postgres-password
 
-      - name: Build and Publish Image
+      - name: 'Build and Publish Image'
         uses: ./actions/build_and_publish_image
         with:
-          tag: "auddia_test_image:${{ github.sha }}"
+          tag: auddia_test_image:${{ github.sha }}
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_context: ./resources/test_docker_env
-          gcp_secrets: '${{ steps.gcp.outputs.secrets }}'
+          gcp_secrets: ${{ steps.gcp.outputs.secrets }}
           build_config: |
             TEST_TWO: TWO
             TEST_THREE: PI
 
-      - name: Validate Image
+      - name: 'Validate Image'
         shell: bash
         run: |
           source ./scripts/test_functions.sh
@@ -113,14 +113,14 @@ jobs:
           fail_if_strings_unequal "$image_output" "$expected"
 
   gcp_image_with_secrets:
-    name: GCP Image w/ Secrets
+    name: 'GCP Image w/ Secrets'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
 
-      - name: GCloud SDK Setup
+      - name: 'GCloud SDK Setup'
         id: gcp
         uses: ./actions/setup_gcloud
         with:
@@ -129,7 +129,7 @@ jobs:
             TEST_ONE: projects/vodacast-staging/secrets/vodacast-postgres-password
             TEST_THREE: projects/vodacast-staging/secrets/vodacast-postgres-password
 
-      - name: Build and Publish Image
+      - name: 'Build and Publish Image'
         uses: ./actions/build_and_publish_image
         with:
           tag: "gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }}"
@@ -140,7 +140,7 @@ jobs:
             TEST_TWO: TWO
             TEST_FOUR: PI
 
-      - name: Validate Image
+      - name: 'Validate Image'
         shell: bash
         run: |
           source ./scripts/test_functions.sh

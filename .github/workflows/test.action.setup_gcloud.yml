@@ -9,31 +9,31 @@ on:
 
 jobs:
   gcloud_no_secrets:
-    name: GCloud Setup
+    name: 'GCloud Setup'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
 
-      - name: GCloud SDK Setup
+      - name: 'GCloud SDK Setup'
         uses: ./actions/setup_gcloud
         with:
           gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 
-      - name: Test SDK
+      - name: 'Test SDK'
         shell: bash
         run: gcloud info
 
   gcloud_with_secrets:
-    name: GCloud Setup w/ Secrets
+    name: 'GCloud Setup w/ Secrets'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
 
-      - name: GCloud SDK Setup
+      - name: 'GCloud SDK Setup'
         id: gcp
         uses: ./actions/setup_gcloud
         with:
@@ -42,11 +42,11 @@ jobs:
             TEST_ONE: projects/vodacast-staging/secrets/vodacast-postgres-password
             TEST_TWO: projects/vodacast-staging/secrets/vodacast-postgres-password
 
-      - name: Test SDK
+      - name: 'Test SDK'
         shell: bash
         run: gcloud info
 
-      - name: Test Secrets Avaiablity
+      - name: 'Test Secrets Avaiablity'
         shell: bash
         run: |
           source ./scripts/test_functions.sh

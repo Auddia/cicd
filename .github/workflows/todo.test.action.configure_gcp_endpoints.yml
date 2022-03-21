@@ -9,7 +9,7 @@ on:
 
 jobs:
   place_holder:
-    name: None
+    name: 'None'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

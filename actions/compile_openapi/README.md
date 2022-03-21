@@ -97,7 +97,7 @@ paths:
 ```yaml
 jobs:
   example job:
-    name: Configure GCP Enpoints Example
+    name: 'Configure GCP Endpoints Example'
     runs-on: ubuntu-latest
     steps:
       - name: Compile OpenAPI YAML File

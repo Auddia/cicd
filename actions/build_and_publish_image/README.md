@@ -73,11 +73,11 @@ push_args: |
 ```yaml
 jobs:
   example_image:
-    name: Publish image to Docker
+    name: 'Publish image to Docker'
     runs-on: ubuntu-latest
     steps:  
-      - name: Build and Publish Docker Image
-        uses: 'Auddia/cicd/actions/build_and_publish_image@<tag>'
+      - name: 'Build and Publish Docker Image'
+        uses: Auddia/cicd/actions/build_and_publish_image@<tag>
         with:
           tag: '<tag>'
           dockerfile: ./api/Dockerfile
@@ -88,18 +88,18 @@ jobs:
             MAX_CONNECTIONS: 15
   
   example_image_no_secrets:
-    name: Publish image to GCP
+    name: 'Publish image to GCP'
     runs-on: ubuntu-latest
     steps:
-      - name: Setup GCloud SDK Environment
+      - name: 'Setup GCloud SDK Environment'
         uses: Auddia/cicd/actions/setup_gcloud@<tag>
         with:
-          gcp_credentials: '${{ inputs.gcp_credentials }}'
+          gcp_credentials: ${{ inputs.gcp_credentials }}
     
-      - name: Build and Publish Docker Image
-        uses: 'Auddia/cicd/actions/build_and_publish_image@<tag>'
+      - name: 'Build and Publish Docker Image'
+        uses: Auddia/cicd/actions/build_and_publish_image@<tag>
         with:
-          tag: 'gcr.io/${{ gcp_project }}/discovery-api:${{ github.sha }}'
+          tag: gcr.io/${{ gcp_project }}/discovery-api:${{ github.sha }}
           dockerfile: ./api/Dockerfile
           build_args: |
             CONNECTION_STR: 10.63.224.44
@@ -108,22 +108,22 @@ jobs:
             MAX_CONNECTIONS: 15
 
   example_image_with_restricted_secrets:
-    name: Publish image to GCP with only a part of the secrets retrieved
+    name: 'Publish image to GCP with only a part of the secrets retrieved'
     runs-on: ubuntu-latest
     steps:
-      - name: Setup GCloud SDK Environment
+      - name: 'Setup GCloud SDK Environment'
         id: gcp
-        uses: 'Auddia/cicd/actions/setup_gcloud@<tag>'
+        uses: Auddia/cicd/actions/setup_gcloud@<tag>
         with:
-          gcp_credentials: '${{ secrets.VODACAST_STAGING_GCP_CREDENTIALS }}'
+          gcp_credentials: ${{ secrets.VODACAST_STAGING_GCP_CREDENTIALS }}
           gcp_secrets: |
             DB_PWD: projects/vodacast-staging/secrets/vodacast-postgres-password
             OTHER: projects/vodacast-staging/secrets/other
 
-      - name: Build and Publish Docker Image
-        uses: 'Auddia/cicd/actions/build_and_publish_image@<tag>'
+      - name: 'Build and Publish Docker Image'
+        uses: Auddia/cicd/actions/build_and_publish_image@<tag>
         with:
-          tag: 'gcr.io/${{ gcp_project }}/discovery-api:${{ github.sha }}'
+          tag: gcr.io/${{ gcp_project }}/discovery-api:${{ github.sha }}
           dockerfile: ./api/Dockerfile
           build_config: |
             CONNECTION_STR: 10.30.192.3
@@ -133,23 +133,23 @@ jobs:
             DB_PWD: ${{ fromJson(steps.gcp.outputs.secrets).DB_PWD }}
 
   example_image_with_all_secrets:
-    name: Publish Image with all the request secrets
+    name: 'Publish Image with all the request secrets'
     runs-on: ubuntu-latest
     steps:
-      - name: Setup GCloud SDK Environment
+      - name: 'Setup GCloud SDK Environment'
         id: gcp
-        uses: 'Auddia/cicd/actions/setup_gcloud@<tag>'
+        uses: Auddia/cicd/actions/setup_gcloud@<tag>
         with:
-          gcp_credentials: '${{ secrets.VODACAST_STAGING_GCP_CREDENTIALS }}'
+          gcp_credentials: ${{ secrets.VODACAST_STAGING_GCP_CREDENTIALS }}
           gcp_secrets: |
             DB_PWD: projects/vodacast-staging/secrets/vodacast-postgres-password
             OTHER: projects/vodacast-staging/secrets/other
             
       # All secrets from the gcp step will be available in the build image as --build-args
-      - name: Build and Publish Docker Image
-        uses: 'Auddia/cicd/actions/build_and_publish_image@<tag>'
+      - name: 'Build and Publish Docker Image'
+        uses: Auddia/cicd/actions/build_and_publish_image@<tag>
         with:
-          tag: 'gcr.io/${{ gcp_project }}/discovery-api:${{ github.sha }}'
+          tag: gcr.io/${{ gcp_project }}/discovery-api:${{ github.sha }}
           dockerfile: ./api/Dockerfile
           gcp_secrets: ${{ steps.gcp.outputs.secrets }}
           build_config: |

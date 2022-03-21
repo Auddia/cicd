@@ -57,7 +57,7 @@ The all generated `plaintext` in this step is made available to all subsequent s
 ```yaml
 jobs:
   decrypt_key:
-    name: Decrypt Key
+    name: 'Decrypt Key'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -69,7 +69,7 @@ jobs:
         with:
           gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 
-      - name: Get Single KMS File
+      - name: 'Get Single KMS File'
         uses: ./actions/decrypt_kms_secrets
         with:
           key_ring: test
@@ -78,7 +78,7 @@ jobs:
           decrypt_info: |
             test_key.key.enc : test_key : test_key.key
 
-      - name: Validate Keys Were Created
+      - name: 'Validate Keys Were Created'
         shell: bash
         run: |
           source ./scripts/test_functions.sh

@@ -80,32 +80,32 @@ on:
 
 jobs:
   discovery_api_update_staging:
-    name: Openapi Update Staging Deployment.
+    name: 'Openapi Update Staging Deployment'
     if: github.ref == 'refs/heads/staging'
     uses: Auddia/cicd/.github/workflows/openapi_update.yml@<tag>
     with:
-      gcp_project: 'vodacast-staging'
-      api_subdomain: 'discovery.vodacast-staging.auddia.services'
-      api_name: 'discovery-api'
-      endpoints_service_name: 'discovery-endpoints-cloudrun-service'
-      default_service_account: "842445588503-compute@developer.gserviceaccount.com"
-      openapi_dir: './api/data/openapi'
-      environment_value: 'staging'
+      gcp_project: vodacast-staging
+      api_subdomain: discovery.vodacast-staging.auddia.services
+      api_name: discovery-api
+      endpoints_service_name: discovery-endpoints-cloudrun-service
+      default_service_account: 842445588503-compute@developer.gserviceaccount.com
+      openapi_dir: ./api/data/openapi
+      environment_value: staging
     secrets:
       gcp_credentials: ${{ secrets.VODACAST_STAGING_GCP_CREDENTIALS }}
 
   discovery_api_update_production:
-    name: Openapi Update Production Deployment
+    name: 'Openapi Update Production Deployment'
     if: github.ref == 'refs/heads/production'
     uses: Auddia/cicd/.github/workflows/openapi_update.yml@<tag>
     with:
-      gcp_project: 'vodacast'
-      api_subdomain: 'discovery.vodacast.auddia.services'
-      api_name: 'discovery-api'
-      endpoints_service_name: 'discovery-endpoints-cloudrun-service'
-      default_service_account: '186761483508-compute@developer.gserviceaccount.com'
-      openapi_dir: './api/data/openapi'
-      environment_value: 'production'
+      gcp_project: vodacast
+      api_subdomain: discovery.vodacast.auddia.services
+      api_name: discovery-api
+      endpoints_service_name: discovery-endpoints-cloudrun-service
+      default_service_account: 186761483508-compute@developer.gserviceaccount.com
+      openapi_dir: ./api/data/openapi
+      environment_value: production
     secrets:
       gcp_credentials: ${{ secrets.VODACAST_GCP_CREDENTIALS }}
 ```

@@ -1,5 +1,6 @@
-name: Decrypt KMS Secret
-description: Using the gcloud command this action decrypts all the kms secrets requested
+name: 'Decrypt KMS Secret'
+description: 'Using the gcloud command this action decrypts all the kms secrets requested'
+
 inputs:
   key_ring:
     description: 'The GCP KMS keyring that the keys are retrieved from'
@@ -20,7 +21,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Process KMS Input
+    - name: 'Process KMS Input'
       shell: bash
       run: |
         keys="${{ inputs.decrypt_info }}"
@@ -32,7 +33,7 @@ runs:
         }' input_dir=${{ inputs.input_dir }} output_dir=${{ inputs.output_dir }} input.txt)
         echo "$arg_list" > /tmp/kms_decrypt_input
 
-    - name: Decrypt Keys
+    - name: 'Decrypt Keys'
       shell: bash
       run: |
         cat /tmp/kms_decrypt_input | xargs -I % bash -c 'gcloud kms decrypt % --location=us-central1 --keyring=${{ inputs.key_ring }}'

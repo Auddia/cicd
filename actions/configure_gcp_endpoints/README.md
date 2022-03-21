@@ -79,15 +79,15 @@ $ gcloud run deploy <API_NAME>-endpoints-cloudrun-service \
 ```yaml
 jobs:
   example_job:
-    name: Configure GCP Enpoints Example
+    name: 'Configure GCP Enpoints Example'
     runs-on: ubuntu-latest
     steps:
       - name: GCloud SDK Setup
         uses: Auddia/cicd/actions/setup_gcloud@<tag>
         with:
-          gcp_credentials: '${{ secrets.GCP_CREDEENTIALS }}'
+          gcp_credentials: ${{ secrets.GCP_CREDEENTIALS }}
 
-      - name: Configure Endpoints
+      - name: 'Configure Endpoints'
         uses: Auddia/cicd/actions/configure_gcp_endpoints@<tag>
         with:
           gcp_project: ${{ inputs.gcp_project }}
