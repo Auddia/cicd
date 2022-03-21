@@ -11,7 +11,7 @@ Make sure to refer to the docs for the specific release, tag or branch to have t
 * [Release Info](#releases)
   * [`v0`](https://github.com/Auddia/cicd/releases/tag/v0)
   * [`v01`](https://github.com/Auddia/cicd/releases/tag/v01)
-  * [`COMING SOON v02`](https://github.com/Auddia/cicd/releases/tag/v02)
+  * [`v02`](https://github.com/Auddia/cicd/releases/tag/v02)
 * [Action Items]()
 
 ## Workflows
@@ -42,7 +42,7 @@ Actions define a group of common steps that reoccur across many jobs and workflo
 For more information on each release view the official release docs. For even more information refer to the docs in the `source_code.zip` or the github `tag` for the specific release.
   * [`v0`](./docs/releases/v0.md)
   * [`v01`](./docs/releases/v01.md)
-  * [`COMING SOON v02`](./docs/releases/v02.md)
+  * [`v02`](./docs/releases/v02.md)
 
 
 # Action Items
@@ -54,17 +54,4 @@ For more information on each release view the official release docs. For even mo
     * [todo.test.workflow.cloud_run_api_deployment](./.github/workflows/todo.test.workflow.cloud_run_api_deployment.yml)
 * Error Propagation
   * Needs to be tested
-* Roll out tag `v02`
-  * Work with Luis and Dan to get the `wudstrand/cicd#3` branch working
-  * Once working test all actions via their new tests
-  * Merge into main
-  * Create release branch
-  * Change the tags to v01
-  * Create a release via Github GUI
-  * Test new release
-  * Migrate early adopters to the `v02` tag
-    * `vodacast-hub`
-    * `cfr`
-    * etc.
-    
 
