@@ -1,0 +1,8 @@
+definitions:
+  id:
+    type: object
+    properties:
+      id:
+        type: string
+      guid:
+        type: string

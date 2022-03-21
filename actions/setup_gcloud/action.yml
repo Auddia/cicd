@@ -3,7 +3,7 @@ description: 'Setups runner environment for a project to use GCLoud-SDK for depl
 
 inputs:
   gcp_credentials:
-    description: A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
+    description: The json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
     required: true
   gcp_secrets:
     description: Secrets from GCP that you want available for other steps and actions within a job
@@ -38,6 +38,3 @@ runs:
       uses: 'google-github-actions/get-secretmanager-secrets@v0'
       with:
         secrets: '${{ inputs.gcp_secrets }}'
-
-
-

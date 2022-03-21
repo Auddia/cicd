@@ -1,0 +1,16 @@
+paths:
+  "/":
+    get:
+      summary: 'Test Endpoint'
+      operationId: test_github_actions
+      parameters:
+        - $ref: '../common/parameters.yaml#/parameters/testParam'
+      responses:
+        '200':
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '../common/definitions.yaml#/definitions/id'
+        '422':
+          description: 'Missing parameters'

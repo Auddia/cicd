@@ -13,10 +13,17 @@ CALLERS_DIR=$(pwd)
 cd "$OPENAPI_DATA_DIR" || exit
 
 touch temp.yaml
-sed "s/$ENV_KEY/$ENV_VALUE/g" $TEMPLATE > temp.yaml
+sed "s/$ENV_KEY/$ENV_VALUE/g" "$TEMPLATE" > temp.yaml
 swagger-cli bundle -o "$CALLERS_DIR"/"$OUTFILE" -t yaml -r temp.yaml
 
-echo "Generated the $CALLERS_DIR/$OUTFILE"
-cat "$CALLERS_DIR"/"$OUTFILE"
+if [ -s "$CALLERS_DIR"/"$OUTFILE" ];
+then
+  echo "Generated the $CALLERS_DIR/$OUTFILE"
+  cat "$CALLERS_DIR"/"$OUTFILE"
+else
+  echo "Failed to generate openapi file"
+  exit 1
+fi
+
 
 rm temp.yaml

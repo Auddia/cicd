@@ -3,7 +3,11 @@ This workflow generates an openapi configuration and deploys/redeploys GCP endpo
 
 * GCloud SDK setup action: [setup_gcloud](../../actions/setup_gcloud/README.md)
 * Openapi config generation action: [compile_openapi action](../../actions/compile_openapi/README.md)
-* GCP Endpoints deployement action: [configure_gcp_endpoints action](../../actions/configure_gcp_endpoints/README.md).
+* GCP Endpoints deployement action: [configure_gcp_endpoints action](../../actions/configure_gcp_endpoints/README.md)
+
+### Tags
+This action is available on tags `v0` and above.
+
 
 ### Input Arguments
 
@@ -14,6 +18,16 @@ This workflow generates an openapi configuration and deploys/redeploys GCP endpo
 
 ##### `api_subdomain`
 * **Description**: The subdomain of the api being deployed
+* `type`: `string`
+* `required`: `true`
+
+##### `api_name`
+* **Description**: Name of the api
+* `type`: `string`
+* `required`: `true`
+
+##### `endpoints_service_name`
+* **Description**: Name of the GCP endpoints service name 
 * `type`: `string`
 * `required`: `true`
 
@@ -51,7 +65,7 @@ This workflow generates an openapi configuration and deploys/redeploys GCP endpo
 ### Secrets
 
 ##### `gcp_credentials`
-* **Description**: A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
+* **Description**: The json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
 * References the repo's available secrets and the github group's (i.e. `Auddia`) available secrets
 * If the needed credentials secret doesnt exist and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
 
@@ -72,6 +86,8 @@ jobs:
     with:
       gcp_project: 'vodacast-staging'
       api_subdomain: 'discovery.vodacast-staging.auddia.services'
+      api_name: 'discovery-api'
+      endpoints_service_name: 'discovery-endpoints-cloudrun-service'
       default_service_account: "842445588503-compute@developer.gserviceaccount.com"
       openapi_dir: './api/data/openapi'
       environment_value: 'staging'
@@ -85,6 +101,8 @@ jobs:
     with:
       gcp_project: 'vodacast'
       api_subdomain: 'discovery.vodacast.auddia.services'
+      api_name: 'discovery-api'
+      endpoints_service_name: 'discovery-endpoints-cloudrun-service'
       default_service_account: '186761483508-compute@developer.gserviceaccount.com'
       openapi_dir: './api/data/openapi'
       environment_value: 'production'
@@ -93,4 +111,4 @@ jobs:
 ```
 
 ### Additional Usage
-* [OpenAPI Update Deployment](https://github.com/Auddia/vodacast-functions/blob/staging/.github/workflows/deployments.yml#L7)
+* [Tests]()

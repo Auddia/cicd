@@ -9,6 +9,9 @@
 This reusable action pulls in the code for the repo, sets up a gcloud-sdk, and retrieves GCP secrets. 
 It makes both the code, sdk, and secrets available to all actions/steps with in the job where this action is used. 
 
+### Tags
+This action is available on tags `v0` and above
+
 #### sdk made available in the following step/action types
 * [Composite Actions](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action) 
   * The code maybe in a wierd (i.e. non-default directory but it is there)
@@ -22,16 +25,24 @@ The sdk is available in all steps and within docker as long as you use the [`goo
 ### Input Arguments
 
 ##### `gcp_cedentials`
-* **Description**: A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
-* References the repo's available secrets and the github group's (i.e. `Auddia`) available secrets
-* If the needed credentials secret doesnt exist and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
+* **Description**: The json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
+* `type`: `string`
+* `required`
+* NOTE: If the needed credentials secret doesnt exist and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
+
 
 ##### `gcp_secrets`
 * **Description**: Secrets from GCP that you want available for other steps and actions within a job
 * Here is a [reference](https://github.com/google-github-actions/get-secretmanager-secrets#inputs) for how to structure the secret string for this action
-
+* Syntax
+```yaml
+gcp_secrets: |
+  TEST_ONE: projects/vodacast-staging/secrets/vodacast-postgres-password
+  TEST_TWO: projects/vodacast-staging/secrets/vodacast-postgres-password
+```
 
 ### Output
+The secrets gathered in this step are made available to all subsequent steps and action within the same job.
 
 ##### `secrets`
 * **Description**: The secrets from gcp that were requested via the `gcp_secrets` argument.
@@ -86,10 +97,7 @@ jobs:
 ```
 
 ### Additonal Usage
+* [Tests](../../.github/workflows/test.action.setup_gcloud.yml)
 * [Reuseable Workflow OpenAPI Update](../../.github/workflows/openapi_update.yml)
 * [Reuseable Workflow Cloud Run API Deployment](../../.github/workflows/cloud_run_api_deployment.yml)
 * [Dynamic Usage of Secrets Usage](../build_and_publish_image/action.yaml)
-* [OpenAPI Update Deployment](https://github.com/Auddia/vodacast-functions/blob/staging/.github/workflows/deployments.yml#L7)
-    * Note this is call to the reusable workflow from [above](../../.github/workflows/openapi_update.yml), but it is still an example of how to configure the `setup_gcloud` action.
-* [API Deployment](FILL IN)
-    * Note this is call to the reusable workflow from [above](../../.github/workflows/cloud_run_api_deployment.yml), but it is still an example of how to configure the `setup_gcloud` action.

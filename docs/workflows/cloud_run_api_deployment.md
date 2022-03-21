@@ -2,7 +2,11 @@
 This workflow build and publishes a docker image to GCP's docker registry and then deploys that container as an application under GCP's cloud run. Make sure to review the actions below to configure your project properly. 
 
 * GCloud SDK setup action: [setup_gcloud](../../actions/setup_gcloud/README.md)
+* (Optional Step) Decrypt KMS secrets action [decrypt_kms_secrets](../../actions/decrypt_kms_secrets/README.md)
 * Build and publish Docker image action: [build_and_publish_image](../../actions/build_and_publish_image/README.md)
+
+### Tags
+This action is available on tags `v01` and above.
 
 ### Input Arguments
 
@@ -20,21 +24,47 @@ This workflow build and publishes a docker image to GCP's docker registry and th
   secrets being passed to the api being built. The restriction of secrets can not be supported until github allows a more nimble way of accessing [github contexts](https://docs.github.com/en/actions/learn-github-actions/contexts#github-context) dynamically. 
   Here is a [stackoverflow article](https://stackoverflow.com/questions/61255989/dynamically-retrieve-github-actions-secret) describing the issue.
 
+##### `key_ring`
+* **Description**: The GCP KMS keyring that the keys are retrieved from
+* `type`: `string`
+* `default`: `''`
+
+##### `decrypt_info`
+* **Description**: A list of decryption requests in the format (`ciphertext : key : plaintext`)
+* `type`: `string`
+* `default`: `''`
+* NOTE: The `plaintext` input is generated in this step and the cipher text exists in the environment. Additionally, the `key` requested from KMS must be the key that was used to create the `ciphertext`
+* Syntax
+```yaml
+decrypt_info: |
+    test_key.key.enc : test_key : test_key.key
+    test_key_two.key.enc : test_key : test_two_key.key
+```
+
+##### `input_dir`
+* **Description**: The location where the encrypted data is stored
+* `type`: `string`
+* `default`: `.`
+
+##### `output_dir`
+* **Description**: The location to store the decrypted data
+* `type`: `string`
+* `default`: `.`
+
+
 ##### `api_name`
 * **Description**: Name of the api
 * `type`: `string`
-* `required`: `true`
+* `required`: true
 
 ##### `dockerfile`
 * **Description**: Location of the dockerfile
 * `type`: `string`
-* `required`: `false`
 * `default`: `./Dockerfile`
 
 ##### `build_config`
 * **Description**: A list of environment variables to pass as build args to the build step
 * `type`: `string`
-* `required`: `false`
 * `default`: `''`
 * Syntax
 ```yaml
@@ -48,13 +78,11 @@ build_config: |
 ##### `build_context`
 * **Description**: Location for docker's build context
 * `type`: `string`
-* `required`: `false`
 * `default`: `.`
 
 ##### `build_args`
 * **Description**: Additional agruments to pass to docker build
 * `type`: `string`
-* `required`: `false`
 * `default`: `''`
 * Syntax
 ```yaml
@@ -66,7 +94,6 @@ build_args: |
 ##### `push_args`
 * **Description**: Additional arguments to pass to docker push
 * `type`: `string`
-* `required`: `false`
 * `default`: `''`
 * Syntax
 ```yaml
@@ -78,7 +105,6 @@ push_args: |
 ##### `deploy_args`
 * **Description**: Additional arguments to pass to `gcloud beta run deploy`
 * `type`: `string`
-* `required`: `false`
 * `default`: `''`
 * Syntax
 ```yaml
@@ -96,8 +122,8 @@ deploy_args: |
 * References the repo's available secrets and the github group's (i.e. `Auddia`) available secrets
 * If the needed credentials secret doesnt exist and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
 
-
-### Example Usage
+TODO: UPDATE
+### Example Usage 
 ```yaml
 on:
   push:
@@ -159,4 +185,4 @@ jobs:
 ```
 
 ### Additional Usage
-* [API Deployment](FILL IN)
+* [Tests](FILLIN)

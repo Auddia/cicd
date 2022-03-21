@@ -12,6 +12,27 @@ on:
         type: string
         required: true
 
+      key_ring:
+        description: 'The GCP KMS keyring that the keys are retrieved from'
+        type: string
+        required: false
+        default: ''
+      decrypt_info:
+        description: 'A list of decryption requests in the format (ciphertext : key : plaintext)'
+        type: string
+        required: false
+        default: ''
+      input_dir:
+        description: 'The location where the encrypted data is stored'
+        type: string
+        required: false
+        default: '.'
+      output_dir:
+        description: 'The location to store the decrypted data'
+        type: string
+        required: false
+        default: '.'
+
       api_name:
         description: Name of the api
         type: string
@@ -57,12 +78,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup GCloud SDK Staging Environment
+      - name: Setup GCloud SDK
         id: gcp
         uses: 'Auddia/cicd/actions/setup_gcloud@main'
         with:
           gcp_credentials: '${{ secrets.gcp_credentials }}'
           gcp_secrets: '${{ inputs.gcp_secrets }}'
+
+      - name: Decrypt Data
+        if: '${{ inputs.decrypt_info }}'
+        uses: 'Auddia/cicd/actions/decrypt_kms_secrets@main'
+        with:
+          key_ring: '${{ inputs.key_ring }}'
+          decrypt_info: '${{ inputs.decrypt_info }}'
+          input_dir: '${{ inputs.input_dir }}'
+          output_dir: '${{ inputs.output_dir }}'
 
       - name: Build and Publish Docker Image
         uses: 'Auddia/cicd/actions/build_and_publish_image@main'

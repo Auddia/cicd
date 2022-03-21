@@ -1,0 +1,17 @@
+versions:
+  swagger-verison: '2.0'
+  api-version: 1.0.0
+
+info:
+  title: ENV TWO
+  description: Test Open API (2)
+  version: 1.0.0
+
+environment:
+  host: 'foo.bar'
+  x-google-endpoints:
+    - name: 'foo.bar'
+  x-google-backend:
+    address: 'https://foo.bar/'
+  security:
+    - api_key: [ ]
