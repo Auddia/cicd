@@ -14,7 +14,7 @@ inputs:
     required: false
     default: ''
   build_context:
-    description: 'Location for docker's build context'
+    description: "Location for docker's build context"
     required: false
     default: '.'
   build_args:
