@@ -12,5 +12,6 @@ runs:
     - name: 'Configure ssh'
       shell: bash
       run: |
+        PRIVATE_SSH_KEY=$(jq -r '.inputs.private_ssh_key' $GITHUB_EVENT_PATH))
         eval `ssh-agent -s`
-        echo "::add-mask::${{ inputs.private_ssh_key }}" | ssh-add
+        echo "::add-mask::$PRIVATE_SSH_KEY" | ssh-add
