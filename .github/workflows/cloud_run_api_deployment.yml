@@ -67,6 +67,11 @@ on:
         type: string
         required: false
         default: ''
+      enable_ssh:
+        description: 'A flag to allow users to toggle on ssh configuration'
+        type: string
+        required: false
+        default: ''
 
     secrets:
       gcp_credentials:
@@ -89,7 +94,7 @@ jobs:
           gcp_secrets: ${{ inputs.gcp_secrets }}
 
       - uses: webfactory/ssh-agent@v0.4.1
-        if: ${{ secrets.ssh_private_key }}
+        if: ${{ inputs.enable_ssh }}
         with:
           ssh-private-key: ${{ secrets.ssh_private_key }}
 
