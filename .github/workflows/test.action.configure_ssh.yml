@@ -21,6 +21,6 @@ jobs:
       - name: 'Pip install'
         shell: bash
         run: |
-          git congfig --global user.name wudstrand
-          git congfig --global user.email wudstrand@auddia.dev
+          git config --global user.name wudstrand
+          git config --global user.email wudstrand@auddia.dev
           pip install git+ssh://git@github.com/Auddia/cloudsql.git@v01
