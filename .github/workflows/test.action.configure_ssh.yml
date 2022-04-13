@@ -13,16 +13,15 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - name: 'Configure SSH'
-        uses: ./actions/configure_ssh
+      - uses: webfactory/ssh-agent@v0.4.1
         with:
-          private_ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: 'View SSH Info'
         shell: bash
         run: |
           ls -la
-          ls -la ~/.ssh
+          ls -la ~
 
       - name: 'Pip install'
         shell: bash
