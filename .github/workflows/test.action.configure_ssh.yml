@@ -18,6 +18,12 @@ jobs:
         with:
           private_ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: 'View SSH Info'
+        shell: bash
+        run: |
+          ls -la
+          ls -la ~/.ssh
+
       - name: 'Pip install'
         shell: bash
         run: |
