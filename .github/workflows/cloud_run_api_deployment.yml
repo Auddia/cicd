@@ -117,15 +117,6 @@ jobs:
           push_args: ${{ inputs.build_args }}
           gcp_secrets: ${{ steps.gcp.outputs.secrets }}
 
-#      - name: 'Build and Publish Docker Image'
-#        uses: docker/build-push-action@v2
-#        with:
-#          context: ${{ inputs.build_context }}
-#          file: ${{ inputs.dockerfile }}
-#          tags: gcr.io/${{ inputs.gcp_project }}/${{ inputs.api_name }}:${{ github.sha }}
-#          ssh: |
-#            default=${{ env.SSH_AUTH_SOCK }}
-
       - name: 'Deploy to Cloud Run'
         shell: bash
         run: |
