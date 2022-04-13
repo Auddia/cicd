@@ -70,17 +70,21 @@ runs:
       run: |
         if [ '${{ inputs.enable_ssh }}' = true ]
         then
-          extra_args='--file ${{ inputs.dockerfile }} --ssh default=${{ env.SSH_AUTH_SOCK }}'
+          docker build \
+          --tag ${{ inputs.tag }} \
+          ${{ env.additional_build_args }} \
+          ${{ inputs.build_args }} \
+          --file ${{ inputs.dockerfile }} \
+          --ssh default=${{ env.SSH_AUTH_SOCK }} \
+          ${{ inputs.build_context }}"
         else
-          extra_args='--file ${{ inputs.dockerfile }}'
+          docker build \
+          --tag ${{ inputs.tag }} \
+          ${{ env.additional_build_args }} \
+          ${{ inputs.build_args }} \
+          --file ${{ inputs.dockerfile }} \
+          ${{ inputs.build_context }}"
         fi
-
-        docker build \
-        --tag ${{ inputs.tag }} \
-        ${{ env.additional_build_args }} \
-        ${{ inputs.build_args }} \
-        "$extra_args" \
-        ${{ inputs.build_context }}
 
     - name: 'Publish GCP Docker Registry'
       if: ${{ contains(inputs.tag, 'gcr.io') }}
