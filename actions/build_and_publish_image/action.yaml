@@ -67,6 +67,7 @@ runs:
         ${{ env.additional_build_args }} \
         ${{ inputs.build_args }} \
         --file ${{ inputs.dockerfile }} \
+        --ssh default=${{ env.SSH_AUTH_SOCK }} \
         ${{ inputs.build_context }}
 
     - name: 'Publish GCP Docker Registry'

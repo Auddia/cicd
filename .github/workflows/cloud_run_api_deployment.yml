@@ -79,7 +79,7 @@ on:
         required: true
       ssh_private_key:
         description: 'Private SSH key'
-        required: false
+        required: true
 jobs:
   api_deployment:
     name: 'API Deployment'
@@ -94,7 +94,6 @@ jobs:
           gcp_secrets: ${{ inputs.gcp_secrets }}
 
       - uses: webfactory/ssh-agent@v0.4.1
-        if: ${{ inputs.enable_ssh }}
         with:
           ssh-private-key: ${{ secrets.ssh_private_key }}
 
@@ -108,7 +107,7 @@ jobs:
           output_dir: ${{ inputs.output_dir }}
 
       - name: 'Build and Publish Docker Image'
-        uses: Auddia/cicd/actions/build_and_publish_image@main
+        uses: Auddia/cicd/actions/build_and_publish_image@wudstrand/cicd#7
         with:
           tag: gcr.io/${{ inputs.gcp_project }}/${{ inputs.api_name }}:${{ github.sha }}
           dockerfile: ${{ inputs.dockerfile }}
