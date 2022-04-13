@@ -2,10 +2,7 @@ name: '[Action Test] configure_ssh'
 
 on:
   workflow_dispatch:
-    inputs:
-      private_ssh_key:
-        description: 'Private ssh key'
-        required: true
+
 
 jobs:
   env_one:
