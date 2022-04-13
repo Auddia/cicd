@@ -9,13 +9,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Info
-      shell: bash
-      run: |
-        ls -la
-        echo "Next Command: "
-        ls -la ~/.ssh
-
     - name: 'Configure ssh'
       shell: bash
       env:
@@ -23,4 +16,8 @@ runs:
       run: |
         PRIVATE_SSH_KEY=$(jq -r '.inputs.private_ssh_key' $GITHUB_EVENT_PATH)
         ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+        ls -la
+        echo "Next Command: "
+        ls -la ~/.ssh
+
         echo "${PRIVATE_SSH_KEY}" | ssh-add -
