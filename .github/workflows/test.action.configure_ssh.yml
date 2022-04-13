@@ -19,7 +19,7 @@ jobs:
       - name: 'Configure SSH'
         uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
         with:
-          private_ssh_key: ${{ github.event.inputs.private_ssh_key }}
+          SSHKEY: ${{ github.event.inputs.private_ssh_key }}
 
       - name: 'Validate OpenAPI Created'
         shell: bash
