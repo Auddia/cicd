@@ -107,15 +107,14 @@ jobs:
           output_dir: ${{ inputs.output_dir }}
 
       - name: 'Build and Publish Docker Image'
-        uses: Auddia/cicd/actions/build_and_publish_image@wudstrand/cicd#7
+        uses: docker/build-push-action@v2
         with:
-          tag: gcr.io/${{ inputs.gcp_project }}/${{ inputs.api_name }}:${{ github.sha }}
-          dockerfile: ${{ inputs.dockerfile }}
-          build_config: ${{ inputs.build_config }}
-          build_context: ${{ inputs.build_context }}
+          context: ${{ inputs.build_context }}
           build_args: ${{ inputs.build_args }}
-          push_args: ${{ inputs.build_args }}
-          gcp_secrets: ${{ steps.gcp.outputs.secrets }}
+          tags: gcr.io/${{ inputs.gcp_project }}/${{ inputs.api_name }}:${{ github.sha }}
+          file: ${{ inputs.dockerfile }}
+          ssh: |
+            default=${{ env.SSH_AUTH_SOCK }}
 
       - name: 'Deploy to Cloud Run'
         shell: bash
