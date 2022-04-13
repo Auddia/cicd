@@ -108,7 +108,7 @@ jobs:
           output_dir: ${{ inputs.output_dir }}
 
       - name: 'Build and Publish Docker Image'
-        uses: Auddia/cicd/actions/build_and_publish_image@wudstrand/cicd#7
+        uses: Auddia/cicd/actions/build_and_publish_image@main
         with:
           tag: gcr.io/${{ inputs.gcp_project }}/${{ inputs.api_name }}:${{ github.sha }}
           dockerfile: ${{ inputs.dockerfile }}
