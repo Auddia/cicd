@@ -9,6 +9,13 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Info
+      shell: bash
+      run: |
+        ls -la
+        echo "Next Command: "
+        ls -la ~/.ssh
+
     - name: 'Configure ssh'
       shell: bash
       env:
