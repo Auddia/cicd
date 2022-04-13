@@ -24,4 +24,4 @@ jobs:
       - name: 'Validate OpenAPI Created'
         shell: bash
         run: |
-          pip install cloudsql @ git+ssh://git@github.com/Auddia/cloudsql.git@v01
+          pip install git+ssh://git@github.com/Auddia/cloudsql.git@v01
