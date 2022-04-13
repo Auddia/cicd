@@ -17,7 +17,7 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: 'Configure SSH'
-        uses: ./actions/configure_ssh
+        uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
         with:
           private_ssh_key: ${{ github.event.inputs.private_ssh_key }}
 
