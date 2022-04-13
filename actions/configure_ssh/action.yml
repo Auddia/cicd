@@ -16,5 +16,4 @@ runs:
       run: |
         PRIVATE_SSH_KEY=$(jq -r '.inputs.private_ssh_key' $GITHUB_EVENT_PATH)
         ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-
-        echo "::add-mask::$PRIVATE_SSH_KEY"
+        ssh-add - <<< "$PRIVATE_SSH_KEY"
