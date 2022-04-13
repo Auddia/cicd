@@ -13,4 +13,4 @@ runs:
       shell: bash
       run: |
         eval `ssh-agent -s`
-        echo `::add-mask::${{ inputs.private_ssh_key }}` | ssh-add
+        echo "::add-mask::${{ inputs.private_ssh_key }}" | ssh-add
