@@ -21,7 +21,9 @@ jobs:
         with:
           private_ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: 'Validate OpenAPI Created'
+      - name: 'Pip install'
         shell: bash
         run: |
+          git congfig --global user.name wudstrand
+          git congfig --global user.email wudstrand@auddia.dev
           pip install git+ssh://git@github.com/Auddia/cloudsql.git@v01
