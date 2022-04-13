@@ -13,4 +13,4 @@ runs:
       shell: bash
       run: |
         eval `ssh-agent -s`
-        ssh-add - <<< '${{ inputs.private_ssh_key }}'
+        echo $key | '${{ inputs.private_ssh_key }}'
