@@ -72,6 +72,9 @@ on:
       gcp_credentials:
         description: 'A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.'
         required: true
+      ssh_private_key:
+        description: 'Private SSH key'
+        required: false
 jobs:
   api_deployment:
     name: 'API Deployment'
@@ -84,6 +87,10 @@ jobs:
         with:
           gcp_credentials: ${{ secrets.gcp_credentials }}
           gcp_secrets: ${{ inputs.gcp_secrets }}
+
+      - uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.ssh_private_key }}
 
       - name: 'Decrypt Data'
         if: ${{ inputs.decrypt_info }}
