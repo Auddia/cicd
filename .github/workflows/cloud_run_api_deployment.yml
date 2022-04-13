@@ -62,13 +62,13 @@ on:
         type: string
         required: false
         default: ''
-      deploy_args:
-        description: 'Additional arguments to pass to gcloud beta run deploy'
-        type: string
-        required: false
-        default: ''
       enable_ssh:
         description: 'A flag to allow users to toggle on ssh configuration'
+        type: boolean
+        required: false
+        default: false
+      deploy_args:
+        description: 'Additional arguments to pass to gcloud beta run deploy'
         type: string
         required: false
         default: ''
@@ -94,6 +94,7 @@ jobs:
           gcp_secrets: ${{ inputs.gcp_secrets }}
 
       - uses: webfactory/ssh-agent@v0.4.1
+        if: ${{ inputs.enable_ssh }}
         with:
           ssh-private-key: ${{ secrets.ssh_private_key }}
 
@@ -115,6 +116,7 @@ jobs:
           build_context: ${{ inputs.build_context }}
           build_args: ${{ inputs.build_args }}
           push_args: ${{ inputs.build_args }}
+          enable_ssh: ${{ inputs.enable_ssh }}
           gcp_secrets: ${{ steps.gcp.outputs.secrets }}
 
       - name: 'Deploy to Cloud Run'

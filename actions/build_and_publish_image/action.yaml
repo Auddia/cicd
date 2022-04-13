@@ -25,6 +25,10 @@ inputs:
     description: 'Additional arguments to pass to docker push'
     required: false
     default: ''
+  enable_ssh:
+    description: 'A flag to allow users to toggle on ssh configuration'
+    required: false
+    default: 'false'
   gcp_secrets:
     description: 'Secrets from GCP that you want available in the docker container'
     required: false
@@ -64,12 +68,18 @@ runs:
       env:
          DOCKER_BUILDKIT: '1'
       run: |
+        if [ '${{ inputs.enable_ssh }}' = true ]
+        then
+          extra_args='--file ${{ inputs.dockerfile }} --ssh default=${{ env.SSH_AUTH_SOCK }}'
+        else
+          extra_args='--file ${{ inputs.dockerfile }}'
+        fi
+
         docker build \
         --tag ${{ inputs.tag }} \
         ${{ env.additional_build_args }} \
         ${{ inputs.build_args }} \
-        --file ${{ inputs.dockerfile }} \
-        --ssh default=${{ env.SSH_AUTH_SOCK }} \
+        "$extra_args" \
         ${{ inputs.build_context }}
 
     - name: 'Publish GCP Docker Registry'
