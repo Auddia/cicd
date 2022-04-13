@@ -102,6 +102,17 @@ push_args: |
     --quiet \
 ```
 
+##### `enable_ssh`
+* **Description**: A flag to allow users to toggle on ssh configuration
+* `type`: `boolean`
+* `required`: `false`
+* `default`: `false`
+* **NOTE**: This flag makes ssh available to other actions 
+* If you wish to make ssh available within a docker container refer to the [build_and_publish_image](../../actions/build_and_publish_image/action.yaml) action
+* If you are enabling ssh for pip installing private git repos in a docker container make sure to do the following
+  * set the `DOCKER_BUILDKIT` environment variable to 1
+  * When using pip in the docker file use `RUN --mount=type=ssh`
+
 ##### `deploy_args`
 * **Description**: Additional arguments to pass to `gcloud beta run deploy`
 * `type`: `string`
@@ -121,6 +132,10 @@ deploy_args: |
 * **Description**: A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
 * References the repo's available secrets and the github group's (i.e. `Auddia`) available secrets
 * If the needed credentials secret doesn't exist, and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
+
+##### `ssh_private_key`
+* **Description**: A github secret containing a private SSH key
+* [How to generate a new ssh key for github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) 
 
 TODO: UPDATE
 ### Example Usage 

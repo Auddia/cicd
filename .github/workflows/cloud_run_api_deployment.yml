@@ -62,6 +62,11 @@ on:
         type: string
         required: false
         default: ''
+      enable_ssh:
+        description: 'A flag to allow users to toggle on ssh configuration'
+        type: boolean
+        required: false
+        default: false
       deploy_args:
         description: 'Additional arguments to pass to gcloud beta run deploy'
         type: string
@@ -71,6 +76,9 @@ on:
     secrets:
       gcp_credentials:
         description: 'A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.'
+        required: true
+      ssh_private_key:
+        description: 'A github secret containing a private SSH key'
         required: true
 jobs:
   api_deployment:
@@ -84,6 +92,11 @@ jobs:
         with:
           gcp_credentials: ${{ secrets.gcp_credentials }}
           gcp_secrets: ${{ inputs.gcp_secrets }}
+
+      - uses: webfactory/ssh-agent@v0.4.1
+        if: ${{ inputs.enable_ssh }}
+        with:
+          ssh-private-key: ${{ secrets.ssh_private_key }}
 
       - name: 'Decrypt Data'
         if: ${{ inputs.decrypt_info }}
@@ -103,6 +116,7 @@ jobs:
           build_context: ${{ inputs.build_context }}
           build_args: ${{ inputs.build_args }}
           push_args: ${{ inputs.build_args }}
+          enable_ssh: ${{ inputs.enable_ssh }}
           gcp_secrets: ${{ steps.gcp.outputs.secrets }}
 
       - name: 'Deploy to Cloud Run'
