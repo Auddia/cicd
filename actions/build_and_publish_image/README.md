@@ -62,6 +62,12 @@ push_args: |
     --quiet \
 ```
 
+##### `enable_ssh`
+* **Description**: A flag to allow users to toggle on ssh configuration
+* `type`: `boolean`
+* `required`: `false`
+* `default`: `false`
+
 ##### `gcp_secrets`
 * **Description**: Secrets from GCP that you want available in the docker container
 * `type`: `string`

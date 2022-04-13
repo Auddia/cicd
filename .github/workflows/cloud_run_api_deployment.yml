@@ -78,7 +78,7 @@ on:
         description: 'A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.'
         required: true
       ssh_private_key:
-        description: 'Private SSH key'
+        description: 'A github secret containing a private SSH key'
         required: true
 jobs:
   api_deployment:
