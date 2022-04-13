@@ -76,14 +76,14 @@ runs:
           ${{ inputs.build_args }} \
           --file ${{ inputs.dockerfile }} \
           --ssh default=${{ env.SSH_AUTH_SOCK }} \
-          ${{ inputs.build_context }}"
+          ${{ inputs.build_context }}
         else
           docker build \
           --tag ${{ inputs.tag }} \
           ${{ env.additional_build_args }} \
           ${{ inputs.build_args }} \
           --file ${{ inputs.dockerfile }} \
-          ${{ inputs.build_context }}"
+          ${{ inputs.build_context }}
         fi
 
     - name: 'Publish GCP Docker Registry'
