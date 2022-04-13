@@ -20,7 +20,6 @@ jobs:
         uses: ./actions/configure_ssh
         with:
           private_ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
-      #          private_ssh_key: ${{ github.event.inputs.private_ssh_key }}
 
       - name: 'Validate OpenAPI Created'
         shell: bash
