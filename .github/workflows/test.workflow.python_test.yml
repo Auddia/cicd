@@ -1,0 +1,18 @@
+name: '[TODO] [Action Test] python test'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  place_holder:
+    name: 'None'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Print
+        shell: bash
+        run: |
+          ls -la
