@@ -28,6 +28,11 @@ on:
         required: false
         default: './requirements.txt'
 
+    secrets:
+      ssh_private_key:
+        description: 'A github secret containing a private SSH key'
+        required: true
+
 
 jobs:
   test_install:
@@ -40,6 +45,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
+
+      - uses: webfactory/ssh-agent@v0.4.1
+        if: ${{ inputs.enable_ssh }}
+        with:
+          ssh-private-key: ${{ secrets.ssh_private_key }}
 
       - name: Install Python Version
         uses: actions/setup-python@v1
@@ -62,6 +72,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
+
+      - uses: webfactory/ssh-agent@v0.4.1
+        if: ${{ inputs.enable_ssh }}
+        with:
+          ssh-private-key: ${{ secrets.ssh_private_key }}
 
       - name: Install Python Version
         uses: actions/setup-python@v1

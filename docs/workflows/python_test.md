@@ -35,6 +35,13 @@ This action is available on tags `v04` and above.
 * `required`: `false`
 * `default`: `./requirements.txt`
 
+### Secrets
+
+##### `ssh_private_key`
+* **Description**: A github secret containing a private SSH key
+* [How to generate a new ssh key for github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) 
+ 
+
 ### Example Usage
 ```yaml
 name: '[Workflow Test] python_test'
