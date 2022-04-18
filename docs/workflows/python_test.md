@@ -23,6 +23,13 @@ This action is available on tags `v04` and above.
 * `required`: `false`
 * `default`: `true`
 
+##### `enable_ssh`
+* **Description**: A flag to allow users to toggle on ssh configuration
+* `type`: `boolean`
+* `required`: `false`
+* `default`: `false`
+* **NOTE**: This flag makes ssh available to other actions
+
 ##### `setup_dir`
 * **Description**: The directory the setup.py is located in 
 * `type`: `string`

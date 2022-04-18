@@ -17,6 +17,11 @@ on:
         type: boolean
         required: false
         default: true
+      enable_ssh:
+        description: 'A flag to allow users to toggle on ssh configuration for pip installs of private repo'
+        type: boolean
+        required: false
+        default: false
       setup_dir:
         description: 'The directory the setup.py is located in'
         type: string
