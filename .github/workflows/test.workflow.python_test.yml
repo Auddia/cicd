@@ -10,7 +10,7 @@ jobs:
     with:
       python_versions: "[\"3.7\", \"3.8\"]"
       test_dir: ./resources/sample_python_tests
-      test_setup: true
+      setup_dir: ./resources/sample_python_tests
 
   test_requirements:
     name: 'Requirements Test'
@@ -18,3 +18,5 @@ jobs:
     with:
       python_versions: "[\"3.7\", \"3.8\"]"
       test_dir: ./resources/sample_python_tests
+      test_setup: false
+      requirements: ./resources/sample_python_tests/requirements.txt
