@@ -1,0 +1,90 @@
+name: '[Template] Python App Testing'
+
+on:
+  workflow_call:
+    inputs:
+      python_versions:
+        description: 'A json string of the versions desired (e.g. "[\"3.7\", \"3.8\"]")'
+        type: string
+        required: true
+      test_dir:
+        description: 'Directory containing all the test files to be run'
+        type: string
+        required: true
+
+      test_setup:
+        description: 'A flag to control whether we use the default requirements.txt or a setup.py '
+        type: boolean
+        required: false
+        default: true
+      setup_dir:
+        description: 'The directory the setup.py is located in'
+        type: string
+        required: false
+        default: '.'
+      requirements:
+        description: 'The location of the requirements.txt'
+        type: string
+        required: false
+        default: './requirements.txt'
+
+
+jobs:
+  test_install:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.test_setup }}
+    strategy:
+      matrix:
+        python_version: ${{ fromJson(inputs.python_versions) }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Install Python Version
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python_version }}
+
+      - name: Test Install
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ${{ inputs.setup_dir }}
+
+  test_app:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python_version: ${{ fromJson(inputs.python_versions) }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Install Python Version
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python_version }}
+
+      - name: Install Dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+
+          if [ '${{ inputs.test_setup }}' = true ]
+          then
+            python -m pip install -e ${{ inputs.setup_dir }}
+          else
+            python -m pip install -r ${{ inputs.requirements }}
+          fi
+
+      - name: Run Tests
+        shell: bash
+        run: |
+          pytest ${{ inputs.test_dir }} --junitxml=report.xml
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        with:
+          files: "report.xml"

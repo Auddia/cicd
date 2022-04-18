@@ -1,0 +1,20 @@
+name: '[Workflow Test] python_test'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test_setup:
+    name: 'Setup Test'
+    uses: Auddia/cicd/.github/workflows/python_test.yml
+    with:
+      python_versions: "[\"3.7\", \"3.8\"]"
+      test_dir: ./resources/sample_python_tests
+      test_setup: true
+
+  test_requirements:
+    name: 'Requirements Test'
+    uses: Auddia/cicd/.github/workflows/python_test.yml
+    with:
+      python_versions: "[\"3.7\", \"3.8\"]"
+      test_dir: ./resources/sample_python_tests
