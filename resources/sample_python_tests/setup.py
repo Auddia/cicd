@@ -9,7 +9,7 @@ setup(
     author_email='darth.vader@sith.net',
 
     install_requires=[
-        'flask'
+        'flask',
     ],
     packages=find_packages(),
 )
