@@ -20,15 +20,16 @@ This action is available on tags `v04` and above.
 * `type`: `string`
 * `required`: `true`
 
-##### `runtime`
-* **Description**: The GCP function runtime 
-* `type`: `string`
-* `required`: `true`
-
 ##### `entry_point`
 * **Description**: The function entry point
 * `type`: `string`
 * `required`: `true`
+
+##### `runtime`
+* **Description**: The GCP function runtime 
+* `type`: `string`
+* `required`: `false`
+* `default`: `python37`
 
 ##### `environment_variables`
 * **Description**: List of environment variables to pass to set in the function

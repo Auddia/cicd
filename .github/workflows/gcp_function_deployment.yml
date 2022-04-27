@@ -15,14 +15,15 @@ on:
         description: 'The name of the GCP function'
         type: string
         required: true
-      runtime:
-        description: 'The GCP function runtime'
-        type: string
-        required: true
       entry_point:
         description: 'The function entry point'
         type: string
         required: true
+      runtime:
+        description: 'The GCP function runtime'
+        type: string
+        required: false
+        default: 'python37'
       environment_variables:
         description: 'List of environment variables to pass to set in the function'
         type: string

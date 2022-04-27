@@ -8,15 +8,15 @@ on:
         required: true
 
 jobs:
-  place_holder:
-    name: 'None'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.ref }}
+  test_function_deployment:
+    name: 'Test Function Deployment'
+    uses: Auddia/cicd/.github/workflows/python_test.yml@wudstrand/cicd#12
+    with:
+      gcp_project: vodacast-staging
+      service_account: vodacastfun-3@vodacast-staging.iam.gserviceaccount.com
+      function_name: test_cicd_function
+      entry_point: handle
+      function_dir: ./resources/test_function
+    secrets:
+      gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 
-      - name: Print
-        shell: bash
-        run: |
-          ls -la
