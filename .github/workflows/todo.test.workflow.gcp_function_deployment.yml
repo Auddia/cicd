@@ -20,7 +20,6 @@ jobs:
       environment_variables: 'ONE=test_value_one,TWO=test_value_two'
       extra_function_args: |
         --trigger-http \
-        --allow-unauthenticated \
     secrets:
       gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 
