@@ -65,5 +65,5 @@ jobs:
             ${{ inputs.extra_function_args }} \
             --runtime ${{ inputs.runtime }} \
             --service-account ${{ inputs.service_account }} \
-            --entry-point ${{ inputs.entry_point }}
-            --update-env-vars '${{ inputs.environment_variables }}' \
+            --entry-point ${{ inputs.entry_point }} \
+            --update-env-vars '${{ inputs.environment_variables }}'
