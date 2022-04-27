@@ -62,8 +62,8 @@ jobs:
           cd ${{ inputs.function_dir }}
 
           gcloud beta functions deploy ${{ inputs.function_name }} \
+            ${{ inputs.extra_function_args }} \
             --runtime ${{ inputs.runtime }} \
             --service-account ${{ inputs.service_account }} \
             --entry-point ${{ inputs.entry_point }}
             --update-env-vars ${{ inputs.environment_variables }} \
-            ${{ inputs.extra_function_args }}
