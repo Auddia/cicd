@@ -10,7 +10,7 @@ on:
 jobs:
   test_function_deployment:
     name: 'Test Function Deployment'
-    uses: Auddia/cicd/.github/workflows/gcp_function_deployment.yml@wudstrand/cicd#12
+    uses: ./.github/workflows/gcp_function_deployment.yml
     with:
       gcp_project: vodacast-staging
       service_account: vodacastfun-3@vodacast-staging.iam.gserviceaccount.com
