@@ -18,7 +18,7 @@ jobs:
       entry_point: handle
       function_dir: ./resources/test_function
       extra_function_args: |
-        --trigger-http
+        --trigger-http \
     secrets:
       gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 
