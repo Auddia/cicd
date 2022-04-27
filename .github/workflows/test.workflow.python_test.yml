@@ -1,18 +1,23 @@
-name: '[Workflow Test] python test'
+name: '[Workflow Test] python_test'
+
 
 on:
   workflow_dispatch:
 
 jobs:
-  place_holder:
-    name: 'None'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.ref }}
+  test_setup:
+    name: 'Setup Test'
+    uses: Auddia/cicd/.github/workflows/python_test.yml@wudstrand/cicd#9
+    with:
+      python_versions: "[\"3.7\", \"3.8\"]"
+      test_dir: ./resources/sample_python_tests
+      setup_dir: ./resources/sample_python_tests
 
-      - name: Print
-        shell: bash
-        run: |
-          ls -la
+  test_requirements:
+    name: 'Requirements Test'
+    uses: Auddia/cicd/.github/workflows/python_test.yml@wudstrand/cicd#9
+    with:
+      python_versions: "[\"3.7\", \"3.8\"]"
+      test_dir: ./resources/sample_python_tests
+      test_setup: false
+      requirements: ./resources/sample_python_tests/requirements.txt
