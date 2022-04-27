@@ -7,7 +7,7 @@ on:
 jobs:
   test_setup:
     name: 'Setup Test'
-    uses: Auddia/cicd/.github/workflows/python_test.yml@wudstrand/cicd#9
+    uses: Auddia/cicd/.github/workflows/python_test.yml@main
     with:
       python_versions: "[\"3.7\", \"3.8\"]"
       test_dir: ./resources/sample_python_tests
@@ -15,7 +15,7 @@ jobs:
 
   test_requirements:
     name: 'Requirements Test'
-    uses: Auddia/cicd/.github/workflows/python_test.yml@wudstrand/cicd#9
+    uses: Auddia/cicd/.github/workflows/python_test.yml@main
     with:
       python_versions: "[\"3.7\", \"3.8\"]"
       test_dir: ./resources/sample_python_tests
