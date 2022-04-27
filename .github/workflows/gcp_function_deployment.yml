@@ -1,0 +1,26 @@
+name: '[TODO] [Template] GCP Function Deployment'
+
+on:
+  workflow_call:
+    inputs:
+      gcp_project:
+        description: 'The GCP project name'
+        type: string
+        required: true
+    secrets:
+      gcp_credentials:
+        required: true
+
+jobs:
+  place_holder:
+    name: 'None'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Print
+        shell: bash
+        run: |
+          ls -la
