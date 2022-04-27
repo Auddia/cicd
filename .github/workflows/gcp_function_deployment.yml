@@ -1,4 +1,4 @@
-name: '[TODO] [Template] GCP Function Deployment'
+name: '[Template] GCP Function Deployment'
 
 on:
   workflow_call:
@@ -7,20 +7,62 @@ on:
         description: 'The GCP project name'
         type: string
         required: true
+      service_account:
+        description: 'The GCP service account to run the function under'
+        type: string
+        required: true
+      function_name:
+        description: 'The name of the GCP function'
+        type: string
+        required: true
+      runtime:
+        description: 'The GCP function runtime'
+        type: string
+        required: true
+      entry_point:
+        description: 'The function entry point'
+        type: string
+        required: true
+      environment_variables:
+        description: 'List of environment variables to pass to set in the function'
+        type: string
+        required: false
+        default: ''
+      function_dir:
+        description: 'Location of the directory containing the GCP function code'
+        type: string
+        required: false
+        default: '.'
+      extra_function_args:
+        description: 'Extra args to pass to the GCP function deploy command'
+        type: string
+        required: false
+        default: ''
     secrets:
       gcp_credentials:
+        description: 'A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.'
         required: true
 
 jobs:
-  place_holder:
-    name: 'None'
+  function_deployment:
+    name: 'GCP Function Deployment'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: 'Setup GCloud SDK'
+        id: gcp
+        uses: Auddia/cicd/actions/setup_gcloud@main
         with:
-          ref: ${{ github.ref }}
+          gcp_credentials: ${{ secrets.gcp_credentials }}
+          gcp_secrets: ${{ inputs.gcp_secrets }}
 
-      - name: Print
+      - name: 'GCP Function Deployment'
         shell: bash
         run: |
-          ls -la
+          cd ${{ inputs.function_dir }}
+
+          gcloud beta functions deploy ${{ inputs.function_name }} \
+            --runtime ${{ inputs.runtime }} \
+            --service-account ${{ inputs.service_account }} \
+            --entry-point ${{ inputs.entry_point }}
+            --update-env-vars ${{ inputs.environment_variables }} \
+            ${{ inputs.extra_function_args }}
