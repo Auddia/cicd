@@ -1,4 +1,4 @@
-name: '[TODO] [Workflow Test] GCP Function Deployment'
+name: '[Workflow Test] GCP Function Deployment'
 
 on:
   workflow_dispatch:
@@ -17,7 +17,9 @@ jobs:
       function_name: test_cicd_function
       entry_point: handle
       function_dir: ./resources/test_function
-      environment_variables: 'ONE=test_value_one,TWO=test_value_two'
+      environment_variables: |
+        ONE: test_value_one
+        TWO: test_value_two
       extra_function_args: |
         --trigger-http \
     secrets:

@@ -56,6 +56,13 @@ jobs:
           gcp_credentials: ${{ secrets.gcp_credentials }}
           gcp_secrets: ${{ inputs.gcp_secrets }}
 
+      - name: 'Parse ENV variables'
+        id: deploy_config
+        shell: bash
+        run: |
+          environment_variables="${{ inputs.environment_variables }}"
+          echo $environment_variables
+
       - name: 'GCP Function Deployment'
         shell: bash
         run: |
