@@ -74,7 +74,7 @@ jobs:
           fi
 
           secret_args="${{ steps.gcp.outputs.secrets }}"
-          echo $secret_args
+          echo "$secret_args" | grep ":" | tr -d "[\":]"
 
           echo "env_vars=${value}" >> "$GITHUB_ENV"
 
