@@ -24,6 +24,11 @@ on:
         type: string
         required: false
         default: 'python37'
+      gcp_secrets:
+        description: 'Secrets from GCP that you want available in the docker container'
+        type: string
+        required: false
+        default: ''
       environment_variables:
         description: 'List of environment variables to pass to set in the function'
         type: string
@@ -67,6 +72,9 @@ jobs:
           else
             value="DUMMY=0"
           fi
+
+          secret_args="${{ steps.gcp.outputs.secrets }}"
+          echo $secret_args
 
           echo "env_vars=${value}" >> "$GITHUB_ENV"
 
