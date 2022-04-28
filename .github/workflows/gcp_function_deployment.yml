@@ -74,9 +74,13 @@ jobs:
           fi
 
           secret_args="${{ steps.gcp.outputs.secrets }}"
-          echo "$secret_args" | grep ":" | tr ':' '=' | tr -d "[\"]" | tr -d [:space:]
-
-          echo "env_vars=${value}" >> "$GITHUB_ENV"
+          if [ -n "$secret_args" ];
+          then
+            additional_args=$(echo "$secret_args" | grep ":" | tr ':' '=' | tr -d "[\"]" | tr -d [:space:])
+            echo "env_vars=${value} ${additional_args}" >> "$GITHUB_ENV"
+          else
+            echo "env_vars=${value}" >> "$GITHUB_ENV"
+          fi
 
       - name: 'GCP Function Deployment'
         shell: bash
