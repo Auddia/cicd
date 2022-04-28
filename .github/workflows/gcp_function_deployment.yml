@@ -61,7 +61,14 @@ jobs:
         shell: bash
         run: |
           environment_variables="${{ inputs.environment_variables }}"
-          echo $environment_variables
+          if [ -n "$environment_variables" ];
+          then
+            value=$(echo "$environment_variables" | tr ':' '=' | tr -d [:space:])
+          else
+            value="DUMMY=0"
+          fi
+
+          echo "env_vars=${value}" >> "$GITHUB_ENV"
 
       - name: 'GCP Function Deployment'
         shell: bash
@@ -73,4 +80,4 @@ jobs:
             --runtime ${{ inputs.runtime }} \
             --service-account ${{ inputs.service_account }} \
             --entry-point ${{ inputs.entry_point }} \
-            --update-env-vars '${{ inputs.environment_variables }}'
+            --update-env-vars '${{ env.env_vars }}'
