@@ -10,7 +10,8 @@ on:
       gcp_secrets:
         description: 'Secrets from GCP that you want available in the docker container'
         type: string
-        required: true
+        required: false
+        default: ''
 
       key_ring:
         description: 'The GCP KMS keyring that the keys are retrieved from'
