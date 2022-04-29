@@ -85,6 +85,25 @@ extra_function_args: |
 
 ### Example Usage
 ```yaml
+jobs:
+  test_function_deployment:
+    name: 'Test Function Deployment'
+    uses: ./.github/workflows/gcp_function_deployment.yml
+    with:
+      gcp_project: vodacast-staging
+      service_account: vodacastfun-3@vodacast-staging.iam.gserviceaccount.com
+      function_name: test_cicd_function
+      entry_point: handle
+      function_dir: ./resources/test_function
+      gcp_secrets: |
+        DB_PASSWORD: projects/vodacast-staging/secrets/vodacast-postgres-password
+      environment_variables: |
+        ONE: test_value_one,
+        TWO: test_value_two
+      extra_function_args: |
+        --trigger-http \
+    secrets:
+      gcp_credentials: ${{ github.event.inputs.gcp_secret }}
 ```
 
 ### Additional Usage
