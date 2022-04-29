@@ -31,6 +31,20 @@ This action is available on tags `v04` and above.
 * `required`: `false`
 * `default`: `python37`
 
+##### `gcp_secrets`
+* **Description**: Secrets from GCP that you want available in the docker container
+* `type`: `string`
+* `required`: `fasle`
+* Uses the `outputs.secrets` from the [setup_gcloud](../../actions/setup_gcloud/README.md) action
+* Although the [setup_gcloud](../../actions/setup_gcloud/README.md) action allows users to restrict access to the secrets retrieved this action only supports all 
+  secrets being passed to the api being built. The restriction of secrets can not be supported until github allows a more nimble way of accessing [github contexts](https://docs.github.com/en/actions/learn-github-actions/contexts#github-context) dynamically. 
+  Here is a [stackoverflow article](https://stackoverflow.com/questions/61255989/dynamically-retrieve-github-actions-secret) describing the issue.
+* Syntax
+```yaml
+gcp_secrets: |
+  DB_PASSWORD: projects/vodacast-staging/secrets/vodacast-postgres-password
+```
+
 ##### `environment_variables`
 * **Description**: List of environment variables to pass to set in the function
 * `type`: `string`
@@ -39,7 +53,8 @@ This action is available on tags `v04` and above.
 * Syntax
 ```yaml
 environment_variables: |
-  VARIABLE_NAME: VALUE
+  VARIABLE_NAME: VALUE,
+  VARIABLE_TWO: VALUE
 ```
 
 ##### `function_dir`
