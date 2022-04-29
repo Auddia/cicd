@@ -19,7 +19,6 @@ jobs:
       function_dir: ./resources/test_function
       gcp_secrets: |
         DB_PASSWORD: projects/vodacast-staging/secrets/vodacast-postgres-password
-        DB_PASSWORD2: projects/vodacast-staging/secrets/vodacast-postgres-password
       environment_variables: |
         ONE: test_value_one,
         TWO: test_value_two
