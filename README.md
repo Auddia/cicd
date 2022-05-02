@@ -12,6 +12,8 @@ Make sure to refer to the docs for the specific release, tag or branch to have t
   * [`v0`](./docs/releases/v0.md)
   * [`v01`](./docs/releases/v01.md)
   * [`v02`](./docs/releases/v02.md)
+  * [`v03`](./docs/releases/v03.md)
+  * [`v04`](./docs/releases/v04.md)
 * [Action Items]()
 
 ## Workflows
