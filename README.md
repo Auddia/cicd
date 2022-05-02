@@ -25,6 +25,8 @@ Workflows define a job or a group of jobs that can be run in parallel or in some
 ### Custom Workflows
 * [Openapi Update](./docs/workflows/openapi_update.md)
 * [Cloud Run API Deployment](./docs/workflows/cloud_run_api_deployment.md)
+* [python_test Workflow](../../docs/workflows/python_test.md)
+* [gcp_function_deployment Workflow](../../docs/workflows/gcp_function_deployment.md)
 
 
 ## Actions
@@ -45,6 +47,8 @@ For more information on each release view the official release docs. For even mo
   * [`v0`](https://github.com/Auddia/cicd/releases/tag/v0)
   * [`v01`](https://github.com/Auddia/cicd/releases/tag/v01)
   * [`v02`](https://github.com/Auddia/cicd/releases/tag/v02)
+  * [`v03`](./docs/releases/v03.md)
+  * [`v04`](./docs/releases/v04.md)
 
 
 # Action Items
