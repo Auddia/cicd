@@ -63,7 +63,7 @@ jobs:
           fail_if_strings_unequal $has_secrets "true"
 
           secrets=${{ toJson(steps.gcp.outputs.secrets) }}
-          fail_if_strings_unequal $secrets "{}"
+          fail_if_strings_equal $secrets "{}"
 
           test_one=${{ fromJson(steps.gcp.outputs.secrets).TEST_ONE }}
           test_two=${{ fromJson(steps.gcp.outputs.secrets)['TEST_TWO'] }}
