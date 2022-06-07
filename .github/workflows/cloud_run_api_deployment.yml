@@ -80,7 +80,8 @@ on:
         required: true
       ssh_private_key:
         description: 'A github secret containing a private SSH key'
-        required: true
+        required: false
+
 jobs:
   api_deployment:
     name: 'API Deployment'
