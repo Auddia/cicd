@@ -40,7 +40,7 @@ runs:
       run: |
         if [ -n "${{ inputs.gcp_secrets }}" ];
         then
-          echo "::set-output name=has_secret::true"
+          echo "::set-output name=has_secrets::true"
         else
           echo "::set-output name=has_secrets::false"
         fi
