@@ -57,7 +57,7 @@ runs:
         fi
 
         secret_args='${{ inputs.gcp_secrets }}'
-        if [ "${{ inputs.gcp_secrets }}" == true ];
+        if [ "${{ inputs.has_secrets }}" == true ];
         then
           echo "$secret_args" | grep ":" | tr -d "[\":]" > input.txt
           additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
