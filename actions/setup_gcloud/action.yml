@@ -11,6 +11,9 @@ inputs:
     default: ''
 
 outputs:
+  has_secrets:
+    description: boolean flag showing if the step produced any secrets
+    value: ${{ steps.validation.has_secrets }}
   secrets:
     description: JSON dictionary of dynamic outputed secret values
     value: ${{ toJson(steps.gcp_secrets.outputs) }}
@@ -38,9 +41,13 @@ runs:
       with:
         secrets: ${{ inputs.gcp_secrets }}
 
-    - name: 'Set Output to Null'
-      if: ${{ inputs.gcp_secrets }} == ''
-      id: gcp_secrets
+    - name: 'Has Secrets'
+      id: validation
       shell: bash
       run: |
-        echo "::set-output name=::"
+        if [ -n "${{ inputs.gcp_secrets }}" ];
+        then
+          echo "::set-output name has_secrets=true::"
+        else
+          echo "::set-output name has_secrets=false::"
+        fi
