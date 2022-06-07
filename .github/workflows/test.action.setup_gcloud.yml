@@ -25,6 +25,14 @@ jobs:
         shell: bash
         run: gcloud info
 
+      - name: 'Test Has Sercets'
+        shell: bash
+        run: |
+          source ./scripts/test_functions.sh
+
+          has_secrets=${{ steps.gcp.outputs.has_secrets }}
+          fail_if_strings_unequal $has_secrets "false"
+
   gcloud_with_secrets:
     name: 'GCloud Setup w/ Secrets'
     runs-on: ubuntu-latest
@@ -50,6 +58,9 @@ jobs:
         shell: bash
         run: |
           source ./scripts/test_functions.sh
+
+          has_secrets=${{ steps.gcp.outputs.has_secrets }}
+          fail_if_strings_unequal $has_secrets "true"
 
           secrets=${{ toJson(steps.gcp.outputs.secrets) }}
           fail_if_strings_unequal $secrets "{}"
