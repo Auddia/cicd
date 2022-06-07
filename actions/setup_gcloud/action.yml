@@ -37,3 +37,10 @@ runs:
       uses: google-github-actions/get-secretmanager-secrets@v0
       with:
         secrets: ${{ inputs.gcp_secrets }}
+
+    - name: 'Set Output to Null'
+      if: ${{ inputs.gcp_secrets }} == ''
+      id: gcp_secrets
+      shell: bash
+      run: |
+        echo "::set-output name=::"
