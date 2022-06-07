@@ -17,6 +17,7 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: 'GCloud SDK Setup'
+        id: gcp
         uses: ./actions/setup_gcloud
         with:
           gcp_credentials: ${{ github.event.inputs.gcp_secret }}
