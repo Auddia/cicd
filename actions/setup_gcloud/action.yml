@@ -13,7 +13,7 @@ inputs:
 outputs:
   has_secrets:
     description: boolean flag showing if the step produced any secrets
-    value: ${{ steps.validation.has_secrets }}
+    value: ${{ steps.validation.outputs.has_secrets }}
   secrets:
     description: JSON dictionary of dynamic outputed secret values
     value: ${{ toJson(steps.gcp_secrets.outputs) }}
