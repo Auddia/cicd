@@ -4,6 +4,7 @@ echo "DEBUG INFO: "
 echo "GCP_PROJECT=${GCP_PROJECT}"
 echo "API_SUBDOMAIN=${API_SUBDOMAIN}"
 echo "API_NAME=${API_NAME}"
+echo "FUNCTION_NAME=${FUNCTION_NAME}"
 echo "ENDPOINTS_SERVICE_NAME=${ENDPOINTS_SERVICE_NAME}"
 echo "DEFAULT_GCP_SERVICE_ACCOUNT=${DEFAULT_GCP_SERVICE_ACCOUNT}"
 echo "OPENAPI_YAML=${OPENAPI_YAML}"
@@ -34,11 +35,21 @@ gcloud beta run deploy "$ENDPOINTS_SERVICE_NAME" \
   --region us-central1 \
   --min-instances 2
 
-gcloud run services add-iam-policy-binding "$API_NAME" \
-  --member "serviceAccount:$DEFAULT_GCP_SERVICE_ACCOUNT" \
-  --role "roles/run.invoker" \
-  --platform managed \
-  --project "$GCP_PROJECT" \
-  --region us-central1
+if [ -n "$API_NAME" ];
+then
+  gcloud run services add-iam-policy-binding "$API_NAME" \
+    --member "serviceAccount:$DEFAULT_GCP_SERVICE_ACCOUNT" \
+    --role "roles/run.invoker" \
+    --platform managed \
+    --project "$GCP_PROJECT" \
+    --region us-central1
+else
+  gcloud functions add-iam-policy-binding "$FUNCTION_NAME" \
+    --member "serviceAccount:$DEFAULT_GCP_SERVICE_ACCOUNT" \
+    --role "roles/cloudfunctions.invoker" \
+    --project "$GCP_PROJECT" \
+    --region us-central1
+fi
+
 
 

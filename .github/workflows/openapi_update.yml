@@ -14,7 +14,13 @@ on:
       api_name:
         description: 'Name of the api'
         type: string
-        required: true
+        required: false
+        default: ''
+      function_name:
+        description: 'Name of the api'
+        type: string
+        required: false
+        default: ''
       endpoints_service_name:
         description: 'Name of the GCP endpoints service name'
         type: string
@@ -81,6 +87,7 @@ jobs:
           gcp_project: ${{ inputs.gcp_project }}
           api_subdomain: ${{ inputs.api_subdomain }}
           api_name: ${{ inputs.api_name }}
+          function_name: ${{ inputs.function_name }}
           endpoints_service_name: ${{ inputs.endpoints_service_name }}
           default_service_account: ${{ inputs.default_service_account }}
           openapi_yaml: ${{ inputs.openapi_yaml }}
