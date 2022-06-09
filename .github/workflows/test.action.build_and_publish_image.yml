@@ -36,7 +36,7 @@ jobs:
             TEST_TWO: TWO
             TEST_THREE: "
 
-          fail_if_strings_unequal "$image_output" "$expected"
+          strings_equal "$image_output" "$expected"
 
   gcp_image:
     name: 'GCP Image'
@@ -71,7 +71,7 @@ jobs:
             TEST_TWO: TWO
             TEST_THREE: "
 
-          fail_if_strings_unequal "$image_output" "$expected"
+          strings_equal "$image_output" "$expected"
 
   generic_image_with_secrets:
     name: 'Generic Image w/ Secrets'
@@ -110,7 +110,7 @@ jobs:
             TEST_TWO: TWO
             TEST_THREE: PI"
 
-          fail_if_strings_unequal "$image_output" "$expected"
+          strings_equal "$image_output" "$expected"
 
   gcp_image_with_secrets:
     name: 'GCP Image w/ Secrets'
@@ -151,4 +151,4 @@ jobs:
             TEST_THREE: ***
             TEST_FOUR: PI"
 
-          fail_if_strings_unequal "$image_output" "$expected"
+          strings_equal "$image_output" "$expected"

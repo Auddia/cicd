@@ -32,7 +32,7 @@ jobs:
           source ./scripts/test_functions.sh
 
           has_secrets=${{ steps.gcp.outputs.has_secrets }}
-          fail_if_strings_unequal $has_secrets "false"
+          strings_equal $has_secrets "false"
 
   gcloud_with_secrets:
     name: 'GCloud Setup w/ Secrets'
@@ -61,10 +61,10 @@ jobs:
           source ./scripts/test_functions.sh
 
           has_secrets=${{ steps.gcp.outputs.has_secrets }}
-          fail_if_strings_unequal $has_secrets "true"
+          strings_equal $has_secrets "true"
 
           secrets=${{ toJson(steps.gcp.outputs.secrets) }}
-          fail_if_strings_equal $secrets "{}"
+          strings_unequal $secrets "{}"
 
           test_one=${{ fromJson(steps.gcp.outputs.secrets).TEST_ONE }}
           test_two=${{ fromJson(steps.gcp.outputs.secrets)['TEST_TWO'] }}

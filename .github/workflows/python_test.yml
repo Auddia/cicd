@@ -36,7 +36,7 @@ on:
     secrets:
       ssh_private_key:
         description: 'A github secret containing a private SSH key'
-        required: true
+        required: false
 
 
 jobs:

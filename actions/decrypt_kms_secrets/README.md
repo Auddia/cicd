@@ -85,7 +85,7 @@ jobs:
           output=$(cat ./decyphered_data/test_key.key)
           expected="Hello World
           "
-          fail_if_strings_unequal "$output" "$expected"
+          strings_equal "$output" "$expected"
 ```
 
 ### Additional Usage
