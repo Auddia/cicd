@@ -1,4 +1,4 @@
-# v04 Release ()
+# v04 Release (4/29/2022)
 [Official Release](https://github.com/Auddia/cicd/releases/tag/v04)
 
 ## new
@@ -16,3 +16,4 @@
 * [openapi_update Workflow](../../docs/workflows/openapi_update.md)
 * [cloud_run_api_deployment_workflow](../../docs/workflows/cloud_run_api_deployment.md)
 * [python_test Workflow](../../docs/workflows/test_python.md)
+* [gcp_function_deployment Workflow](../../docs/workflows/gcp_function_deployment.md)

@@ -42,6 +42,15 @@ $ gcloud run deploy <API_NAME>-endpoints-cloudrun-service \
 
 3. Run the `configure_gcp_endpoints` action.
 
+4. (Optional) If you see an error about the ownership of the domain name and it is the first time you are attempting to successfully run this workflow follow the steps below to fix the issue.
+   * Note: This may not solve the issue
+   * Error Example: `ERROR: (gcloud.endpoints.services.deploy) PERMISSION_DENIED: Ownership for domain name 'events.cfr-staging.auddia.services' on project 'cfr-projects-staging' cannot be verified.` 
+   1. Automatically compile the openapi document or copy it from the CICD workflow into the file `openapi`.
+   2. Run this command
+      ```bash
+      $ gcloud endpoints services deploy ./openapi --project <gcp_project>
+      ```
+
 ### Input Arguments
 
 ##### `gcp_project`
@@ -57,7 +66,14 @@ $ gcloud run deploy <API_NAME>-endpoints-cloudrun-service \
 ##### `api_name`
 * **Description**: Name of the api
 * `type`: `string`
-* `required`: `true`
+* `required`: `false`
+* You must specify this field or the `function_name` field
+
+##### `function_name`
+* **Description**: Name of the GCP function
+* `type`: `string`
+* `required`: `false`
+* You must specify this field or the `api_name` field
 
 ##### `endpoints_service_name`
 * **Description**: Name of the GCP endpoints service name 

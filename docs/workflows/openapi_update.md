@@ -24,7 +24,17 @@ This action is available on tags `v0` and above.
 ##### `api_name`
 * **Description**: Name of the api
 * `type`: `string`
-* `required`: `true`
+* `required`: `false`
+* `default`: `''`
+* You must specify this field or the `function_name` field
+
+##### `function_name`
+* **Description**: Name of the GCP function
+* `type`: `string`
+* `required`: `false`
+* `default`: `''`
+* You must specify this field or the `api_name` field
+
 
 ##### `endpoints_service_name`
 * **Description**: Name of the GCP endpoints service name 
