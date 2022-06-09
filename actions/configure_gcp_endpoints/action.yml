@@ -10,7 +10,10 @@ inputs:
     required: true
   api_name:
     description: 'Name of the api'
-    required: true
+    required: false
+  function_name:
+    description: 'Name of the function'
+    required: false
   endpoints_service_name:
     description: 'Name of the GCP endpoints service name'
     required: true
@@ -29,6 +32,7 @@ runs:
     GCP_PROJECT: ${{ inputs.gcp_project }}
     API_SUBDOMAIN: ${{ inputs.api_subdomain }}
     API_NAME: ${{ inputs.api_name }}
+    FUNCTION_NAME: ${{ inputs.function_name }}
     ENDPOINTS_SERVICE_NAME: ${{ inputs.endpoints_service_name }}
     OPENAPI_YAML: ${{ inputs.openapi_yaml }}
     DEFAULT_GCP_SERVICE_ACCOUNT: ${{ inputs.default_service_account }}

@@ -1,12 +1,9 @@
-# v03 Release (4/13/2022)
-[Official Release](https://github.com/Auddia/cicd/releases/tag/v03)
+# v04 Release (4/29/2022)
+[Official Release](https://github.com/Auddia/cicd/releases/tag/v04)
 
-
-## Updated
-* [cloud_run_api_deployment_workflow](../../docs/workflows/cloud_run_api_deployment.md)
-  * **FEATURE**: Added in optional parameter to configure ssh
-* [build_and_publis_image action](../../actions/build_and_publish_image/README.md)  
-  * **FEATURE**: Added in optional parameter to wore in configured ssh connection
+## new
+* [python_test Workflow](../../docs/workflows/python_test.md)
+* [gcp_function_deployment Workflow](../../docs/workflows/gcp_function_deployment.md)
   
 ## Available Actions
 * [compile_openapi action docs](../../actions/compile_openapi/README.md)
@@ -18,3 +15,5 @@
 ## Available Workflows
 * [openapi_update Workflow](../../docs/workflows/openapi_update.md)
 * [cloud_run_api_deployment_workflow](../../docs/workflows/cloud_run_api_deployment.md)
+* [python_test Workflow](../../docs/workflows/test_python.md)
+* [gcp_function_deployment Workflow](../../docs/workflows/gcp_function_deployment.md)

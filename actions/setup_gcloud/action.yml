@@ -11,6 +11,9 @@ inputs:
     default: ''
 
 outputs:
+  has_secrets:
+    description: boolean flag showing if the step produced any secrets
+    value: ${{ steps.validation.outputs.has_secrets }}
   secrets:
     description: JSON dictionary of dynamic outputed secret values
     value: ${{ toJson(steps.gcp_secrets.outputs) }}
@@ -30,6 +33,17 @@ runs:
       uses: google-github-actions/setup-gcloud@v0
       with:
         install_components: beta
+
+    - name: 'Has Secrets'
+      id: validation
+      shell: bash
+      run: |
+        if [ -n "${{ inputs.gcp_secrets }}" ];
+        then
+          echo "::set-output name=has_secrets::true"
+        else
+          echo "::set-output name=has_secrets::false"
+        fi
 
     - name: 'Get Secrets'
       if: ${{ inputs.gcp_secrets }}

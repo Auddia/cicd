@@ -59,6 +59,10 @@ additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
 echo "additional_build_args=${value} ${additional_args}" >> $GITHUB_ENV
 ```
 
+##### `has_secrets`
+* **Description**: A boolean flag to show if secrets were acquired by this step.
+* This is needed due to an issue with the `secrets` output when no secrets are passed into this step
+
 ## Example Usage
 
 ```yaml
@@ -91,6 +95,7 @@ jobs:
         run: gcloud info
         
       - name: 'Reference the secret'
+        if: ${{ steps.gcp.outputs.has_secrets }} == true
         uses: foo/bar@master
         env:
           TOKEN: ${{ fromJson(steps.gcp.outputs.secrets).TOKEN }}

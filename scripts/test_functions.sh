@@ -13,6 +13,13 @@ fail_if_empty_string() {
 }
 
 fail_if_strings_unequal() {
+  if [ "$1" != "$2" ];
+  then
+    exit 1
+  fi
+}
+
+fail_if_strings_equal() {
   if [ "$1" = "$2" ];
   then
     exit 1

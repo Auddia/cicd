@@ -80,7 +80,8 @@ on:
         required: true
       ssh_private_key:
         description: 'A github secret containing a private SSH key'
-        required: true
+        required: false
+
 jobs:
   api_deployment:
     name: 'API Deployment'
@@ -118,6 +119,7 @@ jobs:
           build_args: ${{ inputs.build_args }}
           push_args: ${{ inputs.build_args }}
           enable_ssh: ${{ inputs.enable_ssh }}
+          has_secrets: ${{ steps.gcp.outputs.has_secrets }}
           gcp_secrets: ${{ steps.gcp.outputs.secrets }}
 
       - name: 'Deploy to Cloud Run'

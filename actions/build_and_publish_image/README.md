@@ -68,6 +68,13 @@ push_args: |
 * `required`: `false`
 * `default`: `false`
 
+##### `has_secrets`
+* **Description**: Flag telling if the input secrets are valid
+* `type`: `string`
+* `required`: `false`
+* `default`: `false`
+* Uses the `outputs.has_secrets` from the [setup_gcloud](../setup_gcloud/README.md) action
+
 ##### `gcp_secrets`
 * **Description**: Secrets from GCP that you want available in the docker container
 * `type`: `string`
