@@ -9,11 +9,12 @@ Make sure to refer to the docs for the specific release, tag or branch to have t
 * [Workflows](#workflows)
 * [Actions](#actions)
 * [Release Info](#releases)
-  * [`v0`](./docs/releases/v0.md)
-  * [`v01`](./docs/releases/v01.md)
-  * [`v02`](./docs/releases/v02.md)
-  * [`v03`](./docs/releases/v03.md)
-  * [`v04`](./docs/releases/v04.md)
+  * [`Prerelease v0`](./docs/releases/prerelease.v0.md)
+  * [`Prerelease v01`](./docs/releases/prerelease.v01.md)
+  * [`Prerelease v02`](./docs/releases/prerelease.v02.md)
+  * [`Prerelease v03`](./docs/releases/prerelease.v03.md)
+  * [`Prerelease v04`](./docs/releases/prerelease.v04.md)
+  * [`v1`](./docs/releases/v1.md)
 * [Action Items]()
 
 ## Workflows
@@ -44,11 +45,12 @@ Actions define a group of common steps that reoccur across many jobs and workflo
 
 ## Releases
 For more information on each release view the official release docs. For even more information refer to the docs in the `source_code.zip` or the github `tag` for the specific release.
-  * [`v0`](https://github.com/Auddia/cicd/releases/tag/v0)
-  * [`v01`](https://github.com/Auddia/cicd/releases/tag/v01)
-  * [`v02`](https://github.com/Auddia/cicd/releases/tag/v02)
-  * [`v03`](./docs/releases/v03.md)
-  * [`v04`](./docs/releases/v04.md)
+  * [`Prerelease v0`](https://github.com/Auddia/cicd/releases/tag/v0)
+  * [`Prerelease v01`](https://github.com/Auddia/cicd/releases/tag/v01)
+  * [`Prerelease v02`](https://github.com/Auddia/cicd/releases/tag/v02)
+  * [`Prerelease v03`](https://github.com/Auddia/cicd/releases/tag/v03)
+  * [`Prerelease v04`](https://github.com/Auddia/cicd/releases/tag/v04)
+  * [`v1`](https://github.com/Auddia/cicd/releases/tag/v1)
 
 
 # Action Items
@@ -60,4 +62,6 @@ For more information on each release view the official release docs. For even mo
     * [todo.test.workflow.cloud_run_api_deployment](./.github/workflows/todo.test.workflow.cloud_run_api_deployment.yml)
 * Error Propagation
   * Needs to be tested
+* Release workflow to automate the release project
+* Main workflow that updates all tags to main before merging in
 
