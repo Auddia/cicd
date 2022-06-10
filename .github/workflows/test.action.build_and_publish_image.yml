@@ -99,6 +99,7 @@ jobs:
           tag: auddia_test_image:${{ github.sha }}
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_context: ./resources/test_docker_env
+          has_secrets: ${{ steps.gcp.outputs.has_secrets }}
           gcp_secrets: ${{ steps.gcp.outputs.secrets }}
           build_config: |
             TEST_TWO: TWO
@@ -141,7 +142,8 @@ jobs:
           tag: gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }}
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_context: ./resources/test_docker_env
-          gcp_secrets: '${{ steps.gcp.outputs.secrets }}'
+          has_secrets: ${{ steps.gcp.outputs.has_secrets }}
+          gcp_secrets: ${{ steps.gcp.outputs.secrets }}
           build_config: |
             TEST_TWO: TWO
             TEST_FOUR: PI
