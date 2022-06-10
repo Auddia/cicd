@@ -60,7 +60,7 @@ runs:
         if [ "${{ inputs.has_secrets }}" == true ];
         then
           echo "$secret_args" | grep ":" | tr -d "[\":]" > input.txt
-          additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt)
+          additional_args=$(awk '{print "--build-arg "$1"="$2}' input.txt | tr '\n' ' ')
           echo "additional_build_args=${value} ${additional_args}" >> "$GITHUB_ENV"
         else
           echo "additional_build_args=${value}" >> "$GITHUB_ENV"
