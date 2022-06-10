@@ -134,7 +134,7 @@ jobs:
           gcp_credentials: ${{ github.event.inputs.gcp_secret }}
           gcp_secrets: |
             TEST_ONE: projects/vodacast-staging/secrets/test-secret
-            TEST_THREE: projects/vodacast-staging/secrets/test-secret
+            TEST_THREE: projects/vodacast-staging/secrets/test-secret-2
 
       - name: 'Build and Publish Image'
         uses: ./actions/build_and_publish_image
@@ -155,7 +155,7 @@ jobs:
 
           expected="TEST_ONE: 1
             TEST_TWO: TWO
-            TEST_THREE: 1"
+            TEST_THREE: 2"
 
           echo "Output: ${image_output}"
           echo "Expected: ${expected}"
