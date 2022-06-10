@@ -26,9 +26,9 @@ jobs:
           title_line=$(grep "title" ./openapi.yaml)
           expected="title: ENV ONE"
 
-          echo "Output: ${output}"
+          echo "Output: ${title_line}"
           echo "Expected: ${expected}"
-          strings_equal "$output" "$expected"
+          strings_equal "title_line" "$expected"
 
   env_two:
     name: 'Environment Two'
@@ -52,6 +52,6 @@ jobs:
           title_line=$(grep "title" ./openapi.yaml)
           expected="title: ENV TWO"
 
-          echo "Output: ${output}"
+          echo "Output: ${title_line}"
           echo "Expected: ${expected}"
-          strings_equal "$output" "$expected"
+          strings_equal "$title_line" "$expected"
