@@ -91,7 +91,7 @@ jobs:
         with:
           gcp_credentials: ${{ github.event.inputs.gcp_secret }}
           gcp_secrets: |
-            TEST_ONE: projects/vodacast-staging/secrets/vodacast-postgres-password
+            TEST_ONE: projects/vodacast-staging/secrets/test-secret
 
       - name: 'Build and Publish Image'
         uses: ./actions/build_and_publish_image
@@ -111,7 +111,7 @@ jobs:
           source ./scripts/test_functions.sh
           image_output=$(docker run auddia_test_image:generic_image_with_secrets)
 
-          expected="TEST_ONE: ***
+          expected="TEST_ONE: 1
             TEST_TWO: TWO
             TEST_THREE: PI"
 
@@ -133,8 +133,8 @@ jobs:
         with:
           gcp_credentials: ${{ github.event.inputs.gcp_secret }}
           gcp_secrets: |
-            TEST_ONE: projects/vodacast-staging/secrets/vodacast-postgres-password
-            TEST_THREE: projects/vodacast-staging/secrets/vodacast-postgres-password
+            TEST_ONE: projects/vodacast-staging/secrets/test-secret
+            TEST_THREE: projects/vodacast-staging/secrets/test-secret
 
       - name: 'Build and Publish Image'
         uses: ./actions/build_and_publish_image
@@ -154,9 +154,9 @@ jobs:
           source ./scripts/test_functions.sh
           image_output=$(docker run gcr.io/vodacast-staging/auddia_test_image:gcp_image_with_secrets)
 
-          expected="TEST_ONE: ***
+          expected="TEST_ONE: 1
             TEST_TWO: TWO
-            TEST_THREE: ***
+            TEST_THREE: 1
             TEST_FOUR: PI"
 
           echo "Output: ${image_output}"
