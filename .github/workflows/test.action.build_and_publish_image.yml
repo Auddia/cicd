@@ -36,6 +36,8 @@ jobs:
             TEST_TWO: TWO
             TEST_THREE: "
 
+          echo "Output: ${output}"
+          echo "Expected: ${expected}"
           strings_equal "$image_output" "$expected"
 
   gcp_image:
@@ -71,6 +73,8 @@ jobs:
             TEST_TWO: TWO
             TEST_THREE: "
 
+          echo "Output: ${output}"
+          echo "Expected: ${expected}"
           strings_equal "$image_output" "$expected"
 
   generic_image_with_secrets:
@@ -110,6 +114,8 @@ jobs:
             TEST_TWO: TWO
             TEST_THREE: PI"
 
+          echo "Output: ${output}"
+          echo "Expected: ${expected}"
           strings_equal "$image_output" "$expected"
 
   gcp_image_with_secrets:
@@ -151,4 +157,6 @@ jobs:
             TEST_THREE: ***
             TEST_FOUR: PI"
 
+          echo "Output: ${output}"
+          echo "Expected: ${expected}"
           strings_equal "$image_output" "$expected"
