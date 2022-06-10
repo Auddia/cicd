@@ -152,7 +152,7 @@ jobs:
         shell: bash
         run: |
           source ./scripts/test_functions.sh
-          image_output=$(docker run gcr.io/vodacast-staging/auddia_test_image:gcp_image_with_secrets
+          image_output=$(docker run gcr.io/vodacast-staging/auddia_test_image:gcp_image_with_secrets)
 
           expected="TEST_ONE: ***
             TEST_TWO: TWO
