@@ -28,7 +28,7 @@ jobs:
 
           echo "Output: ${title_line}"
           echo "Expected: ${expected}"
-          strings_equal "title_line" "$expected"
+          strings_equal "$title_line" "$expected"
 
   env_two:
     name: 'Environment Two'
