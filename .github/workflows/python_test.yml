@@ -57,7 +57,7 @@ jobs:
           ssh-private-key: ${{ secrets.ssh_private_key }}
 
       - name: Install Python Version
-        uses: actions/setup-python@main
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python_version }}
 
@@ -84,7 +84,7 @@ jobs:
           ssh-private-key: ${{ secrets.ssh_private_key }}
 
       - name: Install Python Version
-        uses: actions/setup-python@main
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python_version }}
 
