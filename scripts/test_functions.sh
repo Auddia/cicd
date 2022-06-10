@@ -26,6 +26,9 @@ strings_unequal() {
   s_one=$(echo "$1" | tr -d '[:space:]')
   s_two=$(echo "$2" | tr -d '[:space:]')
 
+  echo $s_one
+  echo $s_two
+
   if [ "$s_one" = "$s_two" ];
   then
     exit 1
