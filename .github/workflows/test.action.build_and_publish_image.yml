@@ -146,7 +146,6 @@ jobs:
           gcp_secrets: ${{ steps.gcp.outputs.secrets }}
           build_config: |
             TEST_TWO: TWO
-            TEST_FOUR: PI
 
       - name: 'Validate Image'
         shell: bash
@@ -156,8 +155,7 @@ jobs:
 
           expected="TEST_ONE: 1
             TEST_TWO: TWO
-            TEST_THREE: 1
-            TEST_FOUR: PI"
+            TEST_THREE: 1"
 
           echo "Output: ${image_output}"
           echo "Expected: ${expected}"
