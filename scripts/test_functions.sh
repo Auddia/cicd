@@ -13,14 +13,20 @@ fail_if_empty_string() {
 }
 
 strings_equal() {
-  if [ "$1" != "$2" ];
+  s_one=$(echo "$1" | tr -d '[:space:]')
+  s_two=$(echo "$2" | tr -d '[:space:]')
+
+  if [ "$s_one" != "$s_two" ];
   then
     exit 1
   fi
 }
 
 strings_unequal() {
-  if [ "$1" = "$2" ];
+  s_one=$(echo "$1" | tr -d '[:space:]')
+  s_two=$(echo "$2" | tr -d '[:space:]')
+
+  if [ "$s_one" = "$s_two" ];
   then
     exit 1
   fi
