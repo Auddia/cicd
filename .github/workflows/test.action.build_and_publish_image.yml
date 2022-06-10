@@ -36,7 +36,7 @@ jobs:
             TEST_TWO: TWO
             TEST_THREE: "
 
-          echo "Output: ${output}"
+          echo "Output: ${image_output}"
           echo "Expected: ${expected}"
           strings_equal "$image_output" "$expected"
 
@@ -73,7 +73,7 @@ jobs:
             TEST_TWO: TWO
             TEST_THREE: "
 
-          echo "Output: ${output}"
+          echo "Output: ${image_output}"
           echo "Expected: ${expected}"
           strings_equal "$image_output" "$expected"
 
@@ -114,7 +114,7 @@ jobs:
             TEST_TWO: TWO
             TEST_THREE: PI"
 
-          echo "Output: ${output}"
+          echo "Output: ${image_output}"
           echo "Expected: ${expected}"
           strings_equal "$image_output" "$expected"
 
@@ -157,6 +157,6 @@ jobs:
             TEST_THREE: ***
             TEST_FOUR: PI"
 
-          echo "Output: ${output}"
+          echo "Output: ${image_output}"
           echo "Expected: ${expected}"
           strings_equal "$image_output" "$expected"
