@@ -19,7 +19,7 @@ jobs:
       - name: 'Build and Publish Image'
         uses: ./actions/build_and_publish_image
         with:
-          tag: auddia_test_image:${{ github.sha }}
+          tag: auddia_test_image:generic_image
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_context: ./resources/test_docker_env
           build_config: |
@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           source ./scripts/test_functions.sh
-          image_output=$(docker run auddia_test_image:${{ github.sha }})
+          image_output=$(docker run auddia_test_image:generic_image)
 
           expected="TEST_ONE: ONE
             TEST_TWO: TWO
@@ -56,7 +56,7 @@ jobs:
       - name: 'Build and Publish Image'
         uses: ./actions/build_and_publish_image
         with:
-          tag: gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }}
+          tag: gcr.io/vodacast-staging/auddia_test_image:gcp_image
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_context: ./resources/test_docker_env
           build_config: |
@@ -67,7 +67,7 @@ jobs:
         shell: bash
         run: |
           source ./scripts/test_functions.sh
-          image_output=$(docker run gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }})
+          image_output=$(docker run gcr.io/vodacast-staging/auddia_test_image:gcp_image)
 
           expected="TEST_ONE: ONE
             TEST_TWO: TWO
@@ -96,7 +96,7 @@ jobs:
       - name: 'Build and Publish Image'
         uses: ./actions/build_and_publish_image
         with:
-          tag: auddia_test_image:${{ github.sha }}
+          tag: auddia_test_image:generic_image_with_secrets
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_context: ./resources/test_docker_env
           has_secrets: ${{ steps.gcp.outputs.has_secrets }}
@@ -109,7 +109,7 @@ jobs:
         shell: bash
         run: |
           source ./scripts/test_functions.sh
-          image_output=$(docker run auddia_test_image:${{ github.sha }})
+          image_output=$(docker run auddia_test_image:generic_image_with_secrets)
 
           expected="TEST_ONE: ***
             TEST_TWO: TWO
@@ -139,7 +139,7 @@ jobs:
       - name: 'Build and Publish Image'
         uses: ./actions/build_and_publish_image
         with:
-          tag: gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }}
+          tag: gcr.io/vodacast-staging/auddia_test_image:gcp_image_with_secrets
           dockerfile: ./resources/test_docker_env/Dockerfile
           build_context: ./resources/test_docker_env
           has_secrets: ${{ steps.gcp.outputs.has_secrets }}
@@ -152,7 +152,7 @@ jobs:
         shell: bash
         run: |
           source ./scripts/test_functions.sh
-          image_output=$(docker run gcr.io/vodacast-staging/auddia_test_image:${{ github.sha }})
+          image_output=$(docker run gcr.io/vodacast-staging/auddia_test_image:gcp_image_with_secrets
 
           expected="TEST_ONE: ***
             TEST_TWO: TWO
