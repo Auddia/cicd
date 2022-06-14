@@ -76,7 +76,7 @@ jobs:
 
       - name: 'Setup SSH'
         uses: webfactory/ssh-agent@v0.4.1
-        if: ${{ inputs.private_repos }}
+        if: ${{ secrets.ssh_private_key }}
         with:
           ssh-private-key: ${{ secrets.ssh_private_key }}
 
