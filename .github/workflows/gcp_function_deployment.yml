@@ -74,12 +74,13 @@ jobs:
           gcp_credentials: ${{ secrets.gcp_credentials }}
           gcp_secrets: ${{ inputs.gcp_secrets }}
 
-      - uses: webfactory/ssh-agent@v0.4.1
+      - name: 'Setup SSH'
+        uses: webfactory/ssh-agent@v0.4.1
         if: ${{ inputs.private_repos }}
         with:
           ssh-private-key: ${{ secrets.ssh_private_key }}
 
-      - name: Install Python Version
+      - name: 'Install Python Version'
         if: ${{ inputs.private_repos }}
         uses: actions/setup-python@v4
         with:
