@@ -142,7 +142,7 @@ deploy_args: |
 * **Description**: A github secret containing a private SSH key
 * [How to generate a new ssh key for github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) 
 
-TODO: UPDATE
+[comment]: <> (TODO: UPDATE)
 ### Example Usage 
 ```yaml
 on:

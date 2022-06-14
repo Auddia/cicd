@@ -111,6 +111,10 @@ private_repos: |
 * References the repo's available secrets and the github group's (i.e. `Auddia`) available secrets
 * If the needed credentials secret doesn't exist, and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
 
+##### `ssh_private_key`
+* **Description**: A github secret containing a private SSH key
+* [How to generate a new ssh key for github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) 
+
 
 ### Example Usage
 ```yaml
