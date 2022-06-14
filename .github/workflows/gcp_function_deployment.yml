@@ -90,7 +90,9 @@ jobs:
         if: ${{ inputs.private_repos }}
         shell: bash
         run: |
-          echo ${{ inputs.private_repos }} | xargs -I '{}' -d , pip install -t packages '{}'
+          pushd ${{ inputs.function_dir }}
+          echo ${{ inputs.private_repos }} | xargs -I '{}' -d , pip install -t ./packages '{}'
+          popd
 
       - name: 'Parse ENV variables'
         id: deploy_config
