@@ -44,10 +44,23 @@ on:
         type: string
         required: false
         default: ''
+      private_repos:
+        description: 'A list of private repos'
+        type: string
+        required: false
+        default: ''
+      python_version:
+        description: 'Python Version Number'
+        type: string
+        required: false
+        default: 3.8
     secrets:
       gcp_credentials:
         description: 'A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.'
         required: true
+      ssh_private_key:
+        description: 'A github secret containing a private SSH key'
+        required: false
 
 jobs:
   function_deployment:
@@ -60,6 +73,23 @@ jobs:
         with:
           gcp_credentials: ${{ secrets.gcp_credentials }}
           gcp_secrets: ${{ inputs.gcp_secrets }}
+
+      - uses: webfactory/ssh-agent@v0.4.1
+        if: ${{ inputs.private_repos }}
+        with:
+          ssh-private-key: ${{ secrets.ssh_private_key }}
+
+      - name: Install Python Version
+        if: ${{ inputs.private_repos }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ inputs.python_version }}
+
+      - name: 'Install private dependencies'
+        if: ${{ inputs.private_repos }}
+        shell: bash
+        run: |
+          echo ${{ inputs.private_repos }} | xargs -I '{}' -d , pip install -t packages '{}'
 
       - name: 'Parse ENV variables'
         id: deploy_config
