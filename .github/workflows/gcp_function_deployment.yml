@@ -45,12 +45,12 @@ on:
         required: false
         default: ''
       private_repos:
-        description: 'A list of private repos'
+        description: 'A comma seperated list of private repos (private git repos or local python packages)'
         type: string
         required: false
         default: ''
       python_version:
-        description: 'Python Version Number'
+        description: 'Python Version Number for installing the private repos'
         type: string
         required: false
         default: 3.8
