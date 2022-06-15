@@ -68,12 +68,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'GCloud SDK Setup'
-        uses: Auddia/cicd/actions/setup_gcloud@main
+        uses: Auddia/cicd/actions/setup_gcloud@v1.1
         with:
           gcp_credentials: ${{ secrets.gcp_credentials }}
 
       - name: 'Compile OpenAPI YAML File'
-        uses: Auddia/cicd/actions/compile_openapi@main
+        uses: Auddia/cicd/actions/compile_openapi@v1.1
         with:
           openapi_dir: ${{ inputs.openapi_dir }}
           template: ${{ inputs.template }}
@@ -82,7 +82,7 @@ jobs:
           environment_value: ${{ inputs.environment_value }}
 
       - name: 'GCP Deployment'
-        uses: Auddia/cicd/actions/configure_gcp_endpoints@main
+        uses: Auddia/cicd/actions/configure_gcp_endpoints@v1.1
         with:
           gcp_project: ${{ inputs.gcp_project }}
           api_subdomain: ${{ inputs.api_subdomain }}
