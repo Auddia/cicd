@@ -73,7 +73,7 @@ jobs:
           gcp_credentials: ${{ secrets.gcp_credentials }}
 
       - name: 'Compile OpenAPI YAML File'
-        uses: Auddia/cicd/actions/compile_openapi@main
+        uses: Auddia/cicd/actions/compile_openapi@wudstrand/cicd#18
         with:
           openapi_dir: ${{ inputs.openapi_dir }}
           template: ${{ inputs.template }}
