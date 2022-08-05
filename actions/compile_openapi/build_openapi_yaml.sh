@@ -14,7 +14,12 @@ cd "$OPENAPI_DATA_DIR" || exit
 
 touch temp.yaml
 sed "s/$ENV_KEY/$ENV_VALUE/g" "$TEMPLATE" > temp.yaml
-swagger-cli bundle -o "$CALLERS_DIR"/"$OUTFILE" -t yaml -r temp.yaml
+
+redocly bundle -o bundled --ext yaml temp.yaml
+
+# NOTE: redocly doesnt dereference the gcp related fields so we use swagger cli
+# to do this last step
+swagger-cli bundle -o "$CALLERS_DIR"/"$OUTFILE" -t yaml bundled.yaml
 
 if [ -s "$CALLERS_DIR"/"$OUTFILE" ];
 then
