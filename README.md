@@ -16,6 +16,7 @@ Make sure to refer to the docs for the specific release, tag or branch to have t
   * [`Prerelease v04`](./docs/releases/prerelease.v04.md)
   * [`v1`](./docs/releases/v1.md)
   * [`v1.1`](./docs/releases/v1.1.md)
+  * [`v1.2`](./docs/releases/v1.2.md)
 * [Action Items](#action-items)
 
 ## Workflows
@@ -53,6 +54,7 @@ For more information on each release view the official release docs. For even mo
   * [`Prerelease v04`](https://github.com/Auddia/cicd/releases/tag/v04)
   * [`v1`](https://github.com/Auddia/cicd/releases/tag/v1)
   * [`v1.1`](https://github.com/Auddia/cicd/releases/tag/v1.1)
+  * [`v1.2`](https://github.com/Auddia/cicd/releases/tag/v1.2)
 
 
 # Action Items
