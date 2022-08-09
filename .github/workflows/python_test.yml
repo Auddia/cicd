@@ -34,7 +34,7 @@ on:
         default: './requirements.txt'
 
     secrets:
-      ssh_private_key:
+      ssh_private_keys:
         description: 'A github secret containing a private SSH key'
         required: false
 
@@ -54,7 +54,8 @@ jobs:
       - uses: webfactory/ssh-agent@v0.4.1
         if: ${{ inputs.enable_ssh }}
         with:
-          ssh-private-key: ${{ secrets.ssh_private_key }}
+          ssh-private-key: |
+            ${{ secrets.ssh_private_keys }}
 
       - name: Install Python Version
         uses: actions/setup-python@v4
