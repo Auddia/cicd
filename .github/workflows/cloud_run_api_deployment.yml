@@ -95,7 +95,7 @@ jobs:
           gcp_credentials: ${{ secrets.gcp_credentials }}
           gcp_secrets: ${{ inputs.gcp_secrets }}
 
-      - uses: webfactory/ssh-agent@v0.4.1
+      - uses: webfactory/ssh-agent@v0.5.4
         if: ${{ inputs.enable_ssh }}
         with:
           ssh-private-key: |

@@ -51,7 +51,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - uses: webfactory/ssh-agent@v0.4.1
+      - uses: webfactory/ssh-agent@v0.5.4
         if: ${{ inputs.enable_ssh }}
         with:
           ssh-private-key: ${{ secrets.ssh_private_keys }}
@@ -78,7 +78,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - uses: webfactory/ssh-agent@v0.4.1
+      - uses: webfactory/ssh-agent@v0.5.4
         if: ${{ inputs.enable_ssh }}
         with:
           ssh-private-key: |
@@ -88,6 +88,7 @@ jobs:
         shell: bash
         run: |
           git config --list
+          ls -la ~/.ssh
 
       - name: Install Python Version
         uses: actions/setup-python@v4
