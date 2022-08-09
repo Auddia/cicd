@@ -84,6 +84,11 @@ jobs:
           ssh-private-key: |
             ${{ secrets.ssh_private_keys }}
 
+      - name: ssh dir
+        shell: bash
+        run: |
+          ls -al ~/.ssh
+
       - name: Install Python Version
         uses: actions/setup-python@v4
         with:
