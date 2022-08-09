@@ -81,7 +81,8 @@ jobs:
       - uses: webfactory/ssh-agent@v0.4.1
         if: ${{ inputs.enable_ssh }}
         with:
-          ssh-private-key: ${{ secrets.ssh_private_keys }}
+          ssh-private-key: |
+            ${{ secrets.ssh_private_keys }}
 
       - name: Install Python Version
         uses: actions/setup-python@v4
