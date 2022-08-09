@@ -87,7 +87,7 @@ jobs:
       - name: ssh dir
         shell: bash
         run: |
-          ls -al ~/.ssh
+          git config --list
 
       - name: Install Python Version
         uses: actions/setup-python@v4
