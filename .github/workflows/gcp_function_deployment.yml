@@ -63,7 +63,7 @@ on:
       gcp_credentials:
         description: 'A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.'
         required: true
-      ssh_private_key:
+      ssh_private_keys:
         description: 'A github secret containing a private SSH key'
         required: false
 
@@ -80,10 +80,11 @@ jobs:
           gcp_secrets: ${{ inputs.gcp_secrets }}
 
       - name: 'Setup SSH'
-        uses: webfactory/ssh-agent@v0.4.1
+        uses: webfactory/ssh-agent@v0.5.4
         if: ${{ inputs.enable_ssh }}
         with:
-          ssh-private-key: ${{ secrets.ssh_private_key }}
+          ssh-private-key: |
+            ${{ secrets.ssh_private_keys }}
 
       - name: 'Install Python Version'
         if: ${{ inputs.private_repos }}
@@ -95,7 +96,7 @@ jobs:
         if: ${{ inputs.private_repos }}
         shell: bash
         run: |
-          echo "${{ inputs.private_repos }}" | xargs -I % -d , pip install -t ${{ inputs.function_dir }}/packages %
+          echo "${{ inputs.private_repos }}" | xargs -I % -d , pip install --no-deps -t ${{ inputs.function_dir }}/packages %
 
       - name: 'Parse ENV variables'
         id: deploy_config

@@ -1,6 +1,9 @@
 # GCP Function Deployment Workflow
 This workflow deploys a GCP function.
 
+* (Optional Step) Setting up deploy key from private repo interaction: [Deploy Key Setup](../DEPLOY_KEYS.md)
+
+
 ### Tags
 This action is available on tags `v04` and above.
 
@@ -78,6 +81,7 @@ extra_function_args: |
 
 ##### `private_repos`
 * **Description**: A comma seperated list of private repos (private git repos or local python packages)
+* NOTE: When installing private repos you need to specifiy their dependencies manually
 * `type`: `string`
 * `required`: `false`
 * `default`: `''`
@@ -111,9 +115,16 @@ private_repos: |
 * References the repo's available secrets and the github group's (i.e. `Auddia`) available secrets
 * If the needed credentials secret doesn't exist, and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
 
-##### `ssh_private_key`
-* **Description**: A github secret containing a private SSH key
+##### `ssh_private_keys`
+* **Description**: A list of github secret containing a private SSH key
 * [How to generate a new ssh key for github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) 
+* Reference the [Deploy Key Setup](../DEPLOY_KEYS.md) guide if you are using SSH keys for github repo interaction
+* Syntax
+```yaml
+ssh_private_keys: |
+  ${{ secrets.REPO_ONE_DEPLOY_KEY }}
+  ${{ secrets.REPO_TWO_DEPLOY_KEY }}
+```
 
 
 ### Example Usage

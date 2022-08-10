@@ -4,6 +4,7 @@ This workflow build and publishes a docker image to GCP's docker registry and th
 * GCloud SDK setup action: [setup_gcloud](../../actions/setup_gcloud/README.md)
 * (Optional Step) Decrypt KMS secrets action [decrypt_kms_secrets](../../actions/decrypt_kms_secrets/README.md)
 * Build and publish Docker image action: [build_and_publish_image](../../actions/build_and_publish_image/README.md)
+* (Optional Step) Setting up deploy key from private repo interaction: [Deploy Key Setup](../DEPLOY_KEYS.md)
 
 ### Tags
 This action is available on tags `v01` and above.
@@ -138,9 +139,16 @@ deploy_args: |
 * References the repo's available secrets and the github group's (i.e. `Auddia`) available secrets
 * If the needed credentials secret doesn't exist, and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
 
-##### `ssh_private_key`
-* **Description**: A github secret containing a private SSH key
+##### `ssh_private_keys`
+* **Description**: A list of github secret containing a private SSH key
 * [How to generate a new ssh key for github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) 
+* Reference the [Deploy Key Setup](../DEPLOY_KEYS.md) guide if you are using SSH keys for github repo interaction
+* Syntax
+```yaml
+ssh_private_keys: |
+  ${{ secrets.REPO_ONE_DEPLOY_KEY }}
+  ${{ secrets.REPO_TWO_DEPLOY_KEY }}
+```
 
 [comment]: <> (TODO: UPDATE)
 ### Example Usage 
