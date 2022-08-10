@@ -84,12 +84,6 @@ jobs:
           ssh-private-key: |
             ${{ secrets.ssh_private_keys }}
 
-      - name: ssh dir
-        shell: bash
-        run: |
-          git config --list
-          ls -la ~/.ssh
-
       - name: Install Python Version
         uses: actions/setup-python@v4
         with:
@@ -98,8 +92,6 @@ jobs:
       - name: Install Dependencies
         shell: bash
         run: |
-          set GIT_SSH_COMMAND=ssh -v
-
           python -m pip install --upgrade pip
           python -m pip install pytest
 
