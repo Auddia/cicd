@@ -1,6 +1,8 @@
 # Python Test Workflow
 This workflow runs all the needed tests for a python app.
 
+* (Optional Step) Setting up deploy key from private repo interaction: [Deploy Key Setup](../DEPLOY_KEYS.md)
+
 ### Tags
 This action is available on tags `v04` and above.
 
@@ -44,10 +46,16 @@ This action is available on tags `v04` and above.
 
 ### Secrets
 
-##### `ssh_private_key`
-* **Description**: A github secret containing a private SSH key
+##### `ssh_private_keys`
+* **Description**: A list of github secret containing a private SSH key
 * [How to generate a new ssh key for github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) 
- 
+* Reference the [Deploy Key Setup](../DEPLOY_KEYS.md) guide if you are using SSH keys for github repo interaction
+* Syntax
+```yaml
+ssh_private_keys: |
+  ${{ secrets.REPO_ONE_DEPLOY_KEY }}
+  ${{ secrets.REPO_TWO_DEPLOY_KEY }}
+```
 
 ### Example Usage
 ```yaml
