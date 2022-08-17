@@ -19,6 +19,7 @@ Make sure to refer to the docs for the specific release, tag or branch to have t
   * [`v1.2`](./docs/releases/v1.2.md)
   * [`v1.3`](./docs/releases/v1.3.md)
   * [`v1.4`](./docs/releases/v1.4.md)
+
 * [Action Items](#action-items)
 
 ## Workflows
