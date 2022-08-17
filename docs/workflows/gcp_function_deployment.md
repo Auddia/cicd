@@ -109,6 +109,33 @@ private_repos: |
   * set the `DOCKER_BUILDKIT` environment variable to 1
   * When using pip in the docker file use `RUN --mount=type=ssh`
 
+##### `key_ring`
+* **Description**: The GCP KMS keyring that the keys are retrieved from
+* `type`: `string`
+* `default`: `''`
+
+##### `decrypt_info`
+* **Description**: A list of decryption requests in the format (`ciphertext : key : plaintext`)
+* `type`: `string`
+* `default`: `''`
+* NOTE: The `plaintext` input is generated in this step and the cipher text exists in the environment. Additionally, the `key` requested from KMS must be the key that was used to create the `ciphertext`
+* Syntax
+```yaml
+decrypt_info: |
+    test_key.key.enc : test_key : test_key.key
+    test_key_two.key.enc : test_key : test_two_key.key
+```
+
+##### `input_dir`
+* **Description**: The location where the encrypted data is stored
+* `type`: `string`
+* `default`: `.`
+
+##### `output_dir`
+* **Description**: The location to store the decrypted data
+* `type`: `string`
+* `default`: `.`
+
 ### Secrets
 ##### `gcp_credentials`
 * **Description**: A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
