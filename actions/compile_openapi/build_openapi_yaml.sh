@@ -5,7 +5,7 @@ echo "OPENAPI_DATA_DIR=${OPENAPI_DATA_DIR}"
 echo "TEMPLATE=${TEMPLATE}"
 echo "OUTFILE=${OUTFILE}"
 echo "ENV_KEY=${ENV_KEY}"
-echo "ENV_VALUE=${ENV_VALUE}"
+echo "ENV_VALUE=${ENV_VALUE}"Ï
 
 
 # OpenAPI File Generation
@@ -19,7 +19,7 @@ redocly bundle -o bundled --ext yaml temp.yaml
 
 # NOTE: redocly doesnt dereference the gcp related fields so we use swagger cli
 # to do this last step
-swagger-cli bundle -o "$CALLERS_DIR"/"$OUTFILE" -t yaml bundled.yaml
+swagger-cli bundle -o "$CALLERS_DIR"/"$OUTFILE" -t yaml -r bundled.yaml
 
 if [ -s "$CALLERS_DIR"/"$OUTFILE" ];
 then
