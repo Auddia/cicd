@@ -31,8 +31,8 @@ Workflows define a job or a group of jobs that can be run in parallel or in some
 ### Custom Workflows
 * [Openapi Update](./docs/workflows/openapi_update.md)
 * [Cloud Run API Deployment](./docs/workflows/cloud_run_api_deployment.md)
-* [python_test Workflow](../../docs/workflows/python_test.md)
-* [gcp_function_deployment Workflow](../../docs/workflows/gcp_function_deployment.md)
+* [python_test Workflow](./docs/workflows/python_test.md)
+* [gcp_function_deployment Workflow](./docs/workflows/gcp_function_deployment.md)
 
 
 ## Actions
