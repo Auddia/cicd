@@ -12,7 +12,7 @@ jobs:
     name: 'GCloud Setup'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
 
@@ -38,7 +38,7 @@ jobs:
     name: 'GCloud Setup w/ Secrets'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
 
