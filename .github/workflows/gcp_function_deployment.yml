@@ -94,7 +94,7 @@ jobs:
     steps:
       - name: 'Setup GCloud SDK'
         id: gcp
-        uses: Auddia/cicd/actions/setup_gcloud@v1.4.2
+        uses: Auddia/cicd/actions/setup_gcloud@main
         with:
           gcp_credentials: ${{ secrets.gcp_credentials }}
           gcp_secrets: ${{ inputs.gcp_secrets }}
