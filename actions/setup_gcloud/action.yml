@@ -39,10 +39,10 @@ runs:
       shell: bash
       run: |
         if [ -n "${{ inputs.gcp_secrets }}" ];
-        then
-          echo "::set-output name=has_secrets::true"
+        then          
+          echo "has_secrets=true" >> $GITHUB_OUTPUT
         else
-          echo "::set-output name=has_secrets::false"
+          echo "has_secrets=false" >> $GITHUB_OUTPUT
         fi
 
     - name: 'Get Secrets'
