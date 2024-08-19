@@ -40,9 +40,9 @@ runs:
       run: |
         if [ -n "${{ inputs.gcp_secrets }}" ];
         then          
-          echo "{has_secrets}={true}" >> $GITHUB_OUTPUT
+          echo "has_secrets=true" >> $GITHUB_OUTPUT
         else
-          echo "{has_secrets}={false}" >> $GITHUB_OUTPUT
+          echo "has_secrets=false" >> $GITHUB_OUTPUT
         fi
 
     - name: 'Get Secrets'
