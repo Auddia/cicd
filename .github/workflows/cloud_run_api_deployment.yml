@@ -68,6 +68,11 @@ on:
         type: boolean
         required: false
         default: false
+      multiple_deploy_keys:
+        description: 'A flag to allow for multiple deploy keys inside Docker builds'
+        type: boolean
+        required: false
+        default: false
       deploy_args:
         description: 'Additional arguments to pass to gcloud beta run deploy'
         type: string
@@ -101,6 +106,11 @@ jobs:
           ssh-private-key: |
             ${{ secrets.ssh_private_keys }}
 
+      - name: 'Copy Git and SSH configuration'
+        if: ${{ inputs.multiple_deploy_keys }}
+        run: |
+          mkdir root-config
+          cp -r ~/.gitconfig ~/.ssh root-config/
       - name: 'Decrypt Data'
         if: ${{ inputs.decrypt_info }}
         uses: Auddia/cicd/actions/decrypt_kms_secrets@main

@@ -26,3 +26,9 @@ This is relevant for `git` and `pip` interactions with private repos.
         ${{ secrets.REPO_ONE_DEPLOY_KEY }}
         ${{ secrets.REPO_TWO_DEPLOY_KEY }}
 ```
+
+***Note that in case of multiple deploy keys you must set the
+multiple_deploy_keys flag to true in the cloud_run_api_deployment job***. See
+[Using Multiple Deploy Keys Inside Docker
+Builds](https://github.com/webfactory/ssh-agent#using-multiple-deploy-keys-inside-docker-builds)
+for an explanation.
