@@ -1,4 +1,4 @@
-FROM node:17.3.0
+FROM node:20.19.0
 
 RUN npm install -g @redocly/cli
 RUN npm install -g @apidevtools/swagger-cli
