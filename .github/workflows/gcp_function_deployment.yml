@@ -79,10 +79,20 @@ on:
         type: string
         required: false
         default: '.'
+      workload_identity_provider:
+        description: 'The full Workload Identity Provider resource name for keyless auth'
+        type: string
+        required: false
+        default: ''
+      deployer_service_account:
+        description: 'The GCP service account email to impersonate via Workload Identity Federation (defaults to service_account if not set)'
+        type: string
+        required: false
+        default: ''
     secrets:
       gcp_credentials:
-        description: 'A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.'
-        required: true
+        description: 'A github secret containing the json api key from google (optional if using workload_identity_provider)'
+        required: false
       ssh_private_keys:
         description: 'A github secret containing a private SSH key'
         required: false
@@ -91,11 +101,18 @@ jobs:
   function_deployment:
     name: 'GCP Function Deployment'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
       - name: 'Setup GCloud SDK'
         id: gcp
         uses: Auddia/cicd/actions/setup_gcloud@main
         with:
+          workload_identity_provider: ${{ inputs.workload_identity_provider }}
+          service_account: ${{ inputs.deployer_service_account || inputs.service_account }}
+          project_id: ${{ inputs.gcp_project }}
           gcp_credentials: ${{ secrets.gcp_credentials }}
           gcp_secrets: ${{ inputs.gcp_secrets }}
 

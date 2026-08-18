@@ -2,9 +2,22 @@ name: 'Setup GCloud'
 description: 'Setups runner environment for a project to use GCLoud-SDK for deployment purposes'
 
 inputs:
+  workload_identity_provider:
+    description: 'The full Workload Identity Provider resource name (projects/123/locations/global/workloadIdentityPools/...)'
+    required: false
+    default: ''
+  service_account:
+    description: 'The GCP service account email to impersonate when authenticating via Workload Identity Federation'
+    required: false
+    default: ''
+  project_id:
+    description: 'The GCP project ID (optional override for auth step)'
+    required: false
+    default: ''
   gcp_credentials:
     description: 'The json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.'
-    required: true
+    required: false
+    default: ''
   gcp_secrets:
     description: 'Secrets from GCP that you want available for other steps and actions within a job.'
     required: false
@@ -27,6 +40,9 @@ runs:
     - name: 'Authenticate to Google Cloud'
       uses: google-github-actions/auth@v2
       with:
+        workload_identity_provider: ${{ inputs.workload_identity_provider }}
+        service_account: ${{ inputs.service_account }}
+        project_id: ${{ inputs.project_id }}
         credentials_json: ${{ inputs.gcp_credentials }}
 
     - name: 'Set up Cloud SDK'
