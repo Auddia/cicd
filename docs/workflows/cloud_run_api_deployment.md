@@ -132,10 +132,20 @@ deploy_args: |
     --set-cloudsql-instances vodacast-staging:us-central1:vodacast \
 ```
 
+##### `workload_identity_provider` *(Recommended for Keyless Auth)*
+* **Description**: The full Workload Identity Provider resource name (e.g. `projects/156247944579/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider`).
+* `type`: `string`
+* `default`: `''`
+
+##### `service_account` *(Required when using WIF)*
+* **Description**: The email address of the GCP service account to impersonate via Workload Identity Federation.
+* `type`: `string`
+* `default`: `''`
+
 ### Secrets
 
-##### `gcp_credentials`
-* **Description**: A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli.
+##### `gcp_credentials` *(Legacy Key Auth)*
+* **Description**: A github secret containing the json api key from google for the desired service account that will be issuing the commands from the `gcloud` cli. Optional if using `workload_identity_provider`.
 * References the repo's available secrets and the github group's (i.e. `Auddia`) available secrets
 * If the needed credentials secret doesn't exist, and you need to add one follow this [guide](https://cloud.google.com/docs/authentication/getting-started#create-service-account-console) to generate the json value that you will assign the secret. NOTE: You need admin privileges to add a secret to a repo or group
 

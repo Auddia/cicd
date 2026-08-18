@@ -1,16 +1,49 @@
-name: '[Action Test] setup_gcloud '
+name: '[Action Test] setup_gcloud'
 
 on:
   workflow_dispatch:
     inputs:
       gcp_secret:
-        description: 'GCP Secret'
-        required: true
+        description: 'GCP Secret (JSON key - optional if using WIF)'
+        required: false
+        default: ''
+      workload_identity_provider:
+        description: 'Workload Identity Provider resource name'
+        required: false
+        default: 'projects/156247944579/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider'
+      service_account:
+        description: 'Service Account email for WIF'
+        required: false
+        default: 'github-actions-deploy@cfr-projects-staging.iam.gserviceaccount.com'
 
 jobs:
+  gcloud_wif_auth:
+    name: 'GCloud Setup via WIF (Keyless)'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    if: ${{ github.event.inputs.workload_identity_provider != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: 'GCloud SDK Setup via WIF'
+        id: gcp
+        uses: ./actions/setup_gcloud
+        with:
+          workload_identity_provider: ${{ github.event.inputs.workload_identity_provider }}
+          service_account: ${{ github.event.inputs.service_account }}
+
+      - name: 'Test SDK'
+        shell: bash
+        run: gcloud info
+
   gcloud_no_secrets:
     name: 'GCloud Setup'
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.gcp_secret != '' }}
     steps:
       - uses: actions/checkout@v4
         with:
