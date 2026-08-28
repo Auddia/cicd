@@ -24,11 +24,6 @@ cat deployment_info.txt
 # 2. Extract CONFIG_ID specifically from the Service Configuration line
 CONFIG_ID=$(grep -E 'Service Configuration \[.+\] uploaded' deployment_info.txt | awk -F'[][]' '{print $2}' | tr -d '[:space:]')
 
-# Fallback extraction if format differs
-if [ -z "$CONFIG_ID" ]; then
-  CONFIG_ID=$(awk -F'[][]' '/serviceConfigs|Service Configuration/ {print $2}' deployment_info.txt | tr -d '[:space:]')
-fi
-
 echo "CONFIG_ID=$CONFIG_ID"
 
 if [ -z "$CONFIG_ID" ]; then
@@ -63,7 +58,3 @@ else
     --project "$GCP_PROJECT" \
     --region us-central1
 fi
-
-
-
-
