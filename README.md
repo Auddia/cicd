@@ -21,6 +21,7 @@ Make sure to refer to the docs for the specific release, tag or branch to have t
   * [`v1.4`](./docs/releases/v1.4.md)
   * [`v1.5.0`](./docs/releases/v1.5.0.md)
   * [`v1.5.1`](./docs/releases/v1.5.1.md)
+  * [`v1.5.2`](./docs/releases/v1.5.2.md)
 
 * [Action Items](#action-items)
 
@@ -64,6 +65,7 @@ For more information on each release view the official release docs. For even mo
   * [`v1.4`](https://github.com/Auddia/cicd/releases/tag/v1.4)
   * [`v1.5.0`](https://github.com/Auddia/cicd/releases/tag/v1.5.0)
   * [`v1.5.1`](https://github.com/Auddia/cicd/releases/tag/v1.5.1)
+  * [`v1.5.2`](https://github.com/Auddia/cicd/releases/tag/v1.5.2)
 
 
 # Action Items

@@ -26,9 +26,14 @@ on:
         type: string
         required: true
       default_service_account:
-        description: 'The service account you want to run the gcloud deployment commands'
+        description: 'The ESPv2 gateway runtime service account to be granted roles/run.invoker or roles/cloudfunctions.invoker on the backend service'
         type: string
         required: true
+      deployer_service_account:
+        description: 'The GCP service account email to impersonate via Workload Identity Federation (defaults to default_service_account if not set)'
+        type: string
+        required: false
+        default: ''
 
       openapi_dir:
         description: 'The directory location of all the openapi templates and configurations'
@@ -80,7 +85,7 @@ jobs:
         uses: Auddia/cicd/actions/setup_gcloud@main
         with:
           workload_identity_provider: ${{ inputs.workload_identity_provider }}
-          service_account: ${{ inputs.default_service_account }}
+          service_account: ${{ inputs.deployer_service_account || inputs.default_service_account }}
           project_id: ${{ inputs.gcp_project }}
           gcp_credentials: ${{ secrets.gcp_credentials }}
 

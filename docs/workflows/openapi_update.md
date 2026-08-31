@@ -42,9 +42,21 @@ This action is available on tags `v0` and above.
 * `required`: `true`
 
 ##### `default_service_account`
-* **Description**: The service account you want to run the gcloud deployment commands
+* **Description**: The ESPv2 gateway runtime service account to be granted `roles/run.invoker` or `roles/cloudfunctions.invoker` on the backend service
 * `type`: `string`
 * `required`: `true`
+
+##### `deployer_service_account`
+* **Description**: The GCP service account email to impersonate via Workload Identity Federation (defaults to `default_service_account` if not set)
+* `type`: `string`
+* `required`: `false`
+* `default`: `''`
+
+##### `workload_identity_provider`
+* **Description**: The full Workload Identity Provider resource name for keyless auth
+* `type`: `string`
+* `required`: `false`
+* `default`: `''`
 
 ##### `openapi_dir`
 * **Description**: The directory location of all the openapi templates and configurations
@@ -81,6 +93,26 @@ This action is available on tags `v0` and above.
 
 
 ### Example Usage
+
+#### Workload Identity Federation (Keyless - Recommended)
+```yaml
+jobs:
+  discovery_api_update_staging:
+    name: 'Openapi Update Staging Deployment'
+    uses: Auddia/cicd/.github/workflows/openapi_update.yml@<tag>
+    with:
+      gcp_project: vodacast-staging
+      workload_identity_provider: 'projects/1234567890/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+      deployer_service_account: github-actions-deploy@vodacast-staging.iam.gserviceaccount.com
+      default_service_account: 842445588503-compute@developer.gserviceaccount.com
+      api_subdomain: discovery.vodacast-staging.auddia.services
+      api_name: discovery-api
+      endpoints_service_name: discovery-endpoints-cloudrun-service
+      openapi_dir: ./api/data/openapi
+      environment_value: staging
+```
+
+#### Service Account Key Authentication (Legacy)
 ```yaml
 on:
   push:
