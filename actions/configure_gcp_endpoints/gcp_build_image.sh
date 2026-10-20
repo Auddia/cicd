@@ -13,8 +13,10 @@
 #   gcloud endpoints configs list --service=${SERVICE}
 # Use the latest one for the CONFIG_ID
 
-# Default to the release image if not specified
-BASE_IMAGE=gcr.io/endpoints-release/endpoints-runtime-serverless:2
+# Default to the release image if not specified. Pinned because the floating
+# :2 tag moved to 2.56.1, which ships without /bin/sh and breaks the RUN step
+# in the Dockerfile below. Bump deliberately after checking the new image.
+BASE_IMAGE=gcr.io/endpoints-release/endpoints-runtime-serverless:2.56.0
 
 function error_exit() {
   # ${BASH_SOURCE[1]} is the file name of the caller.
